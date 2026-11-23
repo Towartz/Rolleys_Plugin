@@ -1,0 +1,683 @@
+{
+  "id": "spr_dmsg_plugin",
+  "name": "SPR & SPR2 Plugin",
+  "description": "Stealth Private Relay (SPR), SPR2 with dmsg integration, and reaction delete",
+  "version": "1.0.0",
+  "author": "Owner",
+  "rules": {
+    "onIncoming": [
+      {
+        "command": ".spr",
+        "aliases": [
+          "spr"
+        ],
+        "ownerOnly": true,
+        "actions": [
+          {
+            "when": "{args}",
+            "empty": true,
+            "then": [
+              {
+                "reply": "╭━━━「 SPR & SPR2 」\n│\n│ 1. REPLY PESAN\n│ .spr hai\n│ Reply pesan target lalu ketik perintah.\n│\n│ 2. MENTION USER\n│ .spr @628xxx | hai\n│ Target diambil dari pesan terakhir di store.\n│\n│ 3. TARGET NOMOR + GRUP\n│ .spr 628xxx | hai | ID_GRUP\n│ Mengirim pesan rahasia ke grup tujuan.\n│\n│ 4. MODE SPR2\n│ .spr2 628xxx | hai | ID_GRUP\n│ Jalankan dmsg ke pesan target lalu kirim SPR.\n╰━━━━━━━━━━━━━━━━━━",
+                "quote": true
+              }
+            ],
+            "else": [
+              {
+                "when": "{hasPipes}",
+                "is": "false",
+                "then": [
+                  {
+                    "when": "{m.quoted.id}",
+                    "notEmpty": true,
+                    "then": [
+                      {
+                        "react": "⏱️",
+                        "targetId": "{m.key.id}"
+                      },
+                      {
+                        "relayMessage": {
+                          "viewOnceMessage": {
+                            "message": {
+                              "interactiveMessage": {
+                                "body": {
+                                  "text": "{args}"
+                                },
+                                "nativeFlowMessage": {
+                                  "buttons": []
+                                },
+                                "contextInfo": {
+                                  "isGroupStatus": false,
+                                  "mentionedJid": []
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "toJid": "{m.chat}",
+                        "messageId": "{m.quoted.id}"
+                      },
+                      {
+                        "react": "",
+                        "targetId": "{m.key.id}"
+                      },
+                      {
+                        "relayMessage": {
+                          "groupStatusMessageV2": {
+                            "message": {
+                              "extendedTextMessage": {
+                                "text": "",
+                                "contextInfo": {
+                                  "isGroupStatus": true
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "toJid": "{m.chat}",
+                        "saveAs": "sprDmsgTemp1"
+                      },
+                      {
+                        "method": "groupMetadata",
+                        "args": {
+                          "groupJid": "{m.chat}"
+                        },
+                        "saveAs": "sprDmsgGroupMeta"
+                      },
+                      {
+                        "relayMessage": {
+                          "protocolMessage": {
+                            "key": {
+                              "jid": "{m.chat}",
+                              "fromMe": true,
+                              "id": "{sprDmsgTemp1}"
+                            },
+                            "type": 14,
+                            "editedMessage": {
+                              "extendedTextMessage": {
+                                "text": "\u0000",
+                                "contextInfo": {
+                                  "isGroupStatus": false,
+                                  "mentionedJid": "{sprDmsgGroupMeta.participants[*].id}"
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "toJid": "{m.chat}",
+                        "messageId": "{m.key.id}",
+                        "saveAs": "sprDmsgTemp2"
+                      },
+                      {
+                        "delay": 100
+                      },
+                      {
+                        "repeat": 8,
+                        "actions": [
+                          {
+                            "delete": {
+                              "remoteJid": "{m.chat}",
+                              "id": "{sprDmsgTemp1}",
+                              "fromMe": true
+                            }
+                          }
+                        ]
+                      },
+                      {
+                        "delete": {
+                          "remoteJid": "{m.chat}",
+                          "id": "{sprDmsgTemp2}",
+                          "fromMe": true
+                        }
+                      }
+                    ],
+                    "else": [
+                      {
+                        "reply": "Pesan target belum ditentukan!\n\nCara penggunaan:\n\nReply pesan target:\n.spr Halo\n\nAtau gunakan mention:\n.spr @628123456789 | Halo\n\nAtau gunakan nomor + grup:\n.spr 628123456789 | Halo | 120363xxxxxxxx@g.us\n\nMode SPR2:\n.spr2 628123456789 | Halo | 120363xxxxxxxx@g.us",
+                        "quote": true
+                      }
+                    ]
+                  }
+                ],
+                "else": [
+                  {
+                    "when": "{part3}",
+                    "notEmpty": true,
+                    "then": [
+                      {
+                        "method": "getidstore",
+                        "args": {
+                          "target": "{part1Number}",
+                          "chatJid": "{part3}"
+                        },
+                        "saveAs": "targetData"
+                      },
+                      {
+                        "when": "{targetData.id}",
+                        "empty": true,
+                        "then": [
+                          {
+                            "reply": "Pesan target tidak ditemukan di global.store!\n\nNomor: {part1Number}\nPastikan target sudah pernah mengirim pesan di grup tujuan.",
+                            "quote": true
+                          }
+                        ],
+                        "else": [
+                          {
+                            "relayMessage": {
+                              "viewOnceMessage": {
+                                "message": {
+                                  "interactiveMessage": {
+                                    "body": {
+                                      "text": "{part2}"
+                                    },
+                                    "nativeFlowMessage": {
+                                      "buttons": []
+                                    },
+                                    "contextInfo": {
+                                      "isGroupStatus": false,
+                                      "mentionedJid": [
+                                        "{targetData.jid}"
+                                      ]
+                                    }
+                                  }
+                                }
+                              }
+                            },
+                            "toJid": "{part3}",
+                            "messageId": "{targetData.id}"
+                          },
+                          {
+                            "reply": "Berhasil memproses perintah!\n\nMode: SPR (Nomor + Grup)\nTarget: {part1Number}\nGrup tujuan: {part3}",
+                            "quote": true
+                          }
+                        ]
+                      }
+                    ],
+                    "else": [
+                      {
+                        "when": "{part2}",
+                        "notEmpty": true,
+                        "then": [
+                          {
+                            "method": "getidstore",
+                            "args": {
+                              "target": "{part1Number}",
+                              "chatJid": "{m.chat}"
+                            },
+                            "saveAs": "targetMentionData"
+                          },
+                          {
+                            "when": "{targetMentionData.id}",
+                            "empty": true,
+                            "then": [
+                              {
+                                "reply": "ID pesan user tidak ditemukan!\n\nPastikan pesan user sudah tersimpan di global.store.",
+                                "quote": true
+                              }
+                            ],
+                            "else": [
+                              {
+                                "react": "⏱️",
+                                "targetId": "{m.key.id}"
+                              },
+                              {
+                                "relayMessage": {
+                                  "viewOnceMessage": {
+                                    "message": {
+                                      "interactiveMessage": {
+                                        "body": {
+                                          "text": "{part2}"
+                                        },
+                                        "nativeFlowMessage": {
+                                          "buttons": []
+                                        },
+                                        "contextInfo": {
+                                          "isGroupStatus": false,
+                                          "mentionedJid": [
+                                            "{targetMentionData.jid}"
+                                          ]
+                                        }
+                                      }
+                                    }
+                                  }
+                                },
+                                "toJid": "{m.chat}",
+                                "messageId": "{targetMentionData.id}"
+                              },
+                              {
+                                "react": "",
+                                "targetId": "{m.key.id}"
+                              },
+                              {
+                                "relayMessage": {
+                                  "groupStatusMessageV2": {
+                                    "message": {
+                                      "extendedTextMessage": {
+                                        "text": "",
+                                        "contextInfo": {
+                                          "isGroupStatus": true
+                                        }
+                                      }
+                                    }
+                                  }
+                                },
+                                "toJid": "{m.chat}",
+                                "saveAs": "sprDmsgTemp1"
+                              },
+                              {
+                                "method": "groupMetadata",
+                                "args": {
+                                  "groupJid": "{m.chat}"
+                                },
+                                "saveAs": "sprDmsgGroupMeta"
+                              },
+                              {
+                                "relayMessage": {
+                                  "protocolMessage": {
+                                    "key": {
+                                      "jid": "{m.chat}",
+                                      "fromMe": true,
+                                      "id": "{sprDmsgTemp1}"
+                                    },
+                                    "type": 14,
+                                    "editedMessage": {
+                                      "extendedTextMessage": {
+                                        "text": "\u0000",
+                                        "contextInfo": {
+                                          "isGroupStatus": false,
+                                          "mentionedJid": "{sprDmsgGroupMeta.participants[*].id}"
+                                        }
+                                      }
+                                    }
+                                  }
+                                },
+                                "toJid": "{m.chat}",
+                                "messageId": "{m.key.id}",
+                                "saveAs": "sprDmsgTemp2"
+                              },
+                              {
+                                "delay": 100
+                              },
+                              {
+                                "repeat": 8,
+                                "actions": [
+                                  {
+                                    "delete": {
+                                      "remoteJid": "{m.chat}",
+                                      "id": "{sprDmsgTemp1}",
+                                      "fromMe": true
+                                    }
+                                  }
+                                ]
+                              },
+                              {
+                                "delete": {
+                                  "remoteJid": "{m.chat}",
+                                  "id": "{sprDmsgTemp2}",
+                                  "fromMe": true
+                                }
+                              }
+                            ]
+                          }
+                        ],
+                        "else": [
+                          {
+                            "reply": "Pesan target belum ditentukan!\n\nCara penggunaan:\n\nReply pesan target:\n.spr Halo\n\nAtau gunakan mention:\n.spr @628123456789 | Halo\n\nAtau gunakan nomor + grup:\n.spr 628123456789 | Halo | 120363xxxxxxxx@g.us\n\nMode SPR2:\n.spr2 628123456789 | Halo | 120363xxxxxxxx@g.us",
+                            "quote": true
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "command": ".spr2",
+        "aliases": [
+          "spr2"
+        ],
+        "ownerOnly": true,
+        "actions": [
+          {
+            "when": "{part3}",
+            "empty": true,
+            "then": [
+              {
+                "reply": "Format tidak valid!\n\nContoh:\n.spr2 628123456789 | Halo | 120363xxxxxxxx@g.us",
+                "quote": true
+              }
+            ],
+            "else": [
+              {
+                "method": "getidstore",
+                "args": {
+                  "target": "{part1Number}",
+                  "chatJid": "{part3}"
+                },
+                "saveAs": "targetData2"
+              },
+              {
+                "when": "{targetData2.id}",
+                "empty": true,
+                "then": [
+                  {
+                    "reply": "Pesan target tidak ditemukan di global.store!\n\nNomor: {part1Number}\nPastikan target sudah pernah mengirim pesan di grup tujuan.",
+                    "quote": true
+                  }
+                ],
+                "else": [
+                  {
+                    "relayMessage": {
+                      "groupStatusMessageV2": {
+                        "message": {
+                          "extendedTextMessage": {
+                            "text": "",
+                            "contextInfo": {
+                              "isGroupStatus": true
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "toJid": "{part3}",
+                    "saveAs": "tempId"
+                  },
+                  {
+                    "method": "groupMetadata",
+                    "args": {
+                      "groupJid": "{part3}"
+                    },
+                    "saveAs": "groupMeta"
+                  },
+                  {
+                    "relayMessage": {
+                      "protocolMessage": {
+                        "key": {
+                          "jid": "{part3}",
+                          "fromMe": true,
+                          "id": "{tempId}"
+                        },
+                        "type": 14,
+                        "editedMessage": {
+                          "extendedTextMessage": {
+                            "text": "\u0000",
+                            "contextInfo": {
+                              "isGroupStatus": false,
+                              "mentionedJid": "{groupMeta.participants[*].id}"
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "toJid": "{part3}",
+                    "messageId": "{targetData2.id}",
+                    "saveAs": "tempId2"
+                  },
+                  {
+                    "delay": 100
+                  },
+                  {
+                    "repeat": 8,
+                    "actions": [
+                      {
+                        "delete": {
+                          "remoteJid": "{part3}",
+                          "id": "{tempId}",
+                          "fromMe": true
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "delete": {
+                      "remoteJid": "{part3}",
+                      "id": "{tempId2}",
+                      "fromMe": true
+                    }
+                  },
+                  {
+                    "relayMessage": {
+                      "viewOnceMessage": {
+                        "message": {
+                          "interactiveMessage": {
+                            "body": {
+                              "text": "{part2}"
+                            },
+                            "nativeFlowMessage": {
+                              "buttons": []
+                            },
+                            "contextInfo": {
+                              "isGroupStatus": false,
+                              "mentionedJid": [
+                                "{targetData2.jid}"
+                              ]
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "toJid": "{part3}",
+                    "messageId": "{targetData2.id}"
+                  },
+                  {
+                    "reply": "Berhasil memproses perintah!\n\nMode: SPR2\nTarget: {part1Number}\nGrup tujuan: {part3}",
+                    "quote": true
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "command": ".dmsg",
+        "aliases": [
+          "dmsg"
+        ],
+        "ownerOnly": true,
+        "actions": [
+          {
+            "when": "{m.quoted.id}",
+            "empty": true,
+            "then": [
+              {
+                "reply": "Reply pesan yang ingin diproses.",
+                "quote": true
+              }
+            ],
+            "else": [
+              {
+                "when": "{isGroup}",
+                "is": "true",
+                "then": [
+                  {
+                    "relayMessage": {
+                      "groupStatusMessageV2": {
+                        "message": {
+                          "extendedTextMessage": {
+                            "text": "",
+                            "contextInfo": {
+                              "isGroupStatus": true
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "toJid": "{m.chat}",
+                    "saveAs": "tempId"
+                  },
+                  {
+                    "method": "groupMetadata",
+                    "args": {
+                      "groupJid": "{m.chat}"
+                    },
+                    "saveAs": "groupMeta"
+                  },
+                  {
+                    "relayMessage": {
+                      "protocolMessage": {
+                        "key": {
+                          "jid": "{m.chat}",
+                          "fromMe": true,
+                          "id": "{tempId}"
+                        },
+                        "type": 14,
+                        "editedMessage": {
+                          "extendedTextMessage": {
+                            "text": "\u0000",
+                            "contextInfo": {
+                              "isGroupStatus": false,
+                              "mentionedJid": "{groupMeta.participants[*].id}"
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "toJid": "{m.chat}",
+                    "messageId": "{m.quoted.id}",
+                    "saveAs": "tempId2"
+                  },
+                  {
+                    "delay": 100
+                  },
+                  {
+                    "repeat": 8,
+                    "actions": [
+                      {
+                        "delete": {
+                          "remoteJid": "{m.chat}",
+                          "id": "{tempId}",
+                          "fromMe": true
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "delete": {
+                      "remoteJid": "{m.chat}",
+                      "id": "{tempId2}",
+                      "fromMe": true
+                    }
+                  }
+                ],
+                "else": [
+                  {
+                    "delete": {
+                      "remoteJid": "{m.chat}",
+                      "id": "{m.quoted.id}",
+                      "fromMe": true
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ownerOnly": true,
+        "messageType": "reactionMessage",
+        "reactionEmoji": "🗑️",
+        "actions": [
+          {
+            "when": "{isGroup}",
+            "is": "true",
+            "then": [
+              {
+                "relayMessage": {
+                  "groupStatusMessageV2": {
+                    "message": {
+                      "extendedTextMessage": {
+                        "text": "",
+                        "contextInfo": {
+                          "isGroupStatus": true
+                        }
+                      }
+                    }
+                  }
+                },
+                "toJid": "{targetKey.remoteJid}",
+                "saveAs": "tempId"
+              },
+              {
+                "method": "groupMetadata",
+                "args": {
+                  "groupJid": "{targetKey.remoteJid}"
+                },
+                "saveAs": "groupMeta"
+              },
+              {
+                "relayMessage": {
+                  "protocolMessage": {
+                    "key": {
+                      "jid": "{targetKey.remoteJid}",
+                      "fromMe": true,
+                      "id": "{tempId}"
+                    },
+                    "type": 14,
+                    "editedMessage": {
+                      "extendedTextMessage": {
+                        "text": "\u0000",
+                        "contextInfo": {
+                          "isGroupStatus": false,
+                          "mentionedJid": "{groupMeta.participants[*].id}"
+                        }
+                      }
+                    }
+                  }
+                },
+                "toJid": "{targetKey.remoteJid}",
+                "messageId": "{targetKey.id}",
+                "saveAs": "tempId2"
+              },
+              {
+                "delay": 100
+              },
+              {
+                "repeat": 8,
+                "actions": [
+                  {
+                    "delete": {
+                      "remoteJid": "{targetKey.remoteJid}",
+                      "id": "{tempId}",
+                      "fromMe": true
+                    }
+                  }
+                ]
+              },
+              {
+                "delete": {
+                  "remoteJid": "{targetKey.remoteJid}",
+                  "id": "{tempId2}",
+                  "fromMe": true
+                }
+              },
+              {
+                "react": "",
+                "targetId": "{targetKey.id}"
+              }
+            ],
+            "else": [
+              {
+                "delete": {
+                  "remoteJid": "{targetKey.remoteJid}",
+                  "id": "{targetKey.id}",
+                  "fromMe": true
+                }
+              },
+              {
+                "react": "",
+                "targetId": "{targetKey.id}"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "enabled": false
+}

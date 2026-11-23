@@ -1,0 +1,30 @@
+{
+  "name": "Towartz Official Rolleys Plugins",
+  "description": "Default community plugin market repository for Rolleys Android.",
+  "plugins": [
+    {
+      "id": "rpg_addictive_adventure",
+      "name": "RPG Addictive Adventure",
+      "description": "RPG WhatsApp adiktif: combo, crit/jackpot, boss raid, gacha senjata, daily streak, level-up. Bisa dipakai pemilik (fromMe) dan orang lain (sender).",
+      "version": "1.0.0",
+      "author": "You",
+      "url": "plugins/rpg_addictive_adventure.json"
+    },
+    {
+      "id": "dmsg_plugin",
+      "name": "DMSG Plugin",
+      "description": "Delete Message (dmsg) and React Revocation Plugin (Command & 🗑️ Reaction)",
+      "version": "1.0.0",
+      "author": "Owner",
+      "url": "plugins/dmsg_plugin.json"
+    },
+    {
+      "id": "spr_dmsg_plugin",
+      "name": "SPR & SPR2 Plugin",
+      "description": "Stealth Private Relay (SPR), SPR2 with dmsg integration, and reaction delete",
+      "version": "1.0.0",
+      "author": "Owner",
+      "url": "plugins/spr_dmsg_plugin.json"
+    }
+  ]
+}

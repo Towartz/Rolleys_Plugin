@@ -1,0 +1,4518 @@
+{
+  "id": "rpg_addictive_adventure",
+  "name": "RPG Addictive Adventure",
+  "description": "RPG WhatsApp adiktif: combo, crit/jackpot, boss raid, gacha senjata, daily streak, level-up. Bisa dipakai pemilik (fromMe) dan orang lain (sender).",
+  "version": "1.0.0",
+  "author": "You",
+  "enabled": false,
+  "type": "JSON",
+  "rules": {
+    "scope": "any",
+    "allowSelf": true,
+    "onIncoming": [
+      {
+        "command": ".rpghelp",
+        "messageType": "text",
+        "scope": "any",
+        "allowSelf": true,
+        "reply": "⚔️ *RPG Commands*\n.rpg — menu\n.hunt — lawan monster\n.boss — boss raid (Lv.3)\n.daily — hadiah harian\n.gacha — summon senjata\n.rest — istirahat\n.buy — beli potion\n.potion — minum potion\n.profile — statistik"
+      },
+      {
+        "command": ".exit",
+        "messageType": "text",
+        "scope": "any",
+        "allowSelf": true,
+        "clearStep": true,
+        "reply": "👋 Keluar dari RPG. Ketik *.rpg* untuk main lagi!"
+      },
+      {
+        "commands": [
+          ".rpg",
+          ".menu"
+        ],
+        "messageType": "text",
+        "scope": "any",
+        "allowSelf": true,
+        "actions": [
+          {
+            "state": "rpg_{senderNumber}",
+            "defaults": {
+              "hp": 100,
+              "maxHp": 100,
+              "gold": 60,
+              "xp": 0,
+              "xpNext": 100,
+              "level": 1,
+              "atk": 3,
+              "combo": 0,
+              "streak": 0,
+              "kills": 0,
+              "inventory": {}
+            },
+            "saveAs": "p"
+          },
+          {
+            "interactive": {
+              "header": "⚔️ RPG Adventure",
+              "body": "👤 *{senderName}*  ⭐ Lv.{p.level}\n❤️ HP {p.hp}/{p.maxHp}  🗡️ ATK {p.atk}\n🪙 Gold {p.gold}  ✨ XP {p.xp}/{p.xpNext}\n🔥 Combo x{p.combo}  💀 Kills {p.kills}  📅 Streak {p.streak}",
+              "footer": "Tap aksi di bawah 👇",
+              "buttons": [
+                {
+                  "type": "quick_reply",
+                  "id": "rpg_hunt",
+                  "text": "⚔️ Hunt"
+                },
+                {
+                  "type": "quick_reply",
+                  "id": "rpg_use_pot",
+                  "text": "🧪 Potion"
+                },
+                {
+                  "type": "single_select",
+                  "text": "📜 Menu RPG",
+                  "sections": [
+                    {
+                      "title": "Petualangan",
+                      "rows": [
+                        {
+                          "id": "rpg_hunt",
+                          "title": "⚔️ Hunt Monster",
+                          "description": "Lawan monster, kejar combo & jackpot"
+                        },
+                        {
+                          "id": "rpg_boss",
+                          "title": "👹 Boss Raid",
+                          "description": "Butuh Lv.3 — hadiah besar"
+                        },
+                        {
+                          "id": "rpg_daily",
+                          "title": "🎁 Daily Reward",
+                          "description": "Klaim tiap hari, streak makin besar"
+                        }
+                      ]
+                    },
+                    {
+                      "title": "Kekuatan",
+                      "rows": [
+                        {
+                          "id": "rpg_gacha",
+                          "title": "🎰 Summon Senjata (100g)",
+                          "description": "Gacha senjata, ATK naik permanen"
+                        },
+                        {
+                          "id": "rpg_buy_pot",
+                          "title": "🛒 Beli Potion (30g)",
+                          "description": "Heal +60 HP"
+                        },
+                        {
+                          "id": "rpg_rest",
+                          "title": "🏕️ Istirahat",
+                          "description": "Heal +35 HP (cooldown 45 dtk)"
+                        },
+                        {
+                          "id": "rpg_profile",
+                          "title": "👤 Profil",
+                          "description": "Lihat statistik"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            "nextStep": "rpg_menu",
+            "stepTtlSec": 3600,
+            "lockSender": true,
+            "boardKey": "rpg_{chat}_{senderNumber}",
+            "deletePrevious": true
+          }
+        ]
+      },
+      {
+        "buttonIds": [
+          "rpg_rpg"
+        ],
+        "step": "rpg_menu",
+        "onlyButtonOwner": true,
+        "lockMessage": "⏳ Menu ini milik pemain lain. Ketik *.rpg* untuk buka menu kamu sendiri!",
+        "scope": "any",
+        "allowSelf": true,
+        "actions": [
+          {
+            "state": "rpg_{senderNumber}",
+            "defaults": {
+              "hp": 100,
+              "maxHp": 100,
+              "gold": 60,
+              "xp": 0,
+              "xpNext": 100,
+              "level": 1,
+              "atk": 3,
+              "combo": 0,
+              "streak": 0,
+              "kills": 0,
+              "inventory": {}
+            },
+            "saveAs": "p"
+          },
+          {
+            "interactive": {
+              "header": "⚔️ RPG Adventure",
+              "body": "👤 *{senderName}*  ⭐ Lv.{p.level}\n❤️ HP {p.hp}/{p.maxHp}  🗡️ ATK {p.atk}\n🪙 Gold {p.gold}  ✨ XP {p.xp}/{p.xpNext}\n🔥 Combo x{p.combo}  💀 Kills {p.kills}  📅 Streak {p.streak}",
+              "footer": "Tap aksi di bawah 👇",
+              "buttons": [
+                {
+                  "type": "quick_reply",
+                  "id": "rpg_hunt",
+                  "text": "⚔️ Hunt"
+                },
+                {
+                  "type": "quick_reply",
+                  "id": "rpg_use_pot",
+                  "text": "🧪 Potion"
+                },
+                {
+                  "type": "single_select",
+                  "text": "📜 Menu RPG",
+                  "sections": [
+                    {
+                      "title": "Petualangan",
+                      "rows": [
+                        {
+                          "id": "rpg_hunt",
+                          "title": "⚔️ Hunt Monster",
+                          "description": "Lawan monster, kejar combo & jackpot"
+                        },
+                        {
+                          "id": "rpg_boss",
+                          "title": "👹 Boss Raid",
+                          "description": "Butuh Lv.3 — hadiah besar"
+                        },
+                        {
+                          "id": "rpg_daily",
+                          "title": "🎁 Daily Reward",
+                          "description": "Klaim tiap hari, streak makin besar"
+                        }
+                      ]
+                    },
+                    {
+                      "title": "Kekuatan",
+                      "rows": [
+                        {
+                          "id": "rpg_gacha",
+                          "title": "🎰 Summon Senjata (100g)",
+                          "description": "Gacha senjata, ATK naik permanen"
+                        },
+                        {
+                          "id": "rpg_buy_pot",
+                          "title": "🛒 Beli Potion (30g)",
+                          "description": "Heal +60 HP"
+                        },
+                        {
+                          "id": "rpg_rest",
+                          "title": "🏕️ Istirahat",
+                          "description": "Heal +35 HP (cooldown 45 dtk)"
+                        },
+                        {
+                          "id": "rpg_profile",
+                          "title": "👤 Profil",
+                          "description": "Lihat statistik"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            "nextStep": "rpg_menu",
+            "stepTtlSec": 3600,
+            "lockSender": true,
+            "boardKey": "rpg_{chat}_{senderNumber}",
+            "deletePrevious": true
+          }
+        ]
+      },
+      {
+        "commands": [
+          ".profile",
+          ".p"
+        ],
+        "messageType": "text",
+        "scope": "any",
+        "allowSelf": true,
+        "actions": [
+          {
+            "state": "rpg_{senderNumber}",
+            "defaults": {
+              "hp": 100,
+              "maxHp": 100,
+              "gold": 60,
+              "xp": 0,
+              "xpNext": 100,
+              "level": 1,
+              "atk": 3,
+              "combo": 0,
+              "streak": 0,
+              "kills": 0,
+              "inventory": {}
+            },
+            "saveAs": "p"
+          },
+          {
+            "interactive": {
+              "header": "👤 Profil Petualang",
+              "body": "👤 *{senderName}*  ⭐ Lv.{p.level}\n❤️ HP {p.hp}/{p.maxHp}  🗡️ ATK {p.atk}\n🪙 Gold {p.gold}  ✨ XP {p.xp}/{p.xpNext}\n🔥 Combo x{p.combo}  💀 Kills {p.kills}  📅 Streak {p.streak}",
+              "footer": "Tap aksi di bawah 👇",
+              "buttons": [
+                {
+                  "type": "quick_reply",
+                  "id": "rpg_hunt",
+                  "text": "⚔️ Hunt"
+                },
+                {
+                  "type": "quick_reply",
+                  "id": "rpg_use_pot",
+                  "text": "🧪 Potion"
+                },
+                {
+                  "type": "single_select",
+                  "text": "📜 Menu RPG",
+                  "sections": [
+                    {
+                      "title": "Petualangan",
+                      "rows": [
+                        {
+                          "id": "rpg_hunt",
+                          "title": "⚔️ Hunt Monster",
+                          "description": "Lawan monster, kejar combo & jackpot"
+                        },
+                        {
+                          "id": "rpg_boss",
+                          "title": "👹 Boss Raid",
+                          "description": "Butuh Lv.3 — hadiah besar"
+                        },
+                        {
+                          "id": "rpg_daily",
+                          "title": "🎁 Daily Reward",
+                          "description": "Klaim tiap hari, streak makin besar"
+                        }
+                      ]
+                    },
+                    {
+                      "title": "Kekuatan",
+                      "rows": [
+                        {
+                          "id": "rpg_gacha",
+                          "title": "🎰 Summon Senjata (100g)",
+                          "description": "Gacha senjata, ATK naik permanen"
+                        },
+                        {
+                          "id": "rpg_buy_pot",
+                          "title": "🛒 Beli Potion (30g)",
+                          "description": "Heal +60 HP"
+                        },
+                        {
+                          "id": "rpg_rest",
+                          "title": "🏕️ Istirahat",
+                          "description": "Heal +35 HP (cooldown 45 dtk)"
+                        },
+                        {
+                          "id": "rpg_profile",
+                          "title": "👤 Profil",
+                          "description": "Lihat statistik"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            "nextStep": "rpg_menu",
+            "stepTtlSec": 3600,
+            "lockSender": true,
+            "boardKey": "rpg_{chat}_{senderNumber}",
+            "deletePrevious": true
+          }
+        ]
+      },
+      {
+        "buttonIds": [
+          "rpg_profile"
+        ],
+        "step": "rpg_menu",
+        "onlyButtonOwner": true,
+        "lockMessage": "⏳ Menu ini milik pemain lain. Ketik *.rpg* untuk buka menu kamu sendiri!",
+        "scope": "any",
+        "allowSelf": true,
+        "actions": [
+          {
+            "state": "rpg_{senderNumber}",
+            "defaults": {
+              "hp": 100,
+              "maxHp": 100,
+              "gold": 60,
+              "xp": 0,
+              "xpNext": 100,
+              "level": 1,
+              "atk": 3,
+              "combo": 0,
+              "streak": 0,
+              "kills": 0,
+              "inventory": {}
+            },
+            "saveAs": "p"
+          },
+          {
+            "interactive": {
+              "header": "👤 Profil Petualang",
+              "body": "👤 *{senderName}*  ⭐ Lv.{p.level}\n❤️ HP {p.hp}/{p.maxHp}  🗡️ ATK {p.atk}\n🪙 Gold {p.gold}  ✨ XP {p.xp}/{p.xpNext}\n🔥 Combo x{p.combo}  💀 Kills {p.kills}  📅 Streak {p.streak}",
+              "footer": "Tap aksi di bawah 👇",
+              "buttons": [
+                {
+                  "type": "quick_reply",
+                  "id": "rpg_hunt",
+                  "text": "⚔️ Hunt"
+                },
+                {
+                  "type": "quick_reply",
+                  "id": "rpg_use_pot",
+                  "text": "🧪 Potion"
+                },
+                {
+                  "type": "single_select",
+                  "text": "📜 Menu RPG",
+                  "sections": [
+                    {
+                      "title": "Petualangan",
+                      "rows": [
+                        {
+                          "id": "rpg_hunt",
+                          "title": "⚔️ Hunt Monster",
+                          "description": "Lawan monster, kejar combo & jackpot"
+                        },
+                        {
+                          "id": "rpg_boss",
+                          "title": "👹 Boss Raid",
+                          "description": "Butuh Lv.3 — hadiah besar"
+                        },
+                        {
+                          "id": "rpg_daily",
+                          "title": "🎁 Daily Reward",
+                          "description": "Klaim tiap hari, streak makin besar"
+                        }
+                      ]
+                    },
+                    {
+                      "title": "Kekuatan",
+                      "rows": [
+                        {
+                          "id": "rpg_gacha",
+                          "title": "🎰 Summon Senjata (100g)",
+                          "description": "Gacha senjata, ATK naik permanen"
+                        },
+                        {
+                          "id": "rpg_buy_pot",
+                          "title": "🛒 Beli Potion (30g)",
+                          "description": "Heal +60 HP"
+                        },
+                        {
+                          "id": "rpg_rest",
+                          "title": "🏕️ Istirahat",
+                          "description": "Heal +35 HP (cooldown 45 dtk)"
+                        },
+                        {
+                          "id": "rpg_profile",
+                          "title": "👤 Profil",
+                          "description": "Lihat statistik"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            "nextStep": "rpg_menu",
+            "stepTtlSec": 3600,
+            "lockSender": true,
+            "boardKey": "rpg_{chat}_{senderNumber}",
+            "deletePrevious": true
+          }
+        ]
+      },
+      {
+        "commands": [
+          ".hunt",
+          ".h"
+        ],
+        "messageType": "text",
+        "scope": "any",
+        "allowSelf": true,
+        "actions": [
+          {
+            "state": "rpg_{senderNumber}",
+            "defaults": {
+              "hp": 100,
+              "maxHp": 100,
+              "gold": 60,
+              "xp": 0,
+              "xpNext": 100,
+              "level": 1,
+              "atk": 3,
+              "combo": 0,
+              "streak": 0,
+              "kills": 0,
+              "inventory": {}
+            },
+            "saveAs": "p"
+          },
+          {
+            "when": "{p.hp}",
+            "lt": "20",
+            "then": [
+              {
+                "interactive": {
+                  "header": "😵 Terlalu Lemah",
+                  "body": "HP kamu {p.hp}/{p.maxHp}. Minum Potion atau istirahat dulu!\n\n👤 *{senderName}*  ⭐ Lv.{p.level}\n❤️ HP {p.hp}/{p.maxHp}  🗡️ ATK {p.atk}\n🪙 Gold {p.gold}  ✨ XP {p.xp}/{p.xpNext}\n🔥 Combo x{p.combo}  💀 Kills {p.kills}  📅 Streak {p.streak}",
+                  "footer": "Tap aksi di bawah 👇",
+                  "buttons": [
+                    {
+                      "type": "quick_reply",
+                      "id": "rpg_hunt",
+                      "text": "⚔️ Hunt"
+                    },
+                    {
+                      "type": "quick_reply",
+                      "id": "rpg_use_pot",
+                      "text": "🧪 Potion"
+                    },
+                    {
+                      "type": "single_select",
+                      "text": "📜 Menu RPG",
+                      "sections": [
+                        {
+                          "title": "Petualangan",
+                          "rows": [
+                            {
+                              "id": "rpg_hunt",
+                              "title": "⚔️ Hunt Monster",
+                              "description": "Lawan monster, kejar combo & jackpot"
+                            },
+                            {
+                              "id": "rpg_boss",
+                              "title": "👹 Boss Raid",
+                              "description": "Butuh Lv.3 — hadiah besar"
+                            },
+                            {
+                              "id": "rpg_daily",
+                              "title": "🎁 Daily Reward",
+                              "description": "Klaim tiap hari, streak makin besar"
+                            }
+                          ]
+                        },
+                        {
+                          "title": "Kekuatan",
+                          "rows": [
+                            {
+                              "id": "rpg_gacha",
+                              "title": "🎰 Summon Senjata (100g)",
+                              "description": "Gacha senjata, ATK naik permanen"
+                            },
+                            {
+                              "id": "rpg_buy_pot",
+                              "title": "🛒 Beli Potion (30g)",
+                              "description": "Heal +60 HP"
+                            },
+                            {
+                              "id": "rpg_rest",
+                              "title": "🏕️ Istirahat",
+                              "description": "Heal +35 HP (cooldown 45 dtk)"
+                            },
+                            {
+                              "id": "rpg_profile",
+                              "title": "👤 Profil",
+                              "description": "Lihat statistik"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                "nextStep": "rpg_menu",
+                "stepTtlSec": 3600,
+                "lockSender": true,
+                "boardKey": "rpg_{chat}_{senderNumber}",
+                "deletePrevious": true
+              }
+            ],
+            "else": [
+              {
+                "random": {
+                  "loot": [
+                    {
+                      "monster": "🟢 Slime",
+                      "power": 8,
+                      "gold": 14,
+                      "xp": 14,
+                      "dmg": 8,
+                      "scr": 2,
+                      "weight": 38
+                    },
+                    {
+                      "monster": "👺 Goblin",
+                      "power": 12,
+                      "gold": 24,
+                      "xp": 24,
+                      "dmg": 12,
+                      "scr": 4,
+                      "weight": 28
+                    },
+                    {
+                      "monster": "🐺 Dire Wolf",
+                      "power": 15,
+                      "gold": 36,
+                      "xp": 34,
+                      "dmg": 16,
+                      "scr": 5,
+                      "weight": 17
+                    },
+                    {
+                      "monster": "💀 Skeleton Knight",
+                      "power": 18,
+                      "gold": 55,
+                      "xp": 52,
+                      "dmg": 20,
+                      "scr": 7,
+                      "weight": 10
+                    },
+                    {
+                      "monster": "🐉 Ember Drake",
+                      "power": 22,
+                      "gold": 100,
+                      "xp": 90,
+                      "dmg": 28,
+                      "scr": 9,
+                      "weight": 5
+                    },
+                    {
+                      "monster": "🌌 Void Dragon (MYTHIC)",
+                      "power": 27,
+                      "gold": 420,
+                      "xp": 320,
+                      "dmg": 40,
+                      "scr": 12,
+                      "weight": 2
+                    }
+                  ]
+                },
+                "saveAs": "enc"
+              },
+              {
+                "random": {
+                  "dice": "1d20+{p.atk}"
+                },
+                "saveAs": "roll"
+              },
+              {
+                "random": {
+                  "dice": "1d12"
+                },
+                "saveAs": "lootRoll"
+              },
+              {
+                "when": "{roll.total}",
+                "gte": "{enc.power}",
+                "then": [
+                  {
+                    "random": {
+                      "loot": [
+                        {
+                          "mult": 1,
+                          "tag": "",
+                          "weight": 82
+                        },
+                        {
+                          "mult": 2,
+                          "tag": "💥 CRITICAL! ",
+                          "weight": 13
+                        },
+                        {
+                          "mult": 3,
+                          "tag": "🌟 JACKPOT x3! ",
+                          "weight": 5
+                        }
+                      ]
+                    },
+                    "saveAs": "mul"
+                  },
+                  {
+                    "random": {
+                      "loot": [
+                        {
+                          "drop": "Potion",
+                          "got": 1,
+                          "weight": 22
+                        },
+                        {
+                          "drop": "none",
+                          "got": 0,
+                          "weight": 78
+                        }
+                      ]
+                    },
+                    "saveAs": "drop"
+                  },
+                  {
+                    "state": "rpg_{senderNumber}",
+                    "defaults": {
+                      "hp": 100,
+                      "maxHp": 100,
+                      "gold": 60,
+                      "xp": 0,
+                      "xpNext": 100,
+                      "level": 1,
+                      "atk": 3,
+                      "combo": 0,
+                      "streak": 0,
+                      "kills": 0,
+                      "inventory": {}
+                    },
+                    "saveAs": "p",
+                    "inc": {
+                      "gold": "{math: ({enc.gold} + {lootRoll.total}) * {mul.mult} * (1 + {p.combo} * 0.05)|round}",
+                      "xp": "{enc.xp}",
+                      "hp": "-{enc.scr}",
+                      "combo": 1,
+                      "kills": 1
+                    },
+                    "clamp": {
+                      "hp": [
+                        1,
+                        9999
+                      ],
+                      "combo": [
+                        0,
+                        20
+                      ]
+                    }
+                  },
+                  {
+                    "when": "{drop.got}",
+                    "is": "1",
+                    "then": [
+                      {
+                        "state": "rpg_{senderNumber}",
+                        "defaults": {
+                          "hp": 100,
+                          "maxHp": 100,
+                          "gold": 60,
+                          "xp": 0,
+                          "xpNext": 100,
+                          "level": 1,
+                          "atk": 3,
+                          "combo": 0,
+                          "streak": 0,
+                          "kills": 0,
+                          "inventory": {}
+                        },
+                        "saveAs": "p",
+                        "addItem": {
+                          "name": "Potion",
+                          "qty": 1
+                        }
+                      },
+                      {
+                        "reply": "🎁 Monster menjatuhkan 🧪 *Potion*!"
+                      }
+                    ]
+                  },
+                  {
+                    "when": "{p.xp}",
+                    "gte": "{p.xpNext}",
+                    "then": [
+                      {
+                        "state": "rpg_{senderNumber}",
+                        "defaults": {
+                          "hp": 100,
+                          "maxHp": 100,
+                          "gold": 60,
+                          "xp": 0,
+                          "xpNext": 100,
+                          "level": 1,
+                          "atk": 3,
+                          "combo": 0,
+                          "streak": 0,
+                          "kills": 0,
+                          "inventory": {}
+                        },
+                        "saveAs": "p",
+                        "set": {
+                          "xp": "{math: {p.xp} - {p.xpNext}}",
+                          "xpNext": "{math: {p.xpNext} * 1.5|round}",
+                          "maxHp": "{math: {p.maxHp} + 15}",
+                          "hp": "{math: {p.maxHp} + 15}"
+                        },
+                        "inc": {
+                          "level": 1,
+                          "atk": 1
+                        }
+                      },
+                      {
+                        "reply": "🎉 *LEVEL UP!* Sekarang Lv.{p.level} — HP penuh, ATK +1, Max HP +15!"
+                      }
+                    ]
+                  },
+                  {
+                    "interactive": {
+                      "header": "{mul.tag}Menang vs {enc.monster}",
+                      "body": "🎲 Roll {roll.total} vs power {enc.power}\n🪙 +{math: ({enc.gold} + {lootRoll.total}) * {mul.mult} * (1 + {p.combo} * 0.05)|round} gold (combo x{p.combo} = +{math: {p.combo} * 5}%)\n✨ +{enc.xp} XP\n\n👤 *{senderName}*  ⭐ Lv.{p.level}\n❤️ HP {p.hp}/{p.maxHp}  🗡️ ATK {p.atk}\n🪙 Gold {p.gold}  ✨ XP {p.xp}/{p.xpNext}\n🔥 Combo x{p.combo}  💀 Kills {p.kills}  📅 Streak {p.streak}",
+                      "footer": "Combo naik terus kalau menang beruntun 🔥",
+                      "buttons": [
+                        {
+                          "type": "quick_reply",
+                          "id": "rpg_hunt",
+                          "text": "⚔️ Hunt"
+                        },
+                        {
+                          "type": "quick_reply",
+                          "id": "rpg_use_pot",
+                          "text": "🧪 Potion"
+                        },
+                        {
+                          "type": "single_select",
+                          "text": "📜 Menu RPG",
+                          "sections": [
+                            {
+                              "title": "Petualangan",
+                              "rows": [
+                                {
+                                  "id": "rpg_hunt",
+                                  "title": "⚔️ Hunt Monster",
+                                  "description": "Lawan monster, kejar combo & jackpot"
+                                },
+                                {
+                                  "id": "rpg_boss",
+                                  "title": "👹 Boss Raid",
+                                  "description": "Butuh Lv.3 — hadiah besar"
+                                },
+                                {
+                                  "id": "rpg_daily",
+                                  "title": "🎁 Daily Reward",
+                                  "description": "Klaim tiap hari, streak makin besar"
+                                }
+                              ]
+                            },
+                            {
+                              "title": "Kekuatan",
+                              "rows": [
+                                {
+                                  "id": "rpg_gacha",
+                                  "title": "🎰 Summon Senjata (100g)",
+                                  "description": "Gacha senjata, ATK naik permanen"
+                                },
+                                {
+                                  "id": "rpg_buy_pot",
+                                  "title": "🛒 Beli Potion (30g)",
+                                  "description": "Heal +60 HP"
+                                },
+                                {
+                                  "id": "rpg_rest",
+                                  "title": "🏕️ Istirahat",
+                                  "description": "Heal +35 HP (cooldown 45 dtk)"
+                                },
+                                {
+                                  "id": "rpg_profile",
+                                  "title": "👤 Profil",
+                                  "description": "Lihat statistik"
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    "nextStep": "rpg_menu",
+                    "stepTtlSec": 3600,
+                    "lockSender": true,
+                    "boardKey": "rpg_{chat}_{senderNumber}",
+                    "deletePrevious": true
+                  }
+                ],
+                "else": [
+                  {
+                    "state": "rpg_{senderNumber}",
+                    "defaults": {
+                      "hp": 100,
+                      "maxHp": 100,
+                      "gold": 60,
+                      "xp": 0,
+                      "xpNext": 100,
+                      "level": 1,
+                      "atk": 3,
+                      "combo": 0,
+                      "streak": 0,
+                      "kills": 0,
+                      "inventory": {}
+                    },
+                    "saveAs": "p",
+                    "inc": {
+                      "hp": "-{enc.dmg}"
+                    },
+                    "set": {
+                      "combo": 0
+                    },
+                    "clamp": {
+                      "hp": [
+                        0,
+                        9999
+                      ]
+                    }
+                  },
+                  {
+                    "interactive": {
+                      "header": "💥 Kalah vs {enc.monster}",
+                      "body": "🎲 Roll {roll.total} vs power {enc.power} — kurang {math: {enc.power} - {roll.total}} poin lagi!\n💔 Kena {enc.dmg} dmg, combo reset.\n\n👤 *{senderName}*  ⭐ Lv.{p.level}\n❤️ HP {p.hp}/{p.maxHp}  🗡️ ATK {p.atk}\n🪙 Gold {p.gold}  ✨ XP {p.xp}/{p.xpNext}\n🔥 Combo x{p.combo}  💀 Kills {p.kills}  📅 Streak {p.streak}",
+                      "footer": "Coba lagi, kamu hampir menang! 😤",
+                      "buttons": [
+                        {
+                          "type": "quick_reply",
+                          "id": "rpg_hunt",
+                          "text": "⚔️ Hunt"
+                        },
+                        {
+                          "type": "quick_reply",
+                          "id": "rpg_use_pot",
+                          "text": "🧪 Potion"
+                        },
+                        {
+                          "type": "single_select",
+                          "text": "📜 Menu RPG",
+                          "sections": [
+                            {
+                              "title": "Petualangan",
+                              "rows": [
+                                {
+                                  "id": "rpg_hunt",
+                                  "title": "⚔️ Hunt Monster",
+                                  "description": "Lawan monster, kejar combo & jackpot"
+                                },
+                                {
+                                  "id": "rpg_boss",
+                                  "title": "👹 Boss Raid",
+                                  "description": "Butuh Lv.3 — hadiah besar"
+                                },
+                                {
+                                  "id": "rpg_daily",
+                                  "title": "🎁 Daily Reward",
+                                  "description": "Klaim tiap hari, streak makin besar"
+                                }
+                              ]
+                            },
+                            {
+                              "title": "Kekuatan",
+                              "rows": [
+                                {
+                                  "id": "rpg_gacha",
+                                  "title": "🎰 Summon Senjata (100g)",
+                                  "description": "Gacha senjata, ATK naik permanen"
+                                },
+                                {
+                                  "id": "rpg_buy_pot",
+                                  "title": "🛒 Beli Potion (30g)",
+                                  "description": "Heal +60 HP"
+                                },
+                                {
+                                  "id": "rpg_rest",
+                                  "title": "🏕️ Istirahat",
+                                  "description": "Heal +35 HP (cooldown 45 dtk)"
+                                },
+                                {
+                                  "id": "rpg_profile",
+                                  "title": "👤 Profil",
+                                  "description": "Lihat statistik"
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    "nextStep": "rpg_menu",
+                    "stepTtlSec": 3600,
+                    "lockSender": true,
+                    "boardKey": "rpg_{chat}_{senderNumber}",
+                    "deletePrevious": true
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "cooldown": 4,
+        "cooldownScope": "user",
+        "cooldownReply": "⏳ Tarik napas! Hunt siap lagi {cooldownRemaining} dtk."
+      },
+      {
+        "buttonIds": [
+          "rpg_hunt"
+        ],
+        "step": "rpg_menu",
+        "onlyButtonOwner": true,
+        "lockMessage": "⏳ Menu ini milik pemain lain. Ketik *.rpg* untuk buka menu kamu sendiri!",
+        "scope": "any",
+        "allowSelf": true,
+        "actions": [
+          {
+            "state": "rpg_{senderNumber}",
+            "defaults": {
+              "hp": 100,
+              "maxHp": 100,
+              "gold": 60,
+              "xp": 0,
+              "xpNext": 100,
+              "level": 1,
+              "atk": 3,
+              "combo": 0,
+              "streak": 0,
+              "kills": 0,
+              "inventory": {}
+            },
+            "saveAs": "p"
+          },
+          {
+            "when": "{p.hp}",
+            "lt": "20",
+            "then": [
+              {
+                "interactive": {
+                  "header": "😵 Terlalu Lemah",
+                  "body": "HP kamu {p.hp}/{p.maxHp}. Minum Potion atau istirahat dulu!\n\n👤 *{senderName}*  ⭐ Lv.{p.level}\n❤️ HP {p.hp}/{p.maxHp}  🗡️ ATK {p.atk}\n🪙 Gold {p.gold}  ✨ XP {p.xp}/{p.xpNext}\n🔥 Combo x{p.combo}  💀 Kills {p.kills}  📅 Streak {p.streak}",
+                  "footer": "Tap aksi di bawah 👇",
+                  "buttons": [
+                    {
+                      "type": "quick_reply",
+                      "id": "rpg_hunt",
+                      "text": "⚔️ Hunt"
+                    },
+                    {
+                      "type": "quick_reply",
+                      "id": "rpg_use_pot",
+                      "text": "🧪 Potion"
+                    },
+                    {
+                      "type": "single_select",
+                      "text": "📜 Menu RPG",
+                      "sections": [
+                        {
+                          "title": "Petualangan",
+                          "rows": [
+                            {
+                              "id": "rpg_hunt",
+                              "title": "⚔️ Hunt Monster",
+                              "description": "Lawan monster, kejar combo & jackpot"
+                            },
+                            {
+                              "id": "rpg_boss",
+                              "title": "👹 Boss Raid",
+                              "description": "Butuh Lv.3 — hadiah besar"
+                            },
+                            {
+                              "id": "rpg_daily",
+                              "title": "🎁 Daily Reward",
+                              "description": "Klaim tiap hari, streak makin besar"
+                            }
+                          ]
+                        },
+                        {
+                          "title": "Kekuatan",
+                          "rows": [
+                            {
+                              "id": "rpg_gacha",
+                              "title": "🎰 Summon Senjata (100g)",
+                              "description": "Gacha senjata, ATK naik permanen"
+                            },
+                            {
+                              "id": "rpg_buy_pot",
+                              "title": "🛒 Beli Potion (30g)",
+                              "description": "Heal +60 HP"
+                            },
+                            {
+                              "id": "rpg_rest",
+                              "title": "🏕️ Istirahat",
+                              "description": "Heal +35 HP (cooldown 45 dtk)"
+                            },
+                            {
+                              "id": "rpg_profile",
+                              "title": "👤 Profil",
+                              "description": "Lihat statistik"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                "nextStep": "rpg_menu",
+                "stepTtlSec": 3600,
+                "lockSender": true,
+                "boardKey": "rpg_{chat}_{senderNumber}",
+                "deletePrevious": true
+              }
+            ],
+            "else": [
+              {
+                "random": {
+                  "loot": [
+                    {
+                      "monster": "🟢 Slime",
+                      "power": 8,
+                      "gold": 14,
+                      "xp": 14,
+                      "dmg": 8,
+                      "scr": 2,
+                      "weight": 38
+                    },
+                    {
+                      "monster": "👺 Goblin",
+                      "power": 12,
+                      "gold": 24,
+                      "xp": 24,
+                      "dmg": 12,
+                      "scr": 4,
+                      "weight": 28
+                    },
+                    {
+                      "monster": "🐺 Dire Wolf",
+                      "power": 15,
+                      "gold": 36,
+                      "xp": 34,
+                      "dmg": 16,
+                      "scr": 5,
+                      "weight": 17
+                    },
+                    {
+                      "monster": "💀 Skeleton Knight",
+                      "power": 18,
+                      "gold": 55,
+                      "xp": 52,
+                      "dmg": 20,
+                      "scr": 7,
+                      "weight": 10
+                    },
+                    {
+                      "monster": "🐉 Ember Drake",
+                      "power": 22,
+                      "gold": 100,
+                      "xp": 90,
+                      "dmg": 28,
+                      "scr": 9,
+                      "weight": 5
+                    },
+                    {
+                      "monster": "🌌 Void Dragon (MYTHIC)",
+                      "power": 27,
+                      "gold": 420,
+                      "xp": 320,
+                      "dmg": 40,
+                      "scr": 12,
+                      "weight": 2
+                    }
+                  ]
+                },
+                "saveAs": "enc"
+              },
+              {
+                "random": {
+                  "dice": "1d20+{p.atk}"
+                },
+                "saveAs": "roll"
+              },
+              {
+                "random": {
+                  "dice": "1d12"
+                },
+                "saveAs": "lootRoll"
+              },
+              {
+                "when": "{roll.total}",
+                "gte": "{enc.power}",
+                "then": [
+                  {
+                    "random": {
+                      "loot": [
+                        {
+                          "mult": 1,
+                          "tag": "",
+                          "weight": 82
+                        },
+                        {
+                          "mult": 2,
+                          "tag": "💥 CRITICAL! ",
+                          "weight": 13
+                        },
+                        {
+                          "mult": 3,
+                          "tag": "🌟 JACKPOT x3! ",
+                          "weight": 5
+                        }
+                      ]
+                    },
+                    "saveAs": "mul"
+                  },
+                  {
+                    "random": {
+                      "loot": [
+                        {
+                          "drop": "Potion",
+                          "got": 1,
+                          "weight": 22
+                        },
+                        {
+                          "drop": "none",
+                          "got": 0,
+                          "weight": 78
+                        }
+                      ]
+                    },
+                    "saveAs": "drop"
+                  },
+                  {
+                    "state": "rpg_{senderNumber}",
+                    "defaults": {
+                      "hp": 100,
+                      "maxHp": 100,
+                      "gold": 60,
+                      "xp": 0,
+                      "xpNext": 100,
+                      "level": 1,
+                      "atk": 3,
+                      "combo": 0,
+                      "streak": 0,
+                      "kills": 0,
+                      "inventory": {}
+                    },
+                    "saveAs": "p",
+                    "inc": {
+                      "gold": "{math: ({enc.gold} + {lootRoll.total}) * {mul.mult} * (1 + {p.combo} * 0.05)|round}",
+                      "xp": "{enc.xp}",
+                      "hp": "-{enc.scr}",
+                      "combo": 1,
+                      "kills": 1
+                    },
+                    "clamp": {
+                      "hp": [
+                        1,
+                        9999
+                      ],
+                      "combo": [
+                        0,
+                        20
+                      ]
+                    }
+                  },
+                  {
+                    "when": "{drop.got}",
+                    "is": "1",
+                    "then": [
+                      {
+                        "state": "rpg_{senderNumber}",
+                        "defaults": {
+                          "hp": 100,
+                          "maxHp": 100,
+                          "gold": 60,
+                          "xp": 0,
+                          "xpNext": 100,
+                          "level": 1,
+                          "atk": 3,
+                          "combo": 0,
+                          "streak": 0,
+                          "kills": 0,
+                          "inventory": {}
+                        },
+                        "saveAs": "p",
+                        "addItem": {
+                          "name": "Potion",
+                          "qty": 1
+                        }
+                      },
+                      {
+                        "reply": "🎁 Monster menjatuhkan 🧪 *Potion*!"
+                      }
+                    ]
+                  },
+                  {
+                    "when": "{p.xp}",
+                    "gte": "{p.xpNext}",
+                    "then": [
+                      {
+                        "state": "rpg_{senderNumber}",
+                        "defaults": {
+                          "hp": 100,
+                          "maxHp": 100,
+                          "gold": 60,
+                          "xp": 0,
+                          "xpNext": 100,
+                          "level": 1,
+                          "atk": 3,
+                          "combo": 0,
+                          "streak": 0,
+                          "kills": 0,
+                          "inventory": {}
+                        },
+                        "saveAs": "p",
+                        "set": {
+                          "xp": "{math: {p.xp} - {p.xpNext}}",
+                          "xpNext": "{math: {p.xpNext} * 1.5|round}",
+                          "maxHp": "{math: {p.maxHp} + 15}",
+                          "hp": "{math: {p.maxHp} + 15}"
+                        },
+                        "inc": {
+                          "level": 1,
+                          "atk": 1
+                        }
+                      },
+                      {
+                        "reply": "🎉 *LEVEL UP!* Sekarang Lv.{p.level} — HP penuh, ATK +1, Max HP +15!"
+                      }
+                    ]
+                  },
+                  {
+                    "interactive": {
+                      "header": "{mul.tag}Menang vs {enc.monster}",
+                      "body": "🎲 Roll {roll.total} vs power {enc.power}\n🪙 +{math: ({enc.gold} + {lootRoll.total}) * {mul.mult} * (1 + {p.combo} * 0.05)|round} gold (combo x{p.combo} = +{math: {p.combo} * 5}%)\n✨ +{enc.xp} XP\n\n👤 *{senderName}*  ⭐ Lv.{p.level}\n❤️ HP {p.hp}/{p.maxHp}  🗡️ ATK {p.atk}\n🪙 Gold {p.gold}  ✨ XP {p.xp}/{p.xpNext}\n🔥 Combo x{p.combo}  💀 Kills {p.kills}  📅 Streak {p.streak}",
+                      "footer": "Combo naik terus kalau menang beruntun 🔥",
+                      "buttons": [
+                        {
+                          "type": "quick_reply",
+                          "id": "rpg_hunt",
+                          "text": "⚔️ Hunt"
+                        },
+                        {
+                          "type": "quick_reply",
+                          "id": "rpg_use_pot",
+                          "text": "🧪 Potion"
+                        },
+                        {
+                          "type": "single_select",
+                          "text": "📜 Menu RPG",
+                          "sections": [
+                            {
+                              "title": "Petualangan",
+                              "rows": [
+                                {
+                                  "id": "rpg_hunt",
+                                  "title": "⚔️ Hunt Monster",
+                                  "description": "Lawan monster, kejar combo & jackpot"
+                                },
+                                {
+                                  "id": "rpg_boss",
+                                  "title": "👹 Boss Raid",
+                                  "description": "Butuh Lv.3 — hadiah besar"
+                                },
+                                {
+                                  "id": "rpg_daily",
+                                  "title": "🎁 Daily Reward",
+                                  "description": "Klaim tiap hari, streak makin besar"
+                                }
+                              ]
+                            },
+                            {
+                              "title": "Kekuatan",
+                              "rows": [
+                                {
+                                  "id": "rpg_gacha",
+                                  "title": "🎰 Summon Senjata (100g)",
+                                  "description": "Gacha senjata, ATK naik permanen"
+                                },
+                                {
+                                  "id": "rpg_buy_pot",
+                                  "title": "🛒 Beli Potion (30g)",
+                                  "description": "Heal +60 HP"
+                                },
+                                {
+                                  "id": "rpg_rest",
+                                  "title": "🏕️ Istirahat",
+                                  "description": "Heal +35 HP (cooldown 45 dtk)"
+                                },
+                                {
+                                  "id": "rpg_profile",
+                                  "title": "👤 Profil",
+                                  "description": "Lihat statistik"
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    "nextStep": "rpg_menu",
+                    "stepTtlSec": 3600,
+                    "lockSender": true,
+                    "boardKey": "rpg_{chat}_{senderNumber}",
+                    "deletePrevious": true
+                  }
+                ],
+                "else": [
+                  {
+                    "state": "rpg_{senderNumber}",
+                    "defaults": {
+                      "hp": 100,
+                      "maxHp": 100,
+                      "gold": 60,
+                      "xp": 0,
+                      "xpNext": 100,
+                      "level": 1,
+                      "atk": 3,
+                      "combo": 0,
+                      "streak": 0,
+                      "kills": 0,
+                      "inventory": {}
+                    },
+                    "saveAs": "p",
+                    "inc": {
+                      "hp": "-{enc.dmg}"
+                    },
+                    "set": {
+                      "combo": 0
+                    },
+                    "clamp": {
+                      "hp": [
+                        0,
+                        9999
+                      ]
+                    }
+                  },
+                  {
+                    "interactive": {
+                      "header": "💥 Kalah vs {enc.monster}",
+                      "body": "🎲 Roll {roll.total} vs power {enc.power} — kurang {math: {enc.power} - {roll.total}} poin lagi!\n💔 Kena {enc.dmg} dmg, combo reset.\n\n👤 *{senderName}*  ⭐ Lv.{p.level}\n❤️ HP {p.hp}/{p.maxHp}  🗡️ ATK {p.atk}\n🪙 Gold {p.gold}  ✨ XP {p.xp}/{p.xpNext}\n🔥 Combo x{p.combo}  💀 Kills {p.kills}  📅 Streak {p.streak}",
+                      "footer": "Coba lagi, kamu hampir menang! 😤",
+                      "buttons": [
+                        {
+                          "type": "quick_reply",
+                          "id": "rpg_hunt",
+                          "text": "⚔️ Hunt"
+                        },
+                        {
+                          "type": "quick_reply",
+                          "id": "rpg_use_pot",
+                          "text": "🧪 Potion"
+                        },
+                        {
+                          "type": "single_select",
+                          "text": "📜 Menu RPG",
+                          "sections": [
+                            {
+                              "title": "Petualangan",
+                              "rows": [
+                                {
+                                  "id": "rpg_hunt",
+                                  "title": "⚔️ Hunt Monster",
+                                  "description": "Lawan monster, kejar combo & jackpot"
+                                },
+                                {
+                                  "id": "rpg_boss",
+                                  "title": "👹 Boss Raid",
+                                  "description": "Butuh Lv.3 — hadiah besar"
+                                },
+                                {
+                                  "id": "rpg_daily",
+                                  "title": "🎁 Daily Reward",
+                                  "description": "Klaim tiap hari, streak makin besar"
+                                }
+                              ]
+                            },
+                            {
+                              "title": "Kekuatan",
+                              "rows": [
+                                {
+                                  "id": "rpg_gacha",
+                                  "title": "🎰 Summon Senjata (100g)",
+                                  "description": "Gacha senjata, ATK naik permanen"
+                                },
+                                {
+                                  "id": "rpg_buy_pot",
+                                  "title": "🛒 Beli Potion (30g)",
+                                  "description": "Heal +60 HP"
+                                },
+                                {
+                                  "id": "rpg_rest",
+                                  "title": "🏕️ Istirahat",
+                                  "description": "Heal +35 HP (cooldown 45 dtk)"
+                                },
+                                {
+                                  "id": "rpg_profile",
+                                  "title": "👤 Profil",
+                                  "description": "Lihat statistik"
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    "nextStep": "rpg_menu",
+                    "stepTtlSec": 3600,
+                    "lockSender": true,
+                    "boardKey": "rpg_{chat}_{senderNumber}",
+                    "deletePrevious": true
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "cooldown": 4,
+        "cooldownScope": "user",
+        "cooldownReply": "⏳ Tarik napas! Hunt siap lagi {cooldownRemaining} dtk."
+      },
+      {
+        "commands": [
+          ".boss"
+        ],
+        "messageType": "text",
+        "scope": "any",
+        "allowSelf": true,
+        "actions": [
+          {
+            "state": "rpg_{senderNumber}",
+            "defaults": {
+              "hp": 100,
+              "maxHp": 100,
+              "gold": 60,
+              "xp": 0,
+              "xpNext": 100,
+              "level": 1,
+              "atk": 3,
+              "combo": 0,
+              "streak": 0,
+              "kills": 0,
+              "inventory": {}
+            },
+            "saveAs": "p"
+          },
+          {
+            "when": "{p.hp}",
+            "lt": "20",
+            "then": [
+              {
+                "interactive": {
+                  "header": "😵 Terlalu Lemah",
+                  "body": "HP kamu {p.hp}/{p.maxHp}. Minum Potion atau istirahat dulu!\n\n👤 *{senderName}*  ⭐ Lv.{p.level}\n❤️ HP {p.hp}/{p.maxHp}  🗡️ ATK {p.atk}\n🪙 Gold {p.gold}  ✨ XP {p.xp}/{p.xpNext}\n🔥 Combo x{p.combo}  💀 Kills {p.kills}  📅 Streak {p.streak}",
+                  "footer": "Tap aksi di bawah 👇",
+                  "buttons": [
+                    {
+                      "type": "quick_reply",
+                      "id": "rpg_hunt",
+                      "text": "⚔️ Hunt"
+                    },
+                    {
+                      "type": "quick_reply",
+                      "id": "rpg_use_pot",
+                      "text": "🧪 Potion"
+                    },
+                    {
+                      "type": "single_select",
+                      "text": "📜 Menu RPG",
+                      "sections": [
+                        {
+                          "title": "Petualangan",
+                          "rows": [
+                            {
+                              "id": "rpg_hunt",
+                              "title": "⚔️ Hunt Monster",
+                              "description": "Lawan monster, kejar combo & jackpot"
+                            },
+                            {
+                              "id": "rpg_boss",
+                              "title": "👹 Boss Raid",
+                              "description": "Butuh Lv.3 — hadiah besar"
+                            },
+                            {
+                              "id": "rpg_daily",
+                              "title": "🎁 Daily Reward",
+                              "description": "Klaim tiap hari, streak makin besar"
+                            }
+                          ]
+                        },
+                        {
+                          "title": "Kekuatan",
+                          "rows": [
+                            {
+                              "id": "rpg_gacha",
+                              "title": "🎰 Summon Senjata (100g)",
+                              "description": "Gacha senjata, ATK naik permanen"
+                            },
+                            {
+                              "id": "rpg_buy_pot",
+                              "title": "🛒 Beli Potion (30g)",
+                              "description": "Heal +60 HP"
+                            },
+                            {
+                              "id": "rpg_rest",
+                              "title": "🏕️ Istirahat",
+                              "description": "Heal +35 HP (cooldown 45 dtk)"
+                            },
+                            {
+                              "id": "rpg_profile",
+                              "title": "👤 Profil",
+                              "description": "Lihat statistik"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                "nextStep": "rpg_menu",
+                "stepTtlSec": 3600,
+                "lockSender": true,
+                "boardKey": "rpg_{chat}_{senderNumber}",
+                "deletePrevious": true
+              }
+            ],
+            "else": [
+              {
+                "when": "{p.level}",
+                "lt": "3",
+                "then": [
+                  {
+                    "interactive": {
+                      "header": "🔒 Boss Terkunci",
+                      "body": "Boss Raid butuh minimal *Lv.3*. Grinding dulu lewat Hunt!\n\n👤 *{senderName}*  ⭐ Lv.{p.level}\n❤️ HP {p.hp}/{p.maxHp}  🗡️ ATK {p.atk}\n🪙 Gold {p.gold}  ✨ XP {p.xp}/{p.xpNext}\n🔥 Combo x{p.combo}  💀 Kills {p.kills}  📅 Streak {p.streak}",
+                      "footer": "Tap aksi di bawah 👇",
+                      "buttons": [
+                        {
+                          "type": "quick_reply",
+                          "id": "rpg_hunt",
+                          "text": "⚔️ Hunt"
+                        },
+                        {
+                          "type": "quick_reply",
+                          "id": "rpg_use_pot",
+                          "text": "🧪 Potion"
+                        },
+                        {
+                          "type": "single_select",
+                          "text": "📜 Menu RPG",
+                          "sections": [
+                            {
+                              "title": "Petualangan",
+                              "rows": [
+                                {
+                                  "id": "rpg_hunt",
+                                  "title": "⚔️ Hunt Monster",
+                                  "description": "Lawan monster, kejar combo & jackpot"
+                                },
+                                {
+                                  "id": "rpg_boss",
+                                  "title": "👹 Boss Raid",
+                                  "description": "Butuh Lv.3 — hadiah besar"
+                                },
+                                {
+                                  "id": "rpg_daily",
+                                  "title": "🎁 Daily Reward",
+                                  "description": "Klaim tiap hari, streak makin besar"
+                                }
+                              ]
+                            },
+                            {
+                              "title": "Kekuatan",
+                              "rows": [
+                                {
+                                  "id": "rpg_gacha",
+                                  "title": "🎰 Summon Senjata (100g)",
+                                  "description": "Gacha senjata, ATK naik permanen"
+                                },
+                                {
+                                  "id": "rpg_buy_pot",
+                                  "title": "🛒 Beli Potion (30g)",
+                                  "description": "Heal +60 HP"
+                                },
+                                {
+                                  "id": "rpg_rest",
+                                  "title": "🏕️ Istirahat",
+                                  "description": "Heal +35 HP (cooldown 45 dtk)"
+                                },
+                                {
+                                  "id": "rpg_profile",
+                                  "title": "👤 Profil",
+                                  "description": "Lihat statistik"
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    "nextStep": "rpg_menu",
+                    "stepTtlSec": 3600,
+                    "lockSender": true,
+                    "boardKey": "rpg_{chat}_{senderNumber}",
+                    "deletePrevious": true
+                  }
+                ],
+                "else": [
+                  {
+                    "random": {
+                      "loot": [
+                        {
+                          "monster": "👹 Raja Iblis",
+                          "power": 30,
+                          "gold": 500,
+                          "xp": 400,
+                          "dmg": 45,
+                          "scr": 12,
+                          "weight": 1
+                        }
+                      ]
+                    },
+                    "saveAs": "enc"
+                  },
+                  {
+                    "random": {
+                      "dice": "1d20+{p.atk}"
+                    },
+                    "saveAs": "roll"
+                  },
+                  {
+                    "random": {
+                      "dice": "1d12+{enc.gold}"
+                    },
+                    "saveAs": "lootRoll"
+                  },
+                  {
+                    "when": "{roll.total}",
+                    "gte": "{enc.power}",
+                    "then": [
+                      {
+                        "random": {
+                          "loot": [
+                            {
+                              "mult": 1,
+                              "tag": "",
+                              "weight": 82
+                            },
+                            {
+                              "mult": 2,
+                              "tag": "💥 CRITICAL! ",
+                              "weight": 13
+                            },
+                            {
+                              "mult": 3,
+                              "tag": "🌟 JACKPOT x3! ",
+                              "weight": 5
+                            }
+                          ]
+                        },
+                        "saveAs": "mul"
+                      },
+                      {
+                        "random": {
+                          "loot": [
+                            {
+                              "drop": "Potion",
+                              "got": 1,
+                              "weight": 22
+                            },
+                            {
+                              "drop": "none",
+                              "got": 0,
+                              "weight": 78
+                            }
+                          ]
+                        },
+                        "saveAs": "drop"
+                      },
+                      {
+                        "state": "rpg_{senderNumber}",
+                        "defaults": {
+                          "hp": 100,
+                          "maxHp": 100,
+                          "gold": 60,
+                          "xp": 0,
+                          "xpNext": 100,
+                          "level": 1,
+                          "atk": 3,
+                          "combo": 0,
+                          "streak": 0,
+                          "kills": 0,
+                          "inventory": {}
+                        },
+                        "saveAs": "p",
+                        "inc": {
+                          "gold": "{math: ({enc.gold} + {lootRoll.total}) * {mul.mult} * (1 + {p.combo} * 0.05)|round}",
+                          "xp": "{enc.xp}",
+                          "hp": "-{enc.scr}",
+                          "combo": 1,
+                          "kills": 1
+                        },
+                        "clamp": {
+                          "hp": [
+                            1,
+                            9999
+                          ],
+                          "combo": [
+                            0,
+                            20
+                          ]
+                        }
+                      },
+                      {
+                        "when": "{drop.got}",
+                        "is": "1",
+                        "then": [
+                          {
+                            "state": "rpg_{senderNumber}",
+                            "defaults": {
+                              "hp": 100,
+                              "maxHp": 100,
+                              "gold": 60,
+                              "xp": 0,
+                              "xpNext": 100,
+                              "level": 1,
+                              "atk": 3,
+                              "combo": 0,
+                              "streak": 0,
+                              "kills": 0,
+                              "inventory": {}
+                            },
+                            "saveAs": "p",
+                            "addItem": {
+                              "name": "Potion",
+                              "qty": 1
+                            }
+                          },
+                          {
+                            "reply": "🎁 Monster menjatuhkan 🧪 *Potion*!"
+                          }
+                        ]
+                      },
+                      {
+                        "when": "{p.xp}",
+                        "gte": "{p.xpNext}",
+                        "then": [
+                          {
+                            "state": "rpg_{senderNumber}",
+                            "defaults": {
+                              "hp": 100,
+                              "maxHp": 100,
+                              "gold": 60,
+                              "xp": 0,
+                              "xpNext": 100,
+                              "level": 1,
+                              "atk": 3,
+                              "combo": 0,
+                              "streak": 0,
+                              "kills": 0,
+                              "inventory": {}
+                            },
+                            "saveAs": "p",
+                            "set": {
+                              "xp": "{math: {p.xp} - {p.xpNext}}",
+                              "xpNext": "{math: {p.xpNext} * 1.5|round}",
+                              "maxHp": "{math: {p.maxHp} + 15}",
+                              "hp": "{math: {p.maxHp} + 15}"
+                            },
+                            "inc": {
+                              "level": 1,
+                              "atk": 1
+                            }
+                          },
+                          {
+                            "reply": "🎉 *LEVEL UP!* Sekarang Lv.{p.level} — HP penuh, ATK +1, Max HP +15!"
+                          }
+                        ]
+                      },
+                      {
+                        "interactive": {
+                          "header": "{mul.tag}Menang vs {enc.monster}",
+                          "body": "🎲 Roll {roll.total} vs power {enc.power}\n🪙 +{math: ({enc.gold} + {lootRoll.total}) * {mul.mult} * (1 + {p.combo} * 0.05)|round} gold (combo x{p.combo} = +{math: {p.combo} * 5}%)\n✨ +{enc.xp} XP\n\n👤 *{senderName}*  ⭐ Lv.{p.level}\n❤️ HP {p.hp}/{p.maxHp}  🗡️ ATK {p.atk}\n🪙 Gold {p.gold}  ✨ XP {p.xp}/{p.xpNext}\n🔥 Combo x{p.combo}  💀 Kills {p.kills}  📅 Streak {p.streak}",
+                          "footer": "Combo naik terus kalau menang beruntun 🔥",
+                          "buttons": [
+                            {
+                              "type": "quick_reply",
+                              "id": "rpg_hunt",
+                              "text": "⚔️ Hunt"
+                            },
+                            {
+                              "type": "quick_reply",
+                              "id": "rpg_use_pot",
+                              "text": "🧪 Potion"
+                            },
+                            {
+                              "type": "single_select",
+                              "text": "📜 Menu RPG",
+                              "sections": [
+                                {
+                                  "title": "Petualangan",
+                                  "rows": [
+                                    {
+                                      "id": "rpg_hunt",
+                                      "title": "⚔️ Hunt Monster",
+                                      "description": "Lawan monster, kejar combo & jackpot"
+                                    },
+                                    {
+                                      "id": "rpg_boss",
+                                      "title": "👹 Boss Raid",
+                                      "description": "Butuh Lv.3 — hadiah besar"
+                                    },
+                                    {
+                                      "id": "rpg_daily",
+                                      "title": "🎁 Daily Reward",
+                                      "description": "Klaim tiap hari, streak makin besar"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "title": "Kekuatan",
+                                  "rows": [
+                                    {
+                                      "id": "rpg_gacha",
+                                      "title": "🎰 Summon Senjata (100g)",
+                                      "description": "Gacha senjata, ATK naik permanen"
+                                    },
+                                    {
+                                      "id": "rpg_buy_pot",
+                                      "title": "🛒 Beli Potion (30g)",
+                                      "description": "Heal +60 HP"
+                                    },
+                                    {
+                                      "id": "rpg_rest",
+                                      "title": "🏕️ Istirahat",
+                                      "description": "Heal +35 HP (cooldown 45 dtk)"
+                                    },
+                                    {
+                                      "id": "rpg_profile",
+                                      "title": "👤 Profil",
+                                      "description": "Lihat statistik"
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        "nextStep": "rpg_menu",
+                        "stepTtlSec": 3600,
+                        "lockSender": true,
+                        "boardKey": "rpg_{chat}_{senderNumber}",
+                        "deletePrevious": true
+                      }
+                    ],
+                    "else": [
+                      {
+                        "state": "rpg_{senderNumber}",
+                        "defaults": {
+                          "hp": 100,
+                          "maxHp": 100,
+                          "gold": 60,
+                          "xp": 0,
+                          "xpNext": 100,
+                          "level": 1,
+                          "atk": 3,
+                          "combo": 0,
+                          "streak": 0,
+                          "kills": 0,
+                          "inventory": {}
+                        },
+                        "saveAs": "p",
+                        "inc": {
+                          "hp": "-{enc.dmg}"
+                        },
+                        "set": {
+                          "combo": 0
+                        },
+                        "clamp": {
+                          "hp": [
+                            0,
+                            9999
+                          ]
+                        }
+                      },
+                      {
+                        "interactive": {
+                          "header": "💥 Kalah vs {enc.monster}",
+                          "body": "🎲 Roll {roll.total} vs power {enc.power} — kurang {math: {enc.power} - {roll.total}} poin lagi!\n💔 Kena {enc.dmg} dmg, combo reset.\n\n👤 *{senderName}*  ⭐ Lv.{p.level}\n❤️ HP {p.hp}/{p.maxHp}  🗡️ ATK {p.atk}\n🪙 Gold {p.gold}  ✨ XP {p.xp}/{p.xpNext}\n🔥 Combo x{p.combo}  💀 Kills {p.kills}  📅 Streak {p.streak}",
+                          "footer": "Coba lagi, kamu hampir menang! 😤",
+                          "buttons": [
+                            {
+                              "type": "quick_reply",
+                              "id": "rpg_hunt",
+                              "text": "⚔️ Hunt"
+                            },
+                            {
+                              "type": "quick_reply",
+                              "id": "rpg_use_pot",
+                              "text": "🧪 Potion"
+                            },
+                            {
+                              "type": "single_select",
+                              "text": "📜 Menu RPG",
+                              "sections": [
+                                {
+                                  "title": "Petualangan",
+                                  "rows": [
+                                    {
+                                      "id": "rpg_hunt",
+                                      "title": "⚔️ Hunt Monster",
+                                      "description": "Lawan monster, kejar combo & jackpot"
+                                    },
+                                    {
+                                      "id": "rpg_boss",
+                                      "title": "👹 Boss Raid",
+                                      "description": "Butuh Lv.3 — hadiah besar"
+                                    },
+                                    {
+                                      "id": "rpg_daily",
+                                      "title": "🎁 Daily Reward",
+                                      "description": "Klaim tiap hari, streak makin besar"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "title": "Kekuatan",
+                                  "rows": [
+                                    {
+                                      "id": "rpg_gacha",
+                                      "title": "🎰 Summon Senjata (100g)",
+                                      "description": "Gacha senjata, ATK naik permanen"
+                                    },
+                                    {
+                                      "id": "rpg_buy_pot",
+                                      "title": "🛒 Beli Potion (30g)",
+                                      "description": "Heal +60 HP"
+                                    },
+                                    {
+                                      "id": "rpg_rest",
+                                      "title": "🏕️ Istirahat",
+                                      "description": "Heal +35 HP (cooldown 45 dtk)"
+                                    },
+                                    {
+                                      "id": "rpg_profile",
+                                      "title": "👤 Profil",
+                                      "description": "Lihat statistik"
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        "nextStep": "rpg_menu",
+                        "stepTtlSec": 3600,
+                        "lockSender": true,
+                        "boardKey": "rpg_{chat}_{senderNumber}",
+                        "deletePrevious": true
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "cooldown": 45,
+        "cooldownScope": "user",
+        "cooldownReply": "👹 Boss butuh waktu pulih: {cooldownRemaining} dtk."
+      },
+      {
+        "buttonIds": [
+          "rpg_boss"
+        ],
+        "step": "rpg_menu",
+        "onlyButtonOwner": true,
+        "lockMessage": "⏳ Menu ini milik pemain lain. Ketik *.rpg* untuk buka menu kamu sendiri!",
+        "scope": "any",
+        "allowSelf": true,
+        "actions": [
+          {
+            "state": "rpg_{senderNumber}",
+            "defaults": {
+              "hp": 100,
+              "maxHp": 100,
+              "gold": 60,
+              "xp": 0,
+              "xpNext": 100,
+              "level": 1,
+              "atk": 3,
+              "combo": 0,
+              "streak": 0,
+              "kills": 0,
+              "inventory": {}
+            },
+            "saveAs": "p"
+          },
+          {
+            "when": "{p.hp}",
+            "lt": "20",
+            "then": [
+              {
+                "interactive": {
+                  "header": "😵 Terlalu Lemah",
+                  "body": "HP kamu {p.hp}/{p.maxHp}. Minum Potion atau istirahat dulu!\n\n👤 *{senderName}*  ⭐ Lv.{p.level}\n❤️ HP {p.hp}/{p.maxHp}  🗡️ ATK {p.atk}\n🪙 Gold {p.gold}  ✨ XP {p.xp}/{p.xpNext}\n🔥 Combo x{p.combo}  💀 Kills {p.kills}  📅 Streak {p.streak}",
+                  "footer": "Tap aksi di bawah 👇",
+                  "buttons": [
+                    {
+                      "type": "quick_reply",
+                      "id": "rpg_hunt",
+                      "text": "⚔️ Hunt"
+                    },
+                    {
+                      "type": "quick_reply",
+                      "id": "rpg_use_pot",
+                      "text": "🧪 Potion"
+                    },
+                    {
+                      "type": "single_select",
+                      "text": "📜 Menu RPG",
+                      "sections": [
+                        {
+                          "title": "Petualangan",
+                          "rows": [
+                            {
+                              "id": "rpg_hunt",
+                              "title": "⚔️ Hunt Monster",
+                              "description": "Lawan monster, kejar combo & jackpot"
+                            },
+                            {
+                              "id": "rpg_boss",
+                              "title": "👹 Boss Raid",
+                              "description": "Butuh Lv.3 — hadiah besar"
+                            },
+                            {
+                              "id": "rpg_daily",
+                              "title": "🎁 Daily Reward",
+                              "description": "Klaim tiap hari, streak makin besar"
+                            }
+                          ]
+                        },
+                        {
+                          "title": "Kekuatan",
+                          "rows": [
+                            {
+                              "id": "rpg_gacha",
+                              "title": "🎰 Summon Senjata (100g)",
+                              "description": "Gacha senjata, ATK naik permanen"
+                            },
+                            {
+                              "id": "rpg_buy_pot",
+                              "title": "🛒 Beli Potion (30g)",
+                              "description": "Heal +60 HP"
+                            },
+                            {
+                              "id": "rpg_rest",
+                              "title": "🏕️ Istirahat",
+                              "description": "Heal +35 HP (cooldown 45 dtk)"
+                            },
+                            {
+                              "id": "rpg_profile",
+                              "title": "👤 Profil",
+                              "description": "Lihat statistik"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                "nextStep": "rpg_menu",
+                "stepTtlSec": 3600,
+                "lockSender": true,
+                "boardKey": "rpg_{chat}_{senderNumber}",
+                "deletePrevious": true
+              }
+            ],
+            "else": [
+              {
+                "when": "{p.level}",
+                "lt": "3",
+                "then": [
+                  {
+                    "interactive": {
+                      "header": "🔒 Boss Terkunci",
+                      "body": "Boss Raid butuh minimal *Lv.3*. Grinding dulu lewat Hunt!\n\n👤 *{senderName}*  ⭐ Lv.{p.level}\n❤️ HP {p.hp}/{p.maxHp}  🗡️ ATK {p.atk}\n🪙 Gold {p.gold}  ✨ XP {p.xp}/{p.xpNext}\n🔥 Combo x{p.combo}  💀 Kills {p.kills}  📅 Streak {p.streak}",
+                      "footer": "Tap aksi di bawah 👇",
+                      "buttons": [
+                        {
+                          "type": "quick_reply",
+                          "id": "rpg_hunt",
+                          "text": "⚔️ Hunt"
+                        },
+                        {
+                          "type": "quick_reply",
+                          "id": "rpg_use_pot",
+                          "text": "🧪 Potion"
+                        },
+                        {
+                          "type": "single_select",
+                          "text": "📜 Menu RPG",
+                          "sections": [
+                            {
+                              "title": "Petualangan",
+                              "rows": [
+                                {
+                                  "id": "rpg_hunt",
+                                  "title": "⚔️ Hunt Monster",
+                                  "description": "Lawan monster, kejar combo & jackpot"
+                                },
+                                {
+                                  "id": "rpg_boss",
+                                  "title": "👹 Boss Raid",
+                                  "description": "Butuh Lv.3 — hadiah besar"
+                                },
+                                {
+                                  "id": "rpg_daily",
+                                  "title": "🎁 Daily Reward",
+                                  "description": "Klaim tiap hari, streak makin besar"
+                                }
+                              ]
+                            },
+                            {
+                              "title": "Kekuatan",
+                              "rows": [
+                                {
+                                  "id": "rpg_gacha",
+                                  "title": "🎰 Summon Senjata (100g)",
+                                  "description": "Gacha senjata, ATK naik permanen"
+                                },
+                                {
+                                  "id": "rpg_buy_pot",
+                                  "title": "🛒 Beli Potion (30g)",
+                                  "description": "Heal +60 HP"
+                                },
+                                {
+                                  "id": "rpg_rest",
+                                  "title": "🏕️ Istirahat",
+                                  "description": "Heal +35 HP (cooldown 45 dtk)"
+                                },
+                                {
+                                  "id": "rpg_profile",
+                                  "title": "👤 Profil",
+                                  "description": "Lihat statistik"
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    "nextStep": "rpg_menu",
+                    "stepTtlSec": 3600,
+                    "lockSender": true,
+                    "boardKey": "rpg_{chat}_{senderNumber}",
+                    "deletePrevious": true
+                  }
+                ],
+                "else": [
+                  {
+                    "random": {
+                      "loot": [
+                        {
+                          "monster": "👹 Raja Iblis",
+                          "power": 30,
+                          "gold": 500,
+                          "xp": 400,
+                          "dmg": 45,
+                          "scr": 12,
+                          "weight": 1
+                        }
+                      ]
+                    },
+                    "saveAs": "enc"
+                  },
+                  {
+                    "random": {
+                      "dice": "1d20+{p.atk}"
+                    },
+                    "saveAs": "roll"
+                  },
+                  {
+                    "random": {
+                      "dice": "1d12+{enc.gold}"
+                    },
+                    "saveAs": "lootRoll"
+                  },
+                  {
+                    "when": "{roll.total}",
+                    "gte": "{enc.power}",
+                    "then": [
+                      {
+                        "random": {
+                          "loot": [
+                            {
+                              "mult": 1,
+                              "tag": "",
+                              "weight": 82
+                            },
+                            {
+                              "mult": 2,
+                              "tag": "💥 CRITICAL! ",
+                              "weight": 13
+                            },
+                            {
+                              "mult": 3,
+                              "tag": "🌟 JACKPOT x3! ",
+                              "weight": 5
+                            }
+                          ]
+                        },
+                        "saveAs": "mul"
+                      },
+                      {
+                        "random": {
+                          "loot": [
+                            {
+                              "drop": "Potion",
+                              "got": 1,
+                              "weight": 22
+                            },
+                            {
+                              "drop": "none",
+                              "got": 0,
+                              "weight": 78
+                            }
+                          ]
+                        },
+                        "saveAs": "drop"
+                      },
+                      {
+                        "state": "rpg_{senderNumber}",
+                        "defaults": {
+                          "hp": 100,
+                          "maxHp": 100,
+                          "gold": 60,
+                          "xp": 0,
+                          "xpNext": 100,
+                          "level": 1,
+                          "atk": 3,
+                          "combo": 0,
+                          "streak": 0,
+                          "kills": 0,
+                          "inventory": {}
+                        },
+                        "saveAs": "p",
+                        "inc": {
+                          "gold": "{math: ({enc.gold} + {lootRoll.total}) * {mul.mult} * (1 + {p.combo} * 0.05)|round}",
+                          "xp": "{enc.xp}",
+                          "hp": "-{enc.scr}",
+                          "combo": 1,
+                          "kills": 1
+                        },
+                        "clamp": {
+                          "hp": [
+                            1,
+                            9999
+                          ],
+                          "combo": [
+                            0,
+                            20
+                          ]
+                        }
+                      },
+                      {
+                        "when": "{drop.got}",
+                        "is": "1",
+                        "then": [
+                          {
+                            "state": "rpg_{senderNumber}",
+                            "defaults": {
+                              "hp": 100,
+                              "maxHp": 100,
+                              "gold": 60,
+                              "xp": 0,
+                              "xpNext": 100,
+                              "level": 1,
+                              "atk": 3,
+                              "combo": 0,
+                              "streak": 0,
+                              "kills": 0,
+                              "inventory": {}
+                            },
+                            "saveAs": "p",
+                            "addItem": {
+                              "name": "Potion",
+                              "qty": 1
+                            }
+                          },
+                          {
+                            "reply": "🎁 Monster menjatuhkan 🧪 *Potion*!"
+                          }
+                        ]
+                      },
+                      {
+                        "when": "{p.xp}",
+                        "gte": "{p.xpNext}",
+                        "then": [
+                          {
+                            "state": "rpg_{senderNumber}",
+                            "defaults": {
+                              "hp": 100,
+                              "maxHp": 100,
+                              "gold": 60,
+                              "xp": 0,
+                              "xpNext": 100,
+                              "level": 1,
+                              "atk": 3,
+                              "combo": 0,
+                              "streak": 0,
+                              "kills": 0,
+                              "inventory": {}
+                            },
+                            "saveAs": "p",
+                            "set": {
+                              "xp": "{math: {p.xp} - {p.xpNext}}",
+                              "xpNext": "{math: {p.xpNext} * 1.5|round}",
+                              "maxHp": "{math: {p.maxHp} + 15}",
+                              "hp": "{math: {p.maxHp} + 15}"
+                            },
+                            "inc": {
+                              "level": 1,
+                              "atk": 1
+                            }
+                          },
+                          {
+                            "reply": "🎉 *LEVEL UP!* Sekarang Lv.{p.level} — HP penuh, ATK +1, Max HP +15!"
+                          }
+                        ]
+                      },
+                      {
+                        "interactive": {
+                          "header": "{mul.tag}Menang vs {enc.monster}",
+                          "body": "🎲 Roll {roll.total} vs power {enc.power}\n🪙 +{math: ({enc.gold} + {lootRoll.total}) * {mul.mult} * (1 + {p.combo} * 0.05)|round} gold (combo x{p.combo} = +{math: {p.combo} * 5}%)\n✨ +{enc.xp} XP\n\n👤 *{senderName}*  ⭐ Lv.{p.level}\n❤️ HP {p.hp}/{p.maxHp}  🗡️ ATK {p.atk}\n🪙 Gold {p.gold}  ✨ XP {p.xp}/{p.xpNext}\n🔥 Combo x{p.combo}  💀 Kills {p.kills}  📅 Streak {p.streak}",
+                          "footer": "Combo naik terus kalau menang beruntun 🔥",
+                          "buttons": [
+                            {
+                              "type": "quick_reply",
+                              "id": "rpg_hunt",
+                              "text": "⚔️ Hunt"
+                            },
+                            {
+                              "type": "quick_reply",
+                              "id": "rpg_use_pot",
+                              "text": "🧪 Potion"
+                            },
+                            {
+                              "type": "single_select",
+                              "text": "📜 Menu RPG",
+                              "sections": [
+                                {
+                                  "title": "Petualangan",
+                                  "rows": [
+                                    {
+                                      "id": "rpg_hunt",
+                                      "title": "⚔️ Hunt Monster",
+                                      "description": "Lawan monster, kejar combo & jackpot"
+                                    },
+                                    {
+                                      "id": "rpg_boss",
+                                      "title": "👹 Boss Raid",
+                                      "description": "Butuh Lv.3 — hadiah besar"
+                                    },
+                                    {
+                                      "id": "rpg_daily",
+                                      "title": "🎁 Daily Reward",
+                                      "description": "Klaim tiap hari, streak makin besar"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "title": "Kekuatan",
+                                  "rows": [
+                                    {
+                                      "id": "rpg_gacha",
+                                      "title": "🎰 Summon Senjata (100g)",
+                                      "description": "Gacha senjata, ATK naik permanen"
+                                    },
+                                    {
+                                      "id": "rpg_buy_pot",
+                                      "title": "🛒 Beli Potion (30g)",
+                                      "description": "Heal +60 HP"
+                                    },
+                                    {
+                                      "id": "rpg_rest",
+                                      "title": "🏕️ Istirahat",
+                                      "description": "Heal +35 HP (cooldown 45 dtk)"
+                                    },
+                                    {
+                                      "id": "rpg_profile",
+                                      "title": "👤 Profil",
+                                      "description": "Lihat statistik"
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        "nextStep": "rpg_menu",
+                        "stepTtlSec": 3600,
+                        "lockSender": true,
+                        "boardKey": "rpg_{chat}_{senderNumber}",
+                        "deletePrevious": true
+                      }
+                    ],
+                    "else": [
+                      {
+                        "state": "rpg_{senderNumber}",
+                        "defaults": {
+                          "hp": 100,
+                          "maxHp": 100,
+                          "gold": 60,
+                          "xp": 0,
+                          "xpNext": 100,
+                          "level": 1,
+                          "atk": 3,
+                          "combo": 0,
+                          "streak": 0,
+                          "kills": 0,
+                          "inventory": {}
+                        },
+                        "saveAs": "p",
+                        "inc": {
+                          "hp": "-{enc.dmg}"
+                        },
+                        "set": {
+                          "combo": 0
+                        },
+                        "clamp": {
+                          "hp": [
+                            0,
+                            9999
+                          ]
+                        }
+                      },
+                      {
+                        "interactive": {
+                          "header": "💥 Kalah vs {enc.monster}",
+                          "body": "🎲 Roll {roll.total} vs power {enc.power} — kurang {math: {enc.power} - {roll.total}} poin lagi!\n💔 Kena {enc.dmg} dmg, combo reset.\n\n👤 *{senderName}*  ⭐ Lv.{p.level}\n❤️ HP {p.hp}/{p.maxHp}  🗡️ ATK {p.atk}\n🪙 Gold {p.gold}  ✨ XP {p.xp}/{p.xpNext}\n🔥 Combo x{p.combo}  💀 Kills {p.kills}  📅 Streak {p.streak}",
+                          "footer": "Coba lagi, kamu hampir menang! 😤",
+                          "buttons": [
+                            {
+                              "type": "quick_reply",
+                              "id": "rpg_hunt",
+                              "text": "⚔️ Hunt"
+                            },
+                            {
+                              "type": "quick_reply",
+                              "id": "rpg_use_pot",
+                              "text": "🧪 Potion"
+                            },
+                            {
+                              "type": "single_select",
+                              "text": "📜 Menu RPG",
+                              "sections": [
+                                {
+                                  "title": "Petualangan",
+                                  "rows": [
+                                    {
+                                      "id": "rpg_hunt",
+                                      "title": "⚔️ Hunt Monster",
+                                      "description": "Lawan monster, kejar combo & jackpot"
+                                    },
+                                    {
+                                      "id": "rpg_boss",
+                                      "title": "👹 Boss Raid",
+                                      "description": "Butuh Lv.3 — hadiah besar"
+                                    },
+                                    {
+                                      "id": "rpg_daily",
+                                      "title": "🎁 Daily Reward",
+                                      "description": "Klaim tiap hari, streak makin besar"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "title": "Kekuatan",
+                                  "rows": [
+                                    {
+                                      "id": "rpg_gacha",
+                                      "title": "🎰 Summon Senjata (100g)",
+                                      "description": "Gacha senjata, ATK naik permanen"
+                                    },
+                                    {
+                                      "id": "rpg_buy_pot",
+                                      "title": "🛒 Beli Potion (30g)",
+                                      "description": "Heal +60 HP"
+                                    },
+                                    {
+                                      "id": "rpg_rest",
+                                      "title": "🏕️ Istirahat",
+                                      "description": "Heal +35 HP (cooldown 45 dtk)"
+                                    },
+                                    {
+                                      "id": "rpg_profile",
+                                      "title": "👤 Profil",
+                                      "description": "Lihat statistik"
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        "nextStep": "rpg_menu",
+                        "stepTtlSec": 3600,
+                        "lockSender": true,
+                        "boardKey": "rpg_{chat}_{senderNumber}",
+                        "deletePrevious": true
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "cooldown": 45,
+        "cooldownScope": "user",
+        "cooldownReply": "👹 Boss butuh waktu pulih: {cooldownRemaining} dtk."
+      },
+      {
+        "commands": [
+          ".gacha",
+          ".summon"
+        ],
+        "messageType": "text",
+        "scope": "any",
+        "allowSelf": true,
+        "actions": [
+          {
+            "state": "rpg_{senderNumber}",
+            "defaults": {
+              "hp": 100,
+              "maxHp": 100,
+              "gold": 60,
+              "xp": 0,
+              "xpNext": 100,
+              "level": 1,
+              "atk": 3,
+              "combo": 0,
+              "streak": 0,
+              "kills": 0,
+              "inventory": {}
+            },
+            "saveAs": "p"
+          },
+          {
+            "when": "{p.gold}",
+            "gte": "100",
+            "then": [
+              {
+                "random": {
+                  "loot": [
+                    {
+                      "name": "Rusty Dagger",
+                      "rar": "⚪ Common",
+                      "atk": 1,
+                      "weight": 450
+                    },
+                    {
+                      "name": "Iron Sword",
+                      "rar": "🟢 Uncommon",
+                      "atk": 2,
+                      "weight": 300
+                    },
+                    {
+                      "name": "Knight Blade",
+                      "rar": "🔵 Rare",
+                      "atk": 4,
+                      "weight": 150
+                    },
+                    {
+                      "name": "Dragon Slayer",
+                      "rar": "🟣 Epic",
+                      "atk": 8,
+                      "weight": 70
+                    },
+                    {
+                      "name": "Excalibur",
+                      "rar": "🟡 LEGENDARY",
+                      "atk": 15,
+                      "weight": 25
+                    },
+                    {
+                      "name": "Godslayer",
+                      "rar": "🌈 MYTHIC",
+                      "atk": 30,
+                      "weight": 5
+                    }
+                  ]
+                },
+                "saveAs": "g"
+              },
+              {
+                "state": "rpg_{senderNumber}",
+                "defaults": {
+                  "hp": 100,
+                  "maxHp": 100,
+                  "gold": 60,
+                  "xp": 0,
+                  "xpNext": 100,
+                  "level": 1,
+                  "atk": 3,
+                  "combo": 0,
+                  "streak": 0,
+                  "kills": 0,
+                  "inventory": {}
+                },
+                "saveAs": "p",
+                "inc": {
+                  "gold": -100,
+                  "atk": "{g.atk}"
+                },
+                "addItem": {
+                  "name": "{g.name}",
+                  "qty": 1
+                }
+              },
+              {
+                "interactive": {
+                  "header": "🎰 Summon: {g.rar}",
+                  "body": "Kamu dapat *{g.name}*! 🗡️ ATK +{g.atk} permanen.\n\n👤 *{senderName}*  ⭐ Lv.{p.level}\n❤️ HP {p.hp}/{p.maxHp}  🗡️ ATK {p.atk}\n🪙 Gold {p.gold}  ✨ XP {p.xp}/{p.xpNext}\n🔥 Combo x{p.combo}  💀 Kills {p.kills}  📅 Streak {p.streak}",
+                  "footer": "Gold kurang? Hunt lagi, gacha lagi! 🔁",
+                  "buttons": [
+                    {
+                      "type": "quick_reply",
+                      "id": "rpg_hunt",
+                      "text": "⚔️ Hunt"
+                    },
+                    {
+                      "type": "quick_reply",
+                      "id": "rpg_use_pot",
+                      "text": "🧪 Potion"
+                    },
+                    {
+                      "type": "single_select",
+                      "text": "📜 Menu RPG",
+                      "sections": [
+                        {
+                          "title": "Petualangan",
+                          "rows": [
+                            {
+                              "id": "rpg_hunt",
+                              "title": "⚔️ Hunt Monster",
+                              "description": "Lawan monster, kejar combo & jackpot"
+                            },
+                            {
+                              "id": "rpg_boss",
+                              "title": "👹 Boss Raid",
+                              "description": "Butuh Lv.3 — hadiah besar"
+                            },
+                            {
+                              "id": "rpg_daily",
+                              "title": "🎁 Daily Reward",
+                              "description": "Klaim tiap hari, streak makin besar"
+                            }
+                          ]
+                        },
+                        {
+                          "title": "Kekuatan",
+                          "rows": [
+                            {
+                              "id": "rpg_gacha",
+                              "title": "🎰 Summon Senjata (100g)",
+                              "description": "Gacha senjata, ATK naik permanen"
+                            },
+                            {
+                              "id": "rpg_buy_pot",
+                              "title": "🛒 Beli Potion (30g)",
+                              "description": "Heal +60 HP"
+                            },
+                            {
+                              "id": "rpg_rest",
+                              "title": "🏕️ Istirahat",
+                              "description": "Heal +35 HP (cooldown 45 dtk)"
+                            },
+                            {
+                              "id": "rpg_profile",
+                              "title": "👤 Profil",
+                              "description": "Lihat statistik"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                "nextStep": "rpg_menu",
+                "stepTtlSec": 3600,
+                "lockSender": true,
+                "boardKey": "rpg_{chat}_{senderNumber}",
+                "deletePrevious": true
+              }
+            ],
+            "else": [
+              {
+                "interactive": {
+                  "header": "❌ Gold Kurang",
+                  "body": "Butuh 100 gold, kamu punya {p.gold}. Hunt dulu!\n\n👤 *{senderName}*  ⭐ Lv.{p.level}\n❤️ HP {p.hp}/{p.maxHp}  🗡️ ATK {p.atk}\n🪙 Gold {p.gold}  ✨ XP {p.xp}/{p.xpNext}\n🔥 Combo x{p.combo}  💀 Kills {p.kills}  📅 Streak {p.streak}",
+                  "footer": "Tap aksi di bawah 👇",
+                  "buttons": [
+                    {
+                      "type": "quick_reply",
+                      "id": "rpg_hunt",
+                      "text": "⚔️ Hunt"
+                    },
+                    {
+                      "type": "quick_reply",
+                      "id": "rpg_use_pot",
+                      "text": "🧪 Potion"
+                    },
+                    {
+                      "type": "single_select",
+                      "text": "📜 Menu RPG",
+                      "sections": [
+                        {
+                          "title": "Petualangan",
+                          "rows": [
+                            {
+                              "id": "rpg_hunt",
+                              "title": "⚔️ Hunt Monster",
+                              "description": "Lawan monster, kejar combo & jackpot"
+                            },
+                            {
+                              "id": "rpg_boss",
+                              "title": "👹 Boss Raid",
+                              "description": "Butuh Lv.3 — hadiah besar"
+                            },
+                            {
+                              "id": "rpg_daily",
+                              "title": "🎁 Daily Reward",
+                              "description": "Klaim tiap hari, streak makin besar"
+                            }
+                          ]
+                        },
+                        {
+                          "title": "Kekuatan",
+                          "rows": [
+                            {
+                              "id": "rpg_gacha",
+                              "title": "🎰 Summon Senjata (100g)",
+                              "description": "Gacha senjata, ATK naik permanen"
+                            },
+                            {
+                              "id": "rpg_buy_pot",
+                              "title": "🛒 Beli Potion (30g)",
+                              "description": "Heal +60 HP"
+                            },
+                            {
+                              "id": "rpg_rest",
+                              "title": "🏕️ Istirahat",
+                              "description": "Heal +35 HP (cooldown 45 dtk)"
+                            },
+                            {
+                              "id": "rpg_profile",
+                              "title": "👤 Profil",
+                              "description": "Lihat statistik"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                "nextStep": "rpg_menu",
+                "stepTtlSec": 3600,
+                "lockSender": true,
+                "boardKey": "rpg_{chat}_{senderNumber}",
+                "deletePrevious": true
+              }
+            ]
+          }
+        ],
+        "cooldown": 2,
+        "cooldownScope": "user",
+        "cooldownReply": "🎰 Sabar, {cooldownRemaining} dtk."
+      },
+      {
+        "buttonIds": [
+          "rpg_gacha"
+        ],
+        "step": "rpg_menu",
+        "onlyButtonOwner": true,
+        "lockMessage": "⏳ Menu ini milik pemain lain. Ketik *.rpg* untuk buka menu kamu sendiri!",
+        "scope": "any",
+        "allowSelf": true,
+        "actions": [
+          {
+            "state": "rpg_{senderNumber}",
+            "defaults": {
+              "hp": 100,
+              "maxHp": 100,
+              "gold": 60,
+              "xp": 0,
+              "xpNext": 100,
+              "level": 1,
+              "atk": 3,
+              "combo": 0,
+              "streak": 0,
+              "kills": 0,
+              "inventory": {}
+            },
+            "saveAs": "p"
+          },
+          {
+            "when": "{p.gold}",
+            "gte": "100",
+            "then": [
+              {
+                "random": {
+                  "loot": [
+                    {
+                      "name": "Rusty Dagger",
+                      "rar": "⚪ Common",
+                      "atk": 1,
+                      "weight": 450
+                    },
+                    {
+                      "name": "Iron Sword",
+                      "rar": "🟢 Uncommon",
+                      "atk": 2,
+                      "weight": 300
+                    },
+                    {
+                      "name": "Knight Blade",
+                      "rar": "🔵 Rare",
+                      "atk": 4,
+                      "weight": 150
+                    },
+                    {
+                      "name": "Dragon Slayer",
+                      "rar": "🟣 Epic",
+                      "atk": 8,
+                      "weight": 70
+                    },
+                    {
+                      "name": "Excalibur",
+                      "rar": "🟡 LEGENDARY",
+                      "atk": 15,
+                      "weight": 25
+                    },
+                    {
+                      "name": "Godslayer",
+                      "rar": "🌈 MYTHIC",
+                      "atk": 30,
+                      "weight": 5
+                    }
+                  ]
+                },
+                "saveAs": "g"
+              },
+              {
+                "state": "rpg_{senderNumber}",
+                "defaults": {
+                  "hp": 100,
+                  "maxHp": 100,
+                  "gold": 60,
+                  "xp": 0,
+                  "xpNext": 100,
+                  "level": 1,
+                  "atk": 3,
+                  "combo": 0,
+                  "streak": 0,
+                  "kills": 0,
+                  "inventory": {}
+                },
+                "saveAs": "p",
+                "inc": {
+                  "gold": -100,
+                  "atk": "{g.atk}"
+                },
+                "addItem": {
+                  "name": "{g.name}",
+                  "qty": 1
+                }
+              },
+              {
+                "interactive": {
+                  "header": "🎰 Summon: {g.rar}",
+                  "body": "Kamu dapat *{g.name}*! 🗡️ ATK +{g.atk} permanen.\n\n👤 *{senderName}*  ⭐ Lv.{p.level}\n❤️ HP {p.hp}/{p.maxHp}  🗡️ ATK {p.atk}\n🪙 Gold {p.gold}  ✨ XP {p.xp}/{p.xpNext}\n🔥 Combo x{p.combo}  💀 Kills {p.kills}  📅 Streak {p.streak}",
+                  "footer": "Gold kurang? Hunt lagi, gacha lagi! 🔁",
+                  "buttons": [
+                    {
+                      "type": "quick_reply",
+                      "id": "rpg_hunt",
+                      "text": "⚔️ Hunt"
+                    },
+                    {
+                      "type": "quick_reply",
+                      "id": "rpg_use_pot",
+                      "text": "🧪 Potion"
+                    },
+                    {
+                      "type": "single_select",
+                      "text": "📜 Menu RPG",
+                      "sections": [
+                        {
+                          "title": "Petualangan",
+                          "rows": [
+                            {
+                              "id": "rpg_hunt",
+                              "title": "⚔️ Hunt Monster",
+                              "description": "Lawan monster, kejar combo & jackpot"
+                            },
+                            {
+                              "id": "rpg_boss",
+                              "title": "👹 Boss Raid",
+                              "description": "Butuh Lv.3 — hadiah besar"
+                            },
+                            {
+                              "id": "rpg_daily",
+                              "title": "🎁 Daily Reward",
+                              "description": "Klaim tiap hari, streak makin besar"
+                            }
+                          ]
+                        },
+                        {
+                          "title": "Kekuatan",
+                          "rows": [
+                            {
+                              "id": "rpg_gacha",
+                              "title": "🎰 Summon Senjata (100g)",
+                              "description": "Gacha senjata, ATK naik permanen"
+                            },
+                            {
+                              "id": "rpg_buy_pot",
+                              "title": "🛒 Beli Potion (30g)",
+                              "description": "Heal +60 HP"
+                            },
+                            {
+                              "id": "rpg_rest",
+                              "title": "🏕️ Istirahat",
+                              "description": "Heal +35 HP (cooldown 45 dtk)"
+                            },
+                            {
+                              "id": "rpg_profile",
+                              "title": "👤 Profil",
+                              "description": "Lihat statistik"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                "nextStep": "rpg_menu",
+                "stepTtlSec": 3600,
+                "lockSender": true,
+                "boardKey": "rpg_{chat}_{senderNumber}",
+                "deletePrevious": true
+              }
+            ],
+            "else": [
+              {
+                "interactive": {
+                  "header": "❌ Gold Kurang",
+                  "body": "Butuh 100 gold, kamu punya {p.gold}. Hunt dulu!\n\n👤 *{senderName}*  ⭐ Lv.{p.level}\n❤️ HP {p.hp}/{p.maxHp}  🗡️ ATK {p.atk}\n🪙 Gold {p.gold}  ✨ XP {p.xp}/{p.xpNext}\n🔥 Combo x{p.combo}  💀 Kills {p.kills}  📅 Streak {p.streak}",
+                  "footer": "Tap aksi di bawah 👇",
+                  "buttons": [
+                    {
+                      "type": "quick_reply",
+                      "id": "rpg_hunt",
+                      "text": "⚔️ Hunt"
+                    },
+                    {
+                      "type": "quick_reply",
+                      "id": "rpg_use_pot",
+                      "text": "🧪 Potion"
+                    },
+                    {
+                      "type": "single_select",
+                      "text": "📜 Menu RPG",
+                      "sections": [
+                        {
+                          "title": "Petualangan",
+                          "rows": [
+                            {
+                              "id": "rpg_hunt",
+                              "title": "⚔️ Hunt Monster",
+                              "description": "Lawan monster, kejar combo & jackpot"
+                            },
+                            {
+                              "id": "rpg_boss",
+                              "title": "👹 Boss Raid",
+                              "description": "Butuh Lv.3 — hadiah besar"
+                            },
+                            {
+                              "id": "rpg_daily",
+                              "title": "🎁 Daily Reward",
+                              "description": "Klaim tiap hari, streak makin besar"
+                            }
+                          ]
+                        },
+                        {
+                          "title": "Kekuatan",
+                          "rows": [
+                            {
+                              "id": "rpg_gacha",
+                              "title": "🎰 Summon Senjata (100g)",
+                              "description": "Gacha senjata, ATK naik permanen"
+                            },
+                            {
+                              "id": "rpg_buy_pot",
+                              "title": "🛒 Beli Potion (30g)",
+                              "description": "Heal +60 HP"
+                            },
+                            {
+                              "id": "rpg_rest",
+                              "title": "🏕️ Istirahat",
+                              "description": "Heal +35 HP (cooldown 45 dtk)"
+                            },
+                            {
+                              "id": "rpg_profile",
+                              "title": "👤 Profil",
+                              "description": "Lihat statistik"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                "nextStep": "rpg_menu",
+                "stepTtlSec": 3600,
+                "lockSender": true,
+                "boardKey": "rpg_{chat}_{senderNumber}",
+                "deletePrevious": true
+              }
+            ]
+          }
+        ],
+        "cooldown": 2,
+        "cooldownScope": "user",
+        "cooldownReply": "🎰 Sabar, {cooldownRemaining} dtk."
+      },
+      {
+        "commands": [
+          ".rest"
+        ],
+        "messageType": "text",
+        "scope": "any",
+        "allowSelf": true,
+        "actions": [
+          {
+            "state": "rpg_{senderNumber}",
+            "defaults": {
+              "hp": 100,
+              "maxHp": 100,
+              "gold": 60,
+              "xp": 0,
+              "xpNext": 100,
+              "level": 1,
+              "atk": 3,
+              "combo": 0,
+              "streak": 0,
+              "kills": 0,
+              "inventory": {}
+            },
+            "saveAs": "p",
+            "inc": {
+              "hp": 35
+            }
+          },
+          {
+            "when": "{p.hp}",
+            "gt": "{p.maxHp}",
+            "then": [
+              {
+                "state": "rpg_{senderNumber}",
+                "defaults": {
+                  "hp": 100,
+                  "maxHp": 100,
+                  "gold": 60,
+                  "xp": 0,
+                  "xpNext": 100,
+                  "level": 1,
+                  "atk": 3,
+                  "combo": 0,
+                  "streak": 0,
+                  "kills": 0,
+                  "inventory": {}
+                },
+                "saveAs": "p",
+                "set": {
+                  "hp": "{p.maxHp}"
+                }
+              }
+            ]
+          },
+          {
+            "interactive": {
+              "header": "🏕️ Istirahat",
+              "body": "Api unggun hangat... HP pulih.\n\n👤 *{senderName}*  ⭐ Lv.{p.level}\n❤️ HP {p.hp}/{p.maxHp}  🗡️ ATK {p.atk}\n🪙 Gold {p.gold}  ✨ XP {p.xp}/{p.xpNext}\n🔥 Combo x{p.combo}  💀 Kills {p.kills}  📅 Streak {p.streak}",
+              "footer": "Tap aksi di bawah 👇",
+              "buttons": [
+                {
+                  "type": "quick_reply",
+                  "id": "rpg_hunt",
+                  "text": "⚔️ Hunt"
+                },
+                {
+                  "type": "quick_reply",
+                  "id": "rpg_use_pot",
+                  "text": "🧪 Potion"
+                },
+                {
+                  "type": "single_select",
+                  "text": "📜 Menu RPG",
+                  "sections": [
+                    {
+                      "title": "Petualangan",
+                      "rows": [
+                        {
+                          "id": "rpg_hunt",
+                          "title": "⚔️ Hunt Monster",
+                          "description": "Lawan monster, kejar combo & jackpot"
+                        },
+                        {
+                          "id": "rpg_boss",
+                          "title": "👹 Boss Raid",
+                          "description": "Butuh Lv.3 — hadiah besar"
+                        },
+                        {
+                          "id": "rpg_daily",
+                          "title": "🎁 Daily Reward",
+                          "description": "Klaim tiap hari, streak makin besar"
+                        }
+                      ]
+                    },
+                    {
+                      "title": "Kekuatan",
+                      "rows": [
+                        {
+                          "id": "rpg_gacha",
+                          "title": "🎰 Summon Senjata (100g)",
+                          "description": "Gacha senjata, ATK naik permanen"
+                        },
+                        {
+                          "id": "rpg_buy_pot",
+                          "title": "🛒 Beli Potion (30g)",
+                          "description": "Heal +60 HP"
+                        },
+                        {
+                          "id": "rpg_rest",
+                          "title": "🏕️ Istirahat",
+                          "description": "Heal +35 HP (cooldown 45 dtk)"
+                        },
+                        {
+                          "id": "rpg_profile",
+                          "title": "👤 Profil",
+                          "description": "Lihat statistik"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            "nextStep": "rpg_menu",
+            "stepTtlSec": 3600,
+            "lockSender": true,
+            "boardKey": "rpg_{chat}_{senderNumber}",
+            "deletePrevious": true
+          }
+        ],
+        "cooldown": 45,
+        "cooldownScope": "user",
+        "cooldownReply": "🏕️ Api unggun masih menyala, tunggu {cooldownRemaining} dtk."
+      },
+      {
+        "buttonIds": [
+          "rpg_rest"
+        ],
+        "step": "rpg_menu",
+        "onlyButtonOwner": true,
+        "lockMessage": "⏳ Menu ini milik pemain lain. Ketik *.rpg* untuk buka menu kamu sendiri!",
+        "scope": "any",
+        "allowSelf": true,
+        "actions": [
+          {
+            "state": "rpg_{senderNumber}",
+            "defaults": {
+              "hp": 100,
+              "maxHp": 100,
+              "gold": 60,
+              "xp": 0,
+              "xpNext": 100,
+              "level": 1,
+              "atk": 3,
+              "combo": 0,
+              "streak": 0,
+              "kills": 0,
+              "inventory": {}
+            },
+            "saveAs": "p",
+            "inc": {
+              "hp": 35
+            }
+          },
+          {
+            "when": "{p.hp}",
+            "gt": "{p.maxHp}",
+            "then": [
+              {
+                "state": "rpg_{senderNumber}",
+                "defaults": {
+                  "hp": 100,
+                  "maxHp": 100,
+                  "gold": 60,
+                  "xp": 0,
+                  "xpNext": 100,
+                  "level": 1,
+                  "atk": 3,
+                  "combo": 0,
+                  "streak": 0,
+                  "kills": 0,
+                  "inventory": {}
+                },
+                "saveAs": "p",
+                "set": {
+                  "hp": "{p.maxHp}"
+                }
+              }
+            ]
+          },
+          {
+            "interactive": {
+              "header": "🏕️ Istirahat",
+              "body": "Api unggun hangat... HP pulih.\n\n👤 *{senderName}*  ⭐ Lv.{p.level}\n❤️ HP {p.hp}/{p.maxHp}  🗡️ ATK {p.atk}\n🪙 Gold {p.gold}  ✨ XP {p.xp}/{p.xpNext}\n🔥 Combo x{p.combo}  💀 Kills {p.kills}  📅 Streak {p.streak}",
+              "footer": "Tap aksi di bawah 👇",
+              "buttons": [
+                {
+                  "type": "quick_reply",
+                  "id": "rpg_hunt",
+                  "text": "⚔️ Hunt"
+                },
+                {
+                  "type": "quick_reply",
+                  "id": "rpg_use_pot",
+                  "text": "🧪 Potion"
+                },
+                {
+                  "type": "single_select",
+                  "text": "📜 Menu RPG",
+                  "sections": [
+                    {
+                      "title": "Petualangan",
+                      "rows": [
+                        {
+                          "id": "rpg_hunt",
+                          "title": "⚔️ Hunt Monster",
+                          "description": "Lawan monster, kejar combo & jackpot"
+                        },
+                        {
+                          "id": "rpg_boss",
+                          "title": "👹 Boss Raid",
+                          "description": "Butuh Lv.3 — hadiah besar"
+                        },
+                        {
+                          "id": "rpg_daily",
+                          "title": "🎁 Daily Reward",
+                          "description": "Klaim tiap hari, streak makin besar"
+                        }
+                      ]
+                    },
+                    {
+                      "title": "Kekuatan",
+                      "rows": [
+                        {
+                          "id": "rpg_gacha",
+                          "title": "🎰 Summon Senjata (100g)",
+                          "description": "Gacha senjata, ATK naik permanen"
+                        },
+                        {
+                          "id": "rpg_buy_pot",
+                          "title": "🛒 Beli Potion (30g)",
+                          "description": "Heal +60 HP"
+                        },
+                        {
+                          "id": "rpg_rest",
+                          "title": "🏕️ Istirahat",
+                          "description": "Heal +35 HP (cooldown 45 dtk)"
+                        },
+                        {
+                          "id": "rpg_profile",
+                          "title": "👤 Profil",
+                          "description": "Lihat statistik"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            "nextStep": "rpg_menu",
+            "stepTtlSec": 3600,
+            "lockSender": true,
+            "boardKey": "rpg_{chat}_{senderNumber}",
+            "deletePrevious": true
+          }
+        ],
+        "cooldown": 45,
+        "cooldownScope": "user",
+        "cooldownReply": "🏕️ Api unggun masih menyala, tunggu {cooldownRemaining} dtk."
+      },
+      {
+        "commands": [
+          ".buy"
+        ],
+        "messageType": "text",
+        "scope": "any",
+        "allowSelf": true,
+        "actions": [
+          {
+            "state": "rpg_{senderNumber}",
+            "defaults": {
+              "hp": 100,
+              "maxHp": 100,
+              "gold": 60,
+              "xp": 0,
+              "xpNext": 100,
+              "level": 1,
+              "atk": 3,
+              "combo": 0,
+              "streak": 0,
+              "kills": 0,
+              "inventory": {}
+            },
+            "saveAs": "p"
+          },
+          {
+            "when": "{p.gold}",
+            "gte": "30",
+            "then": [
+              {
+                "state": "rpg_{senderNumber}",
+                "defaults": {
+                  "hp": 100,
+                  "maxHp": 100,
+                  "gold": 60,
+                  "xp": 0,
+                  "xpNext": 100,
+                  "level": 1,
+                  "atk": 3,
+                  "combo": 0,
+                  "streak": 0,
+                  "kills": 0,
+                  "inventory": {}
+                },
+                "saveAs": "p",
+                "inc": {
+                  "gold": -30
+                },
+                "addItem": {
+                  "name": "Potion",
+                  "qty": 1
+                }
+              },
+              {
+                "interactive": {
+                  "header": "🛒 Beli Potion",
+                  "body": "Dapat 1x 🧪 Potion!\n\n👤 *{senderName}*  ⭐ Lv.{p.level}\n❤️ HP {p.hp}/{p.maxHp}  🗡️ ATK {p.atk}\n🪙 Gold {p.gold}  ✨ XP {p.xp}/{p.xpNext}\n🔥 Combo x{p.combo}  💀 Kills {p.kills}  📅 Streak {p.streak}",
+                  "footer": "Tap aksi di bawah 👇",
+                  "buttons": [
+                    {
+                      "type": "quick_reply",
+                      "id": "rpg_hunt",
+                      "text": "⚔️ Hunt"
+                    },
+                    {
+                      "type": "quick_reply",
+                      "id": "rpg_use_pot",
+                      "text": "🧪 Potion"
+                    },
+                    {
+                      "type": "single_select",
+                      "text": "📜 Menu RPG",
+                      "sections": [
+                        {
+                          "title": "Petualangan",
+                          "rows": [
+                            {
+                              "id": "rpg_hunt",
+                              "title": "⚔️ Hunt Monster",
+                              "description": "Lawan monster, kejar combo & jackpot"
+                            },
+                            {
+                              "id": "rpg_boss",
+                              "title": "👹 Boss Raid",
+                              "description": "Butuh Lv.3 — hadiah besar"
+                            },
+                            {
+                              "id": "rpg_daily",
+                              "title": "🎁 Daily Reward",
+                              "description": "Klaim tiap hari, streak makin besar"
+                            }
+                          ]
+                        },
+                        {
+                          "title": "Kekuatan",
+                          "rows": [
+                            {
+                              "id": "rpg_gacha",
+                              "title": "🎰 Summon Senjata (100g)",
+                              "description": "Gacha senjata, ATK naik permanen"
+                            },
+                            {
+                              "id": "rpg_buy_pot",
+                              "title": "🛒 Beli Potion (30g)",
+                              "description": "Heal +60 HP"
+                            },
+                            {
+                              "id": "rpg_rest",
+                              "title": "🏕️ Istirahat",
+                              "description": "Heal +35 HP (cooldown 45 dtk)"
+                            },
+                            {
+                              "id": "rpg_profile",
+                              "title": "👤 Profil",
+                              "description": "Lihat statistik"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                "nextStep": "rpg_menu",
+                "stepTtlSec": 3600,
+                "lockSender": true,
+                "boardKey": "rpg_{chat}_{senderNumber}",
+                "deletePrevious": true
+              }
+            ],
+            "else": [
+              {
+                "interactive": {
+                  "header": "❌ Gold Kurang",
+                  "body": "Butuh 30 gold, punya {p.gold}.\n\n👤 *{senderName}*  ⭐ Lv.{p.level}\n❤️ HP {p.hp}/{p.maxHp}  🗡️ ATK {p.atk}\n🪙 Gold {p.gold}  ✨ XP {p.xp}/{p.xpNext}\n🔥 Combo x{p.combo}  💀 Kills {p.kills}  📅 Streak {p.streak}",
+                  "footer": "Tap aksi di bawah 👇",
+                  "buttons": [
+                    {
+                      "type": "quick_reply",
+                      "id": "rpg_hunt",
+                      "text": "⚔️ Hunt"
+                    },
+                    {
+                      "type": "quick_reply",
+                      "id": "rpg_use_pot",
+                      "text": "🧪 Potion"
+                    },
+                    {
+                      "type": "single_select",
+                      "text": "📜 Menu RPG",
+                      "sections": [
+                        {
+                          "title": "Petualangan",
+                          "rows": [
+                            {
+                              "id": "rpg_hunt",
+                              "title": "⚔️ Hunt Monster",
+                              "description": "Lawan monster, kejar combo & jackpot"
+                            },
+                            {
+                              "id": "rpg_boss",
+                              "title": "👹 Boss Raid",
+                              "description": "Butuh Lv.3 — hadiah besar"
+                            },
+                            {
+                              "id": "rpg_daily",
+                              "title": "🎁 Daily Reward",
+                              "description": "Klaim tiap hari, streak makin besar"
+                            }
+                          ]
+                        },
+                        {
+                          "title": "Kekuatan",
+                          "rows": [
+                            {
+                              "id": "rpg_gacha",
+                              "title": "🎰 Summon Senjata (100g)",
+                              "description": "Gacha senjata, ATK naik permanen"
+                            },
+                            {
+                              "id": "rpg_buy_pot",
+                              "title": "🛒 Beli Potion (30g)",
+                              "description": "Heal +60 HP"
+                            },
+                            {
+                              "id": "rpg_rest",
+                              "title": "🏕️ Istirahat",
+                              "description": "Heal +35 HP (cooldown 45 dtk)"
+                            },
+                            {
+                              "id": "rpg_profile",
+                              "title": "👤 Profil",
+                              "description": "Lihat statistik"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                "nextStep": "rpg_menu",
+                "stepTtlSec": 3600,
+                "lockSender": true,
+                "boardKey": "rpg_{chat}_{senderNumber}",
+                "deletePrevious": true
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "buttonIds": [
+          "rpg_buy_pot"
+        ],
+        "step": "rpg_menu",
+        "onlyButtonOwner": true,
+        "lockMessage": "⏳ Menu ini milik pemain lain. Ketik *.rpg* untuk buka menu kamu sendiri!",
+        "scope": "any",
+        "allowSelf": true,
+        "actions": [
+          {
+            "state": "rpg_{senderNumber}",
+            "defaults": {
+              "hp": 100,
+              "maxHp": 100,
+              "gold": 60,
+              "xp": 0,
+              "xpNext": 100,
+              "level": 1,
+              "atk": 3,
+              "combo": 0,
+              "streak": 0,
+              "kills": 0,
+              "inventory": {}
+            },
+            "saveAs": "p"
+          },
+          {
+            "when": "{p.gold}",
+            "gte": "30",
+            "then": [
+              {
+                "state": "rpg_{senderNumber}",
+                "defaults": {
+                  "hp": 100,
+                  "maxHp": 100,
+                  "gold": 60,
+                  "xp": 0,
+                  "xpNext": 100,
+                  "level": 1,
+                  "atk": 3,
+                  "combo": 0,
+                  "streak": 0,
+                  "kills": 0,
+                  "inventory": {}
+                },
+                "saveAs": "p",
+                "inc": {
+                  "gold": -30
+                },
+                "addItem": {
+                  "name": "Potion",
+                  "qty": 1
+                }
+              },
+              {
+                "interactive": {
+                  "header": "🛒 Beli Potion",
+                  "body": "Dapat 1x 🧪 Potion!\n\n👤 *{senderName}*  ⭐ Lv.{p.level}\n❤️ HP {p.hp}/{p.maxHp}  🗡️ ATK {p.atk}\n🪙 Gold {p.gold}  ✨ XP {p.xp}/{p.xpNext}\n🔥 Combo x{p.combo}  💀 Kills {p.kills}  📅 Streak {p.streak}",
+                  "footer": "Tap aksi di bawah 👇",
+                  "buttons": [
+                    {
+                      "type": "quick_reply",
+                      "id": "rpg_hunt",
+                      "text": "⚔️ Hunt"
+                    },
+                    {
+                      "type": "quick_reply",
+                      "id": "rpg_use_pot",
+                      "text": "🧪 Potion"
+                    },
+                    {
+                      "type": "single_select",
+                      "text": "📜 Menu RPG",
+                      "sections": [
+                        {
+                          "title": "Petualangan",
+                          "rows": [
+                            {
+                              "id": "rpg_hunt",
+                              "title": "⚔️ Hunt Monster",
+                              "description": "Lawan monster, kejar combo & jackpot"
+                            },
+                            {
+                              "id": "rpg_boss",
+                              "title": "👹 Boss Raid",
+                              "description": "Butuh Lv.3 — hadiah besar"
+                            },
+                            {
+                              "id": "rpg_daily",
+                              "title": "🎁 Daily Reward",
+                              "description": "Klaim tiap hari, streak makin besar"
+                            }
+                          ]
+                        },
+                        {
+                          "title": "Kekuatan",
+                          "rows": [
+                            {
+                              "id": "rpg_gacha",
+                              "title": "🎰 Summon Senjata (100g)",
+                              "description": "Gacha senjata, ATK naik permanen"
+                            },
+                            {
+                              "id": "rpg_buy_pot",
+                              "title": "🛒 Beli Potion (30g)",
+                              "description": "Heal +60 HP"
+                            },
+                            {
+                              "id": "rpg_rest",
+                              "title": "🏕️ Istirahat",
+                              "description": "Heal +35 HP (cooldown 45 dtk)"
+                            },
+                            {
+                              "id": "rpg_profile",
+                              "title": "👤 Profil",
+                              "description": "Lihat statistik"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                "nextStep": "rpg_menu",
+                "stepTtlSec": 3600,
+                "lockSender": true,
+                "boardKey": "rpg_{chat}_{senderNumber}",
+                "deletePrevious": true
+              }
+            ],
+            "else": [
+              {
+                "interactive": {
+                  "header": "❌ Gold Kurang",
+                  "body": "Butuh 30 gold, punya {p.gold}.\n\n👤 *{senderName}*  ⭐ Lv.{p.level}\n❤️ HP {p.hp}/{p.maxHp}  🗡️ ATK {p.atk}\n🪙 Gold {p.gold}  ✨ XP {p.xp}/{p.xpNext}\n🔥 Combo x{p.combo}  💀 Kills {p.kills}  📅 Streak {p.streak}",
+                  "footer": "Tap aksi di bawah 👇",
+                  "buttons": [
+                    {
+                      "type": "quick_reply",
+                      "id": "rpg_hunt",
+                      "text": "⚔️ Hunt"
+                    },
+                    {
+                      "type": "quick_reply",
+                      "id": "rpg_use_pot",
+                      "text": "🧪 Potion"
+                    },
+                    {
+                      "type": "single_select",
+                      "text": "📜 Menu RPG",
+                      "sections": [
+                        {
+                          "title": "Petualangan",
+                          "rows": [
+                            {
+                              "id": "rpg_hunt",
+                              "title": "⚔️ Hunt Monster",
+                              "description": "Lawan monster, kejar combo & jackpot"
+                            },
+                            {
+                              "id": "rpg_boss",
+                              "title": "👹 Boss Raid",
+                              "description": "Butuh Lv.3 — hadiah besar"
+                            },
+                            {
+                              "id": "rpg_daily",
+                              "title": "🎁 Daily Reward",
+                              "description": "Klaim tiap hari, streak makin besar"
+                            }
+                          ]
+                        },
+                        {
+                          "title": "Kekuatan",
+                          "rows": [
+                            {
+                              "id": "rpg_gacha",
+                              "title": "🎰 Summon Senjata (100g)",
+                              "description": "Gacha senjata, ATK naik permanen"
+                            },
+                            {
+                              "id": "rpg_buy_pot",
+                              "title": "🛒 Beli Potion (30g)",
+                              "description": "Heal +60 HP"
+                            },
+                            {
+                              "id": "rpg_rest",
+                              "title": "🏕️ Istirahat",
+                              "description": "Heal +35 HP (cooldown 45 dtk)"
+                            },
+                            {
+                              "id": "rpg_profile",
+                              "title": "👤 Profil",
+                              "description": "Lihat statistik"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                "nextStep": "rpg_menu",
+                "stepTtlSec": 3600,
+                "lockSender": true,
+                "boardKey": "rpg_{chat}_{senderNumber}",
+                "deletePrevious": true
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "commands": [
+          ".potion"
+        ],
+        "messageType": "text",
+        "scope": "any",
+        "allowSelf": true,
+        "actions": [
+          {
+            "state": "rpg_{senderNumber}",
+            "defaults": {
+              "hp": 100,
+              "maxHp": 100,
+              "gold": 60,
+              "xp": 0,
+              "xpNext": 100,
+              "level": 1,
+              "atk": 3,
+              "combo": 0,
+              "streak": 0,
+              "kills": 0,
+              "inventory": {}
+            },
+            "saveAs": "p",
+            "removeItem": {
+              "name": "Potion",
+              "qty": 1
+            }
+          },
+          {
+            "when": "{itemRemoved}",
+            "is": "true",
+            "then": [
+              {
+                "state": "rpg_{senderNumber}",
+                "defaults": {
+                  "hp": 100,
+                  "maxHp": 100,
+                  "gold": 60,
+                  "xp": 0,
+                  "xpNext": 100,
+                  "level": 1,
+                  "atk": 3,
+                  "combo": 0,
+                  "streak": 0,
+                  "kills": 0,
+                  "inventory": {}
+                },
+                "saveAs": "p",
+                "inc": {
+                  "hp": 60
+                }
+              },
+              {
+                "when": "{p.hp}",
+                "gt": "{p.maxHp}",
+                "then": [
+                  {
+                    "state": "rpg_{senderNumber}",
+                    "defaults": {
+                      "hp": 100,
+                      "maxHp": 100,
+                      "gold": 60,
+                      "xp": 0,
+                      "xpNext": 100,
+                      "level": 1,
+                      "atk": 3,
+                      "combo": 0,
+                      "streak": 0,
+                      "kills": 0,
+                      "inventory": {}
+                    },
+                    "saveAs": "p",
+                    "set": {
+                      "hp": "{p.maxHp}"
+                    }
+                  }
+                ]
+              },
+              {
+                "interactive": {
+                  "header": "🧪 Minum Potion",
+                  "body": "HP pulih!\n\n👤 *{senderName}*  ⭐ Lv.{p.level}\n❤️ HP {p.hp}/{p.maxHp}  🗡️ ATK {p.atk}\n🪙 Gold {p.gold}  ✨ XP {p.xp}/{p.xpNext}\n🔥 Combo x{p.combo}  💀 Kills {p.kills}  📅 Streak {p.streak}",
+                  "footer": "Tap aksi di bawah 👇",
+                  "buttons": [
+                    {
+                      "type": "quick_reply",
+                      "id": "rpg_hunt",
+                      "text": "⚔️ Hunt"
+                    },
+                    {
+                      "type": "quick_reply",
+                      "id": "rpg_use_pot",
+                      "text": "🧪 Potion"
+                    },
+                    {
+                      "type": "single_select",
+                      "text": "📜 Menu RPG",
+                      "sections": [
+                        {
+                          "title": "Petualangan",
+                          "rows": [
+                            {
+                              "id": "rpg_hunt",
+                              "title": "⚔️ Hunt Monster",
+                              "description": "Lawan monster, kejar combo & jackpot"
+                            },
+                            {
+                              "id": "rpg_boss",
+                              "title": "👹 Boss Raid",
+                              "description": "Butuh Lv.3 — hadiah besar"
+                            },
+                            {
+                              "id": "rpg_daily",
+                              "title": "🎁 Daily Reward",
+                              "description": "Klaim tiap hari, streak makin besar"
+                            }
+                          ]
+                        },
+                        {
+                          "title": "Kekuatan",
+                          "rows": [
+                            {
+                              "id": "rpg_gacha",
+                              "title": "🎰 Summon Senjata (100g)",
+                              "description": "Gacha senjata, ATK naik permanen"
+                            },
+                            {
+                              "id": "rpg_buy_pot",
+                              "title": "🛒 Beli Potion (30g)",
+                              "description": "Heal +60 HP"
+                            },
+                            {
+                              "id": "rpg_rest",
+                              "title": "🏕️ Istirahat",
+                              "description": "Heal +35 HP (cooldown 45 dtk)"
+                            },
+                            {
+                              "id": "rpg_profile",
+                              "title": "👤 Profil",
+                              "description": "Lihat statistik"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                "nextStep": "rpg_menu",
+                "stepTtlSec": 3600,
+                "lockSender": true,
+                "boardKey": "rpg_{chat}_{senderNumber}",
+                "deletePrevious": true
+              }
+            ],
+            "else": [
+              {
+                "interactive": {
+                  "header": "🎒 Potion Habis",
+                  "body": "Beli di menu (30g) atau dapat dari drop monster.\n\n👤 *{senderName}*  ⭐ Lv.{p.level}\n❤️ HP {p.hp}/{p.maxHp}  🗡️ ATK {p.atk}\n🪙 Gold {p.gold}  ✨ XP {p.xp}/{p.xpNext}\n🔥 Combo x{p.combo}  💀 Kills {p.kills}  📅 Streak {p.streak}",
+                  "footer": "Tap aksi di bawah 👇",
+                  "buttons": [
+                    {
+                      "type": "quick_reply",
+                      "id": "rpg_hunt",
+                      "text": "⚔️ Hunt"
+                    },
+                    {
+                      "type": "quick_reply",
+                      "id": "rpg_use_pot",
+                      "text": "🧪 Potion"
+                    },
+                    {
+                      "type": "single_select",
+                      "text": "📜 Menu RPG",
+                      "sections": [
+                        {
+                          "title": "Petualangan",
+                          "rows": [
+                            {
+                              "id": "rpg_hunt",
+                              "title": "⚔️ Hunt Monster",
+                              "description": "Lawan monster, kejar combo & jackpot"
+                            },
+                            {
+                              "id": "rpg_boss",
+                              "title": "👹 Boss Raid",
+                              "description": "Butuh Lv.3 — hadiah besar"
+                            },
+                            {
+                              "id": "rpg_daily",
+                              "title": "🎁 Daily Reward",
+                              "description": "Klaim tiap hari, streak makin besar"
+                            }
+                          ]
+                        },
+                        {
+                          "title": "Kekuatan",
+                          "rows": [
+                            {
+                              "id": "rpg_gacha",
+                              "title": "🎰 Summon Senjata (100g)",
+                              "description": "Gacha senjata, ATK naik permanen"
+                            },
+                            {
+                              "id": "rpg_buy_pot",
+                              "title": "🛒 Beli Potion (30g)",
+                              "description": "Heal +60 HP"
+                            },
+                            {
+                              "id": "rpg_rest",
+                              "title": "🏕️ Istirahat",
+                              "description": "Heal +35 HP (cooldown 45 dtk)"
+                            },
+                            {
+                              "id": "rpg_profile",
+                              "title": "👤 Profil",
+                              "description": "Lihat statistik"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                "nextStep": "rpg_menu",
+                "stepTtlSec": 3600,
+                "lockSender": true,
+                "boardKey": "rpg_{chat}_{senderNumber}",
+                "deletePrevious": true
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "buttonIds": [
+          "rpg_use_pot"
+        ],
+        "step": "rpg_menu",
+        "onlyButtonOwner": true,
+        "lockMessage": "⏳ Menu ini milik pemain lain. Ketik *.rpg* untuk buka menu kamu sendiri!",
+        "scope": "any",
+        "allowSelf": true,
+        "actions": [
+          {
+            "state": "rpg_{senderNumber}",
+            "defaults": {
+              "hp": 100,
+              "maxHp": 100,
+              "gold": 60,
+              "xp": 0,
+              "xpNext": 100,
+              "level": 1,
+              "atk": 3,
+              "combo": 0,
+              "streak": 0,
+              "kills": 0,
+              "inventory": {}
+            },
+            "saveAs": "p",
+            "removeItem": {
+              "name": "Potion",
+              "qty": 1
+            }
+          },
+          {
+            "when": "{itemRemoved}",
+            "is": "true",
+            "then": [
+              {
+                "state": "rpg_{senderNumber}",
+                "defaults": {
+                  "hp": 100,
+                  "maxHp": 100,
+                  "gold": 60,
+                  "xp": 0,
+                  "xpNext": 100,
+                  "level": 1,
+                  "atk": 3,
+                  "combo": 0,
+                  "streak": 0,
+                  "kills": 0,
+                  "inventory": {}
+                },
+                "saveAs": "p",
+                "inc": {
+                  "hp": 60
+                }
+              },
+              {
+                "when": "{p.hp}",
+                "gt": "{p.maxHp}",
+                "then": [
+                  {
+                    "state": "rpg_{senderNumber}",
+                    "defaults": {
+                      "hp": 100,
+                      "maxHp": 100,
+                      "gold": 60,
+                      "xp": 0,
+                      "xpNext": 100,
+                      "level": 1,
+                      "atk": 3,
+                      "combo": 0,
+                      "streak": 0,
+                      "kills": 0,
+                      "inventory": {}
+                    },
+                    "saveAs": "p",
+                    "set": {
+                      "hp": "{p.maxHp}"
+                    }
+                  }
+                ]
+              },
+              {
+                "interactive": {
+                  "header": "🧪 Minum Potion",
+                  "body": "HP pulih!\n\n👤 *{senderName}*  ⭐ Lv.{p.level}\n❤️ HP {p.hp}/{p.maxHp}  🗡️ ATK {p.atk}\n🪙 Gold {p.gold}  ✨ XP {p.xp}/{p.xpNext}\n🔥 Combo x{p.combo}  💀 Kills {p.kills}  📅 Streak {p.streak}",
+                  "footer": "Tap aksi di bawah 👇",
+                  "buttons": [
+                    {
+                      "type": "quick_reply",
+                      "id": "rpg_hunt",
+                      "text": "⚔️ Hunt"
+                    },
+                    {
+                      "type": "quick_reply",
+                      "id": "rpg_use_pot",
+                      "text": "🧪 Potion"
+                    },
+                    {
+                      "type": "single_select",
+                      "text": "📜 Menu RPG",
+                      "sections": [
+                        {
+                          "title": "Petualangan",
+                          "rows": [
+                            {
+                              "id": "rpg_hunt",
+                              "title": "⚔️ Hunt Monster",
+                              "description": "Lawan monster, kejar combo & jackpot"
+                            },
+                            {
+                              "id": "rpg_boss",
+                              "title": "👹 Boss Raid",
+                              "description": "Butuh Lv.3 — hadiah besar"
+                            },
+                            {
+                              "id": "rpg_daily",
+                              "title": "🎁 Daily Reward",
+                              "description": "Klaim tiap hari, streak makin besar"
+                            }
+                          ]
+                        },
+                        {
+                          "title": "Kekuatan",
+                          "rows": [
+                            {
+                              "id": "rpg_gacha",
+                              "title": "🎰 Summon Senjata (100g)",
+                              "description": "Gacha senjata, ATK naik permanen"
+                            },
+                            {
+                              "id": "rpg_buy_pot",
+                              "title": "🛒 Beli Potion (30g)",
+                              "description": "Heal +60 HP"
+                            },
+                            {
+                              "id": "rpg_rest",
+                              "title": "🏕️ Istirahat",
+                              "description": "Heal +35 HP (cooldown 45 dtk)"
+                            },
+                            {
+                              "id": "rpg_profile",
+                              "title": "👤 Profil",
+                              "description": "Lihat statistik"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                "nextStep": "rpg_menu",
+                "stepTtlSec": 3600,
+                "lockSender": true,
+                "boardKey": "rpg_{chat}_{senderNumber}",
+                "deletePrevious": true
+              }
+            ],
+            "else": [
+              {
+                "interactive": {
+                  "header": "🎒 Potion Habis",
+                  "body": "Beli di menu (30g) atau dapat dari drop monster.\n\n👤 *{senderName}*  ⭐ Lv.{p.level}\n❤️ HP {p.hp}/{p.maxHp}  🗡️ ATK {p.atk}\n🪙 Gold {p.gold}  ✨ XP {p.xp}/{p.xpNext}\n🔥 Combo x{p.combo}  💀 Kills {p.kills}  📅 Streak {p.streak}",
+                  "footer": "Tap aksi di bawah 👇",
+                  "buttons": [
+                    {
+                      "type": "quick_reply",
+                      "id": "rpg_hunt",
+                      "text": "⚔️ Hunt"
+                    },
+                    {
+                      "type": "quick_reply",
+                      "id": "rpg_use_pot",
+                      "text": "🧪 Potion"
+                    },
+                    {
+                      "type": "single_select",
+                      "text": "📜 Menu RPG",
+                      "sections": [
+                        {
+                          "title": "Petualangan",
+                          "rows": [
+                            {
+                              "id": "rpg_hunt",
+                              "title": "⚔️ Hunt Monster",
+                              "description": "Lawan monster, kejar combo & jackpot"
+                            },
+                            {
+                              "id": "rpg_boss",
+                              "title": "👹 Boss Raid",
+                              "description": "Butuh Lv.3 — hadiah besar"
+                            },
+                            {
+                              "id": "rpg_daily",
+                              "title": "🎁 Daily Reward",
+                              "description": "Klaim tiap hari, streak makin besar"
+                            }
+                          ]
+                        },
+                        {
+                          "title": "Kekuatan",
+                          "rows": [
+                            {
+                              "id": "rpg_gacha",
+                              "title": "🎰 Summon Senjata (100g)",
+                              "description": "Gacha senjata, ATK naik permanen"
+                            },
+                            {
+                              "id": "rpg_buy_pot",
+                              "title": "🛒 Beli Potion (30g)",
+                              "description": "Heal +60 HP"
+                            },
+                            {
+                              "id": "rpg_rest",
+                              "title": "🏕️ Istirahat",
+                              "description": "Heal +35 HP (cooldown 45 dtk)"
+                            },
+                            {
+                              "id": "rpg_profile",
+                              "title": "👤 Profil",
+                              "description": "Lihat statistik"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                "nextStep": "rpg_menu",
+                "stepTtlSec": 3600,
+                "lockSender": true,
+                "boardKey": "rpg_{chat}_{senderNumber}",
+                "deletePrevious": true
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "commands": [
+          ".daily"
+        ],
+        "messageType": "text",
+        "scope": "any",
+        "allowSelf": true,
+        "actions": [
+          {
+            "cooldown": 86400,
+            "key": "daily_{senderNumber}",
+            "scope": "user",
+            "reply": "⏰ Daily sudah diklaim! Balik lagi {remaining} detik lagi."
+          },
+          {
+            "state": "rpg_{senderNumber}",
+            "defaults": {
+              "hp": 100,
+              "maxHp": 100,
+              "gold": 60,
+              "xp": 0,
+              "xpNext": 100,
+              "level": 1,
+              "atk": 3,
+              "combo": 0,
+              "streak": 0,
+              "kills": 0,
+              "inventory": {}
+            },
+            "saveAs": "p"
+          },
+          {
+            "state": "rpg_{senderNumber}",
+            "defaults": {
+              "hp": 100,
+              "maxHp": 100,
+              "gold": 60,
+              "xp": 0,
+              "xpNext": 100,
+              "level": 1,
+              "atk": 3,
+              "combo": 0,
+              "streak": 0,
+              "kills": 0,
+              "inventory": {}
+            },
+            "saveAs": "p",
+            "inc": {
+              "gold": "{math: 100 + {p.streak} * 25}",
+              "streak": 1
+            },
+            "addItem": {
+              "name": "Potion",
+              "qty": 1
+            }
+          },
+          {
+            "interactive": {
+              "header": "🎁 Daily Reward — Streak {p.streak}",
+              "body": "🪙 +{math: 100 + {p.streak} * 25 - 25} gold + 🧪 1 Potion\nStreak makin tinggi, hadiah makin besar!\n\n👤 *{senderName}*  ⭐ Lv.{p.level}\n❤️ HP {p.hp}/{p.maxHp}  🗡️ ATK {p.atk}\n🪙 Gold {p.gold}  ✨ XP {p.xp}/{p.xpNext}\n🔥 Combo x{p.combo}  💀 Kills {p.kills}  📅 Streak {p.streak}",
+              "footer": "Tap aksi di bawah 👇",
+              "buttons": [
+                {
+                  "type": "quick_reply",
+                  "id": "rpg_hunt",
+                  "text": "⚔️ Hunt"
+                },
+                {
+                  "type": "quick_reply",
+                  "id": "rpg_use_pot",
+                  "text": "🧪 Potion"
+                },
+                {
+                  "type": "single_select",
+                  "text": "📜 Menu RPG",
+                  "sections": [
+                    {
+                      "title": "Petualangan",
+                      "rows": [
+                        {
+                          "id": "rpg_hunt",
+                          "title": "⚔️ Hunt Monster",
+                          "description": "Lawan monster, kejar combo & jackpot"
+                        },
+                        {
+                          "id": "rpg_boss",
+                          "title": "👹 Boss Raid",
+                          "description": "Butuh Lv.3 — hadiah besar"
+                        },
+                        {
+                          "id": "rpg_daily",
+                          "title": "🎁 Daily Reward",
+                          "description": "Klaim tiap hari, streak makin besar"
+                        }
+                      ]
+                    },
+                    {
+                      "title": "Kekuatan",
+                      "rows": [
+                        {
+                          "id": "rpg_gacha",
+                          "title": "🎰 Summon Senjata (100g)",
+                          "description": "Gacha senjata, ATK naik permanen"
+                        },
+                        {
+                          "id": "rpg_buy_pot",
+                          "title": "🛒 Beli Potion (30g)",
+                          "description": "Heal +60 HP"
+                        },
+                        {
+                          "id": "rpg_rest",
+                          "title": "🏕️ Istirahat",
+                          "description": "Heal +35 HP (cooldown 45 dtk)"
+                        },
+                        {
+                          "id": "rpg_profile",
+                          "title": "👤 Profil",
+                          "description": "Lihat statistik"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            "nextStep": "rpg_menu",
+            "stepTtlSec": 3600,
+            "lockSender": true,
+            "boardKey": "rpg_{chat}_{senderNumber}",
+            "deletePrevious": true
+          }
+        ]
+      },
+      {
+        "buttonIds": [
+          "rpg_daily"
+        ],
+        "step": "rpg_menu",
+        "onlyButtonOwner": true,
+        "lockMessage": "⏳ Menu ini milik pemain lain. Ketik *.rpg* untuk buka menu kamu sendiri!",
+        "scope": "any",
+        "allowSelf": true,
+        "actions": [
+          {
+            "cooldown": 86400,
+            "key": "daily_{senderNumber}",
+            "scope": "user",
+            "reply": "⏰ Daily sudah diklaim! Balik lagi {remaining} detik lagi."
+          },
+          {
+            "state": "rpg_{senderNumber}",
+            "defaults": {
+              "hp": 100,
+              "maxHp": 100,
+              "gold": 60,
+              "xp": 0,
+              "xpNext": 100,
+              "level": 1,
+              "atk": 3,
+              "combo": 0,
+              "streak": 0,
+              "kills": 0,
+              "inventory": {}
+            },
+            "saveAs": "p"
+          },
+          {
+            "state": "rpg_{senderNumber}",
+            "defaults": {
+              "hp": 100,
+              "maxHp": 100,
+              "gold": 60,
+              "xp": 0,
+              "xpNext": 100,
+              "level": 1,
+              "atk": 3,
+              "combo": 0,
+              "streak": 0,
+              "kills": 0,
+              "inventory": {}
+            },
+            "saveAs": "p",
+            "inc": {
+              "gold": "{math: 100 + {p.streak} * 25}",
+              "streak": 1
+            },
+            "addItem": {
+              "name": "Potion",
+              "qty": 1
+            }
+          },
+          {
+            "interactive": {
+              "header": "🎁 Daily Reward — Streak {p.streak}",
+              "body": "🪙 +{math: 100 + {p.streak} * 25 - 25} gold + 🧪 1 Potion\nStreak makin tinggi, hadiah makin besar!\n\n👤 *{senderName}*  ⭐ Lv.{p.level}\n❤️ HP {p.hp}/{p.maxHp}  🗡️ ATK {p.atk}\n🪙 Gold {p.gold}  ✨ XP {p.xp}/{p.xpNext}\n🔥 Combo x{p.combo}  💀 Kills {p.kills}  📅 Streak {p.streak}",
+              "footer": "Tap aksi di bawah 👇",
+              "buttons": [
+                {
+                  "type": "quick_reply",
+                  "id": "rpg_hunt",
+                  "text": "⚔️ Hunt"
+                },
+                {
+                  "type": "quick_reply",
+                  "id": "rpg_use_pot",
+                  "text": "🧪 Potion"
+                },
+                {
+                  "type": "single_select",
+                  "text": "📜 Menu RPG",
+                  "sections": [
+                    {
+                      "title": "Petualangan",
+                      "rows": [
+                        {
+                          "id": "rpg_hunt",
+                          "title": "⚔️ Hunt Monster",
+                          "description": "Lawan monster, kejar combo & jackpot"
+                        },
+                        {
+                          "id": "rpg_boss",
+                          "title": "👹 Boss Raid",
+                          "description": "Butuh Lv.3 — hadiah besar"
+                        },
+                        {
+                          "id": "rpg_daily",
+                          "title": "🎁 Daily Reward",
+                          "description": "Klaim tiap hari, streak makin besar"
+                        }
+                      ]
+                    },
+                    {
+                      "title": "Kekuatan",
+                      "rows": [
+                        {
+                          "id": "rpg_gacha",
+                          "title": "🎰 Summon Senjata (100g)",
+                          "description": "Gacha senjata, ATK naik permanen"
+                        },
+                        {
+                          "id": "rpg_buy_pot",
+                          "title": "🛒 Beli Potion (30g)",
+                          "description": "Heal +60 HP"
+                        },
+                        {
+                          "id": "rpg_rest",
+                          "title": "🏕️ Istirahat",
+                          "description": "Heal +35 HP (cooldown 45 dtk)"
+                        },
+                        {
+                          "id": "rpg_profile",
+                          "title": "👤 Profil",
+                          "description": "Lihat statistik"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            "nextStep": "rpg_menu",
+            "stepTtlSec": 3600,
+            "lockSender": true,
+            "boardKey": "rpg_{chat}_{senderNumber}",
+            "deletePrevious": true
+          }
+        ]
+      }
+    ]
+  }
+}

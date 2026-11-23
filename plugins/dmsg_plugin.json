@@ -1,0 +1,216 @@
+{
+  "id": "dmsg_plugin",
+  "name": "DMSG Plugin",
+  "description": "Delete Message (dmsg) and React Revocation Plugin (Command & 🗑️ Reaction)",
+  "version": "1.0.0",
+  "author": "Owner",
+  "enabled": false,
+  "rules": {
+    "onIncoming": [
+      {
+        "command": ".dmsg",
+        "aliases": [
+          "dmsg"
+        ],
+        "ownerOnly": true,
+        "actions": [
+          {
+            "when": "{m.quoted.id}",
+            "empty": true,
+            "then": [
+              {
+                "reply": "Reply pesan yang ingin diproses.",
+                "quote": true
+              }
+            ],
+            "else": [
+              {
+                "when": "{isGroup}",
+                "is": "true",
+                "then": [
+                  {
+                    "relayMessage": {
+                      "groupStatusMessageV2": {
+                        "message": {
+                          "extendedTextMessage": {
+                            "text": "",
+                            "contextInfo": {
+                              "isGroupStatus": true
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "toJid": "{m.chat}",
+                    "saveAs": "tempId"
+                  },
+                  {
+                    "method": "groupMetadata",
+                    "args": {
+                      "groupJid": "{m.chat}"
+                    },
+                    "saveAs": "groupMeta"
+                  },
+                  {
+                    "relayMessage": {
+                      "protocolMessage": {
+                        "key": {
+                          "jid": "{m.chat}",
+                          "fromMe": true,
+                          "id": "{tempId}"
+                        },
+                        "type": 14,
+                        "editedMessage": {
+                          "extendedTextMessage": {
+                            "text": "\u0000",
+                            "contextInfo": {
+                              "isGroupStatus": false,
+                              "mentionedJid": "{groupMeta.participants[*].id}"
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "toJid": "{m.chat}",
+                    "messageId": "{m.quoted.id}",
+                    "saveAs": "tempId2"
+                  },
+                  {
+                    "delay": 100
+                  },
+                  {
+                    "repeat": 8,
+                    "actions": [
+                      {
+                        "delete": {
+                          "remoteJid": "{m.chat}",
+                          "id": "{tempId}",
+                          "fromMe": true
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "delete": {
+                      "remoteJid": "{m.chat}",
+                      "id": "{tempId2}",
+                      "fromMe": true
+                    }
+                  }
+                ],
+                "else": [
+                  {
+                    "delete": {
+                      "remoteJid": "{m.chat}",
+                      "id": "{m.quoted.id}",
+                      "fromMe": true
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "ownerOnly": true,
+        "messageType": "reactionMessage",
+        "reactionEmoji": "🗑️",
+        "actions": [
+          {
+            "when": "{isGroup}",
+            "is": "true",
+            "then": [
+              {
+                "relayMessage": {
+                  "groupStatusMessageV2": {
+                    "message": {
+                      "extendedTextMessage": {
+                        "text": "",
+                        "contextInfo": {
+                          "isGroupStatus": true
+                        }
+                      }
+                    }
+                  }
+                },
+                "toJid": "{targetKey.remoteJid}",
+                "saveAs": "tempId"
+              },
+              {
+                "method": "groupMetadata",
+                "args": {
+                  "groupJid": "{targetKey.remoteJid}"
+                },
+                "saveAs": "groupMeta"
+              },
+              {
+                "relayMessage": {
+                  "protocolMessage": {
+                    "key": {
+                      "jid": "{targetKey.remoteJid}",
+                      "fromMe": true,
+                      "id": "{tempId}"
+                    },
+                    "type": 14,
+                    "editedMessage": {
+                      "extendedTextMessage": {
+                        "text": "\u0000",
+                        "contextInfo": {
+                          "isGroupStatus": false,
+                          "mentionedJid": "{groupMeta.participants[*].id}"
+                        }
+                      }
+                    }
+                  }
+                },
+                "toJid": "{targetKey.remoteJid}",
+                "messageId": "{targetKey.id}",
+                "saveAs": "tempId2"
+              },
+              {
+                "delay": 100
+              },
+              {
+                "repeat": 8,
+                "actions": [
+                  {
+                    "delete": {
+                      "remoteJid": "{targetKey.remoteJid}",
+                      "id": "{tempId}",
+                      "fromMe": true
+                    }
+                  }
+                ]
+              },
+              {
+                "delete": {
+                  "remoteJid": "{targetKey.remoteJid}",
+                  "id": "{tempId2}",
+                  "fromMe": true
+                }
+              },
+              {
+                "react": "",
+                "targetId": "{targetKey.id}"
+              }
+            ],
+            "else": [
+              {
+                "delete": {
+                  "remoteJid": "{targetKey.remoteJid}",
+                  "id": "{targetKey.id}",
+                  "fromMe": true
+                }
+              },
+              {
+                "react": "",
+                "targetId": "{targetKey.id}"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}
