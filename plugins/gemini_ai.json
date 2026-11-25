@@ -1,0 +1,136 @@
+{
+  "id": "gemini_ai",
+  "name": "Gemini AI Chatbot",
+  "description": "Chatbot Gemini dengan ganti model lewat perintah. Default gemini-3.8-flash.",
+  "version": "1.1.0",
+  "author": "You",
+  "type": "JSON",
+  "enabled": true,
+  "secrets": ["GEMINI_API_KEY"],
+  "rules": {
+    "onIncoming": [
+      {
+        "command": ".models",
+        "ownerOnly": true,
+        "cooldown": 5,
+        "actions": [
+          { "recall": "gem_model_{chat}", "default": "gemini-3.8-flash", "saveAs": "model" },
+          {
+            "method": "httpRequest",
+            "args": {
+              "url": "https://generativelanguage.googleapis.com/v1beta/models",
+              "query": { "pageSize": 50 },
+              "headers": { "x-goog-api-key": "{secret.GEMINI_API_KEY}" },
+              "extract": { "list": "models[*].name", "next": "nextPageToken" }
+            },
+            "saveAs": "p1",
+            "onError": "❌ Gagal mengambil daftar model. Cek GEMINI_API_KEY."
+          },
+          { "reply": "Model untuk API key Anda (halaman 1):\n{p1.extracted.list|lines}" },
+          {
+            "when": "{p1.extracted.next}",
+            "notEmpty": true,
+            "then": [
+              {
+                "method": "httpRequest",
+                "args": {
+                  "url": "https://generativelanguage.googleapis.com/v1beta/models",
+                  "query": { "pageSize": 50, "pageToken": "{p1.extracted.next}" },
+                  "headers": { "x-goog-api-key": "{secret.GEMINI_API_KEY}" },
+                  "extract": { "list": "models[*].name" }
+                },
+                "saveAs": "p2",
+                "onError": "❌ Gagal mengambil halaman 2."
+              },
+              { "reply": "Halaman 2:\n{p2.extracted.list|lines}" }
+            ]
+          },
+          { "reply": "Model aktif: {model}\nGanti dengan: .model <id>\nContoh: .model gemini-2.5-flash" }
+        ]
+      },
+      {
+        "regex": "^\\.model\\s+(?:models/)?(\\S+)\\s*$",
+        "ownerOnly": true,
+        "actions": [
+          { "remember": "gem_model_{chat}", "value": "{args}" },
+          { "forget": "gem_h1_{chat}" },
+          { "forget": "gem_h2_{chat}" },
+          { "reply": "✅ Model diganti ke {args}. Riwayat chat direset." }
+        ]
+      },
+      {
+        "command": ".model",
+        "actions": [
+          { "recall": "gem_model_{chat}", "default": "gemini-3.8-flash", "saveAs": "model" },
+          { "reply": "Model aktif: {model}\nDaftar: .models\nGanti: .model <id>" }
+        ]
+      },
+      {
+        "command": ".ai",
+        "aliases": [".gemini", ".ask"],
+        "requireArgs": true,
+        "allowQuotedInput": true,
+        "usage": "Usage: .ai <question>",
+        "cooldown": 5,
+        "actions": [
+          { "recall": "gem_model_{chat}", "default": "gemini-3.8-flash", "saveAs": "model" },
+          { "recall": "gem_h1_{chat}", "default": "", "saveAs": "h1" },
+          { "recall": "gem_h2_{chat}", "default": "", "saveAs": "h2" },
+          { "react": "⏳" },
+          {
+            "stream": {
+              "url": "https://generativelanguage.googleapis.com/v1beta/models/{model}:streamGenerateContent",
+              "method": "POST",
+              "query": { "alt": "sse" },
+              "headers": {
+                "x-goog-api-key": "{secret.GEMINI_API_KEY}",
+                "Content-Type": "application/json"
+              },
+              "json": {
+                "contents": [
+                  {
+                    "role": "user",
+                    "parts": [
+                      {
+                        "text": "Instruction: You are a helpful chatbot inside WhatsApp. Answer in the user's language. Keep answers short and clear. Use plain text without markdown headers.\n\nEarlier messages:\n{h2}\n{h1}\n\nNew message from user:\n{args}"
+                      }
+                    ]
+                  }
+                ],
+                "generationConfig": { "maxOutputTokens": 2048 }
+              },
+              "format": "sse",
+              "textPath": "candidates[0].content.parts[0].text",
+              "timeoutMs": 120000
+            },
+            "reply": true,
+            "live": true,
+            "quote": true,
+            "saveAs": "ai",
+            "onError": "❌ Model {model} tidak menjawab. Cek GEMINI_API_KEY atau ganti model dengan .models"
+          },
+          {
+            "when": "{ai.text}",
+            "notEmpty": true,
+            "then": [
+              { "remember": "gem_h2_{chat}", "value": "{h1}", "ttlSec": 3600 },
+              {
+                "remember": "gem_h1_{chat}",
+                "value": "User: {args}\nAI: {ai.text}",
+                "ttlSec": 3600
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "command": ".reset",
+        "actions": [
+          { "forget": "gem_h1_{chat}" },
+          { "forget": "gem_h2_{chat}" },
+          { "reply": "🔄 Percakapan baru." }
+        ]
+      }
+    ]
+  }
+}
