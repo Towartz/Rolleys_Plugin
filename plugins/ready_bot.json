@@ -1,0 +1,2112 @@
+{
+  "id": "ready_bot",
+  "name": "Ready Bot",
+  "description": "Bot siap pakai: menu interaktif, list menu, tools grup, sticker, terjemah, cuaca, QR, catatan, game, dan AI.",
+  "version": "1.0.0",
+  "author": "You",
+  "enabled": true,
+  "type": "JSON",
+  "secrets": [
+    "AI_API_KEY"
+  ],
+  "rules": {
+    "scope": "any",
+    "allowSelf": true,
+    "autoResponder": {
+      "commands": {
+        ".menu": {
+          "interactive": {
+            "header": "🤖 Ready Bot",
+            "body": "Halo {sender} 👋\nPilih menu di bawah atau ketik perintah langsung.\n\n📅 {date}   ⏰ {time}",
+            "footer": "Ketik .menu kapan saja untuk kembali",
+            "buttons": [
+              {
+                "type": "quick_reply",
+                "id": ".info",
+                "text": "ℹ️ Info Bot"
+              },
+              {
+                "type": "quick_reply",
+                "id": "cat_game",
+                "text": "🎮 Game"
+              },
+              {
+                "type": "single_select",
+                "text": "📜 Pilih Menu",
+                "sections": [
+                  {
+                    "title": "Fitur",
+                    "rows": [
+                      {
+                        "id": "cat_info",
+                        "title": "ℹ️ Info",
+                        "description": "Info dan status bot"
+                      },
+                      {
+                        "id": "cat_member",
+                        "title": "👥 Grup: Anggota",
+                        "description": "Kelola anggota grup (khusus admin)"
+                      },
+                      {
+                        "id": "cat_gset",
+                        "title": "⚙️ Grup: Pengaturan",
+                        "description": "Atur grup (khusus admin)"
+                      },
+                      {
+                        "id": "cat_media",
+                        "title": "🖼️ Media",
+                        "description": "Sticker dan unduhan"
+                      },
+                      {
+                        "id": "cat_tools",
+                        "title": "🧰 Tools",
+                        "description": "Alat bantu harian"
+                      },
+                      {
+                        "id": "cat_game",
+                        "title": "🎮 Game",
+                        "description": "Hiburan ringan"
+                      },
+                      {
+                        "id": "cat_notes",
+                        "title": "📝 Catatan",
+                        "description": "Catatan pribadi di database bot"
+                      }
+                    ]
+                  },
+                  {
+                    "title": "Lainnya",
+                    "rows": [
+                      {
+                        "id": "cat_all",
+                        "title": "📋 Semua Perintah",
+                        "description": "Daftar lengkap dalam satu pesan"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          "boardKey": "menu_{chat}_{senderNumber}",
+          "deletePrevious": true
+        },
+        ".help": {
+          "interactive": {
+            "header": "🤖 Ready Bot",
+            "body": "Halo {sender} 👋\nPilih menu di bawah atau ketik perintah langsung.\n\n📅 {date}   ⏰ {time}",
+            "footer": "Ketik .menu kapan saja untuk kembali",
+            "buttons": [
+              {
+                "type": "quick_reply",
+                "id": ".info",
+                "text": "ℹ️ Info Bot"
+              },
+              {
+                "type": "quick_reply",
+                "id": "cat_game",
+                "text": "🎮 Game"
+              },
+              {
+                "type": "single_select",
+                "text": "📜 Pilih Menu",
+                "sections": [
+                  {
+                    "title": "Fitur",
+                    "rows": [
+                      {
+                        "id": "cat_info",
+                        "title": "ℹ️ Info",
+                        "description": "Info dan status bot"
+                      },
+                      {
+                        "id": "cat_member",
+                        "title": "👥 Grup: Anggota",
+                        "description": "Kelola anggota grup (khusus admin)"
+                      },
+                      {
+                        "id": "cat_gset",
+                        "title": "⚙️ Grup: Pengaturan",
+                        "description": "Atur grup (khusus admin)"
+                      },
+                      {
+                        "id": "cat_media",
+                        "title": "🖼️ Media",
+                        "description": "Sticker dan unduhan"
+                      },
+                      {
+                        "id": "cat_tools",
+                        "title": "🧰 Tools",
+                        "description": "Alat bantu harian"
+                      },
+                      {
+                        "id": "cat_game",
+                        "title": "🎮 Game",
+                        "description": "Hiburan ringan"
+                      },
+                      {
+                        "id": "cat_notes",
+                        "title": "📝 Catatan",
+                        "description": "Catatan pribadi di database bot"
+                      }
+                    ]
+                  },
+                  {
+                    "title": "Lainnya",
+                    "rows": [
+                      {
+                        "id": "cat_all",
+                        "title": "📋 Semua Perintah",
+                        "description": "Daftar lengkap dalam satu pesan"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          "boardKey": "menu_{chat}_{senderNumber}",
+          "deletePrevious": true
+        },
+        ".start": {
+          "interactive": {
+            "header": "🤖 Ready Bot",
+            "body": "Halo {sender} 👋\nPilih menu di bawah atau ketik perintah langsung.\n\n📅 {date}   ⏰ {time}",
+            "footer": "Ketik .menu kapan saja untuk kembali",
+            "buttons": [
+              {
+                "type": "quick_reply",
+                "id": ".info",
+                "text": "ℹ️ Info Bot"
+              },
+              {
+                "type": "quick_reply",
+                "id": "cat_game",
+                "text": "🎮 Game"
+              },
+              {
+                "type": "single_select",
+                "text": "📜 Pilih Menu",
+                "sections": [
+                  {
+                    "title": "Fitur",
+                    "rows": [
+                      {
+                        "id": "cat_info",
+                        "title": "ℹ️ Info",
+                        "description": "Info dan status bot"
+                      },
+                      {
+                        "id": "cat_member",
+                        "title": "👥 Grup: Anggota",
+                        "description": "Kelola anggota grup (khusus admin)"
+                      },
+                      {
+                        "id": "cat_gset",
+                        "title": "⚙️ Grup: Pengaturan",
+                        "description": "Atur grup (khusus admin)"
+                      },
+                      {
+                        "id": "cat_media",
+                        "title": "🖼️ Media",
+                        "description": "Sticker dan unduhan"
+                      },
+                      {
+                        "id": "cat_tools",
+                        "title": "🧰 Tools",
+                        "description": "Alat bantu harian"
+                      },
+                      {
+                        "id": "cat_game",
+                        "title": "🎮 Game",
+                        "description": "Hiburan ringan"
+                      },
+                      {
+                        "id": "cat_notes",
+                        "title": "📝 Catatan",
+                        "description": "Catatan pribadi di database bot"
+                      }
+                    ]
+                  },
+                  {
+                    "title": "Lainnya",
+                    "rows": [
+                      {
+                        "id": "cat_all",
+                        "title": "📋 Semua Perintah",
+                        "description": "Daftar lengkap dalam satu pesan"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          "boardKey": "menu_{chat}_{senderNumber}",
+          "deletePrevious": true
+        },
+        "menu_main": {
+          "interactive": {
+            "header": "🤖 Ready Bot",
+            "body": "Halo {sender} 👋\nPilih menu di bawah atau ketik perintah langsung.\n\n📅 {date}   ⏰ {time}",
+            "footer": "Ketik .menu kapan saja untuk kembali",
+            "buttons": [
+              {
+                "type": "quick_reply",
+                "id": ".info",
+                "text": "ℹ️ Info Bot"
+              },
+              {
+                "type": "quick_reply",
+                "id": "cat_game",
+                "text": "🎮 Game"
+              },
+              {
+                "type": "single_select",
+                "text": "📜 Pilih Menu",
+                "sections": [
+                  {
+                    "title": "Fitur",
+                    "rows": [
+                      {
+                        "id": "cat_info",
+                        "title": "ℹ️ Info",
+                        "description": "Info dan status bot"
+                      },
+                      {
+                        "id": "cat_member",
+                        "title": "👥 Grup: Anggota",
+                        "description": "Kelola anggota grup (khusus admin)"
+                      },
+                      {
+                        "id": "cat_gset",
+                        "title": "⚙️ Grup: Pengaturan",
+                        "description": "Atur grup (khusus admin)"
+                      },
+                      {
+                        "id": "cat_media",
+                        "title": "🖼️ Media",
+                        "description": "Sticker dan unduhan"
+                      },
+                      {
+                        "id": "cat_tools",
+                        "title": "🧰 Tools",
+                        "description": "Alat bantu harian"
+                      },
+                      {
+                        "id": "cat_game",
+                        "title": "🎮 Game",
+                        "description": "Hiburan ringan"
+                      },
+                      {
+                        "id": "cat_notes",
+                        "title": "📝 Catatan",
+                        "description": "Catatan pribadi di database bot"
+                      }
+                    ]
+                  },
+                  {
+                    "title": "Lainnya",
+                    "rows": [
+                      {
+                        "id": "cat_all",
+                        "title": "📋 Semua Perintah",
+                        "description": "Daftar lengkap dalam satu pesan"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          "boardKey": "menu_{chat}_{senderNumber}",
+          "deletePrevious": true
+        },
+        "cat_info": {
+          "interactive": {
+            "header": "ℹ️ Info",
+            "body": "Info dan status bot\n\n▫️ .ping  Cek kecepatan bot\n▫️ .info  Info bot dan waktu\n▫️ .owner  Kirim kontak pemilik bot\n▫️ .jid  Lihat ID chat dan ID kamu\n▫️ .waktu  Tanggal dan jam sekarang\n\nPilih perintah di daftar untuk menjalankan atau melihat cara pakai.",
+            "footer": "🤖 Ready Bot",
+            "buttons": [
+              {
+                "type": "single_select",
+                "text": "📜 Pilih Perintah",
+                "sections": [
+                  {
+                    "title": "ℹ️ Info",
+                    "rows": [
+                      {
+                        "id": ".ping",
+                        "title": ".ping",
+                        "description": "Cek kecepatan bot"
+                      },
+                      {
+                        "id": ".info",
+                        "title": ".info",
+                        "description": "Info bot dan waktu"
+                      },
+                      {
+                        "id": ".owner",
+                        "title": ".owner",
+                        "description": "Kirim kontak pemilik bot"
+                      },
+                      {
+                        "id": ".jid",
+                        "title": ".jid",
+                        "description": "Lihat ID chat dan ID kamu"
+                      },
+                      {
+                        "id": ".waktu",
+                        "title": ".waktu",
+                        "description": "Tanggal dan jam sekarang"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "quick_reply",
+                "id": "menu_main",
+                "text": "🏠 Menu Utama"
+              }
+            ]
+          },
+          "boardKey": "menu_{chat}_{senderNumber}",
+          "deletePrevious": true
+        },
+        "cat_member": {
+          "interactive": {
+            "header": "👥 Grup: Anggota",
+            "body": "Kelola anggota grup (khusus admin)\n\n▫️ .groupinfo  Info grup ini\n▫️ .tagall <pesan>  Mention semua anggota\n▫️ .hidetag <pesan>  Mention semua tanpa terlihat\n▫️ .kick  Keluarkan anggota\n▫️ .promote  Jadikan admin\n▫️ .demote  Cabut status admin\n\nPilih perintah di daftar untuk menjalankan atau melihat cara pakai.",
+            "footer": "🤖 Ready Bot",
+            "buttons": [
+              {
+                "type": "single_select",
+                "text": "📜 Pilih Perintah",
+                "sections": [
+                  {
+                    "title": "👥 Grup: Anggota",
+                    "rows": [
+                      {
+                        "id": ".groupinfo",
+                        "title": ".groupinfo",
+                        "description": "Info grup ini"
+                      },
+                      {
+                        "id": "help_tagall",
+                        "title": ".tagall <pesan>",
+                        "description": "Mention semua anggota"
+                      },
+                      {
+                        "id": "help_hidetag",
+                        "title": ".hidetag <pesan>",
+                        "description": "Mention semua tanpa terlihat"
+                      },
+                      {
+                        "id": "help_kick",
+                        "title": ".kick",
+                        "description": "Keluarkan anggota"
+                      },
+                      {
+                        "id": "help_promote",
+                        "title": ".promote",
+                        "description": "Jadikan admin"
+                      },
+                      {
+                        "id": "help_demote",
+                        "title": ".demote",
+                        "description": "Cabut status admin"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "quick_reply",
+                "id": "menu_main",
+                "text": "🏠 Menu Utama"
+              }
+            ]
+          },
+          "boardKey": "menu_{chat}_{senderNumber}",
+          "deletePrevious": true
+        },
+        "cat_gset": {
+          "interactive": {
+            "header": "⚙️ Grup: Pengaturan",
+            "body": "Atur grup (khusus admin)\n\n▫️ .open  Semua anggota boleh kirim pesan\n▫️ .close  Hanya admin boleh kirim pesan\n▫️ .setname <nama>  Ganti nama grup\n▫️ .setdesc <teks>  Ganti deskripsi grup\n▫️ .link  Ambil link undangan grup\n▫️ .del  Hapus pesan anggota\n▫️ .antilink on/off  Blokir link grup lain\n\nPilih perintah di daftar untuk menjalankan atau melihat cara pakai.",
+            "footer": "🤖 Ready Bot",
+            "buttons": [
+              {
+                "type": "single_select",
+                "text": "📜 Pilih Perintah",
+                "sections": [
+                  {
+                    "title": "⚙️ Grup: Pengaturan",
+                    "rows": [
+                      {
+                        "id": "help_open",
+                        "title": ".open",
+                        "description": "Semua anggota boleh kirim pesan"
+                      },
+                      {
+                        "id": "help_close",
+                        "title": ".close",
+                        "description": "Hanya admin boleh kirim pesan"
+                      },
+                      {
+                        "id": "help_setname",
+                        "title": ".setname <nama>",
+                        "description": "Ganti nama grup"
+                      },
+                      {
+                        "id": "help_setdesc",
+                        "title": ".setdesc <teks>",
+                        "description": "Ganti deskripsi grup"
+                      },
+                      {
+                        "id": "help_link",
+                        "title": ".link",
+                        "description": "Ambil link undangan grup"
+                      },
+                      {
+                        "id": "help_del",
+                        "title": ".del",
+                        "description": "Hapus pesan anggota"
+                      },
+                      {
+                        "id": "help_antilink",
+                        "title": ".antilink on/off",
+                        "description": "Blokir link grup lain"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "quick_reply",
+                "id": "menu_main",
+                "text": "🏠 Menu Utama"
+              }
+            ]
+          },
+          "boardKey": "menu_{chat}_{senderNumber}",
+          "deletePrevious": true
+        },
+        "cat_media": {
+          "interactive": {
+            "header": "🖼️ Media",
+            "body": "Sticker dan unduhan\n\n▫️ .s  Buat sticker dari gambar atau video\n▫️ .toimg  Ubah sticker jadi gambar\n▫️ .dl <link>  Kirim file dari link langsung\n\nPilih perintah di daftar untuk menjalankan atau melihat cara pakai.",
+            "footer": "🤖 Ready Bot",
+            "buttons": [
+              {
+                "type": "single_select",
+                "text": "📜 Pilih Perintah",
+                "sections": [
+                  {
+                    "title": "🖼️ Media",
+                    "rows": [
+                      {
+                        "id": "help_s",
+                        "title": ".s",
+                        "description": "Buat sticker dari gambar atau video"
+                      },
+                      {
+                        "id": "help_toimg",
+                        "title": ".toimg",
+                        "description": "Ubah sticker jadi gambar"
+                      },
+                      {
+                        "id": "help_dl",
+                        "title": ".dl <link>",
+                        "description": "Kirim file dari link langsung"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "quick_reply",
+                "id": "menu_main",
+                "text": "🏠 Menu Utama"
+              }
+            ]
+          },
+          "boardKey": "menu_{chat}_{senderNumber}",
+          "deletePrevious": true
+        },
+        "cat_tools": {
+          "interactive": {
+            "header": "🧰 Tools",
+            "body": "Alat bantu harian\n\n▫️ .calc <hitungan>  Kalkulator\n▫️ .toen <teks>  Terjemah Indonesia ke Inggris\n▫️ .toid <teks>  Terjemah Inggris ke Indonesia\n▫️ .cuaca <kota>  Cuaca sekarang\n▫️ .qr <teks>  Buat QR code\n▫️ .ai <pertanyaan>  Tanya AI\n\nPilih perintah di daftar untuk menjalankan atau melihat cara pakai.",
+            "footer": "🤖 Ready Bot",
+            "buttons": [
+              {
+                "type": "single_select",
+                "text": "📜 Pilih Perintah",
+                "sections": [
+                  {
+                    "title": "🧰 Tools",
+                    "rows": [
+                      {
+                        "id": "help_calc",
+                        "title": ".calc <hitungan>",
+                        "description": "Kalkulator"
+                      },
+                      {
+                        "id": "help_toen",
+                        "title": ".toen <teks>",
+                        "description": "Terjemah Indonesia ke Inggris"
+                      },
+                      {
+                        "id": "help_toid",
+                        "title": ".toid <teks>",
+                        "description": "Terjemah Inggris ke Indonesia"
+                      },
+                      {
+                        "id": "help_cuaca",
+                        "title": ".cuaca <kota>",
+                        "description": "Cuaca sekarang"
+                      },
+                      {
+                        "id": "help_qr",
+                        "title": ".qr <teks>",
+                        "description": "Buat QR code"
+                      },
+                      {
+                        "id": "help_ai",
+                        "title": ".ai <pertanyaan>",
+                        "description": "Tanya AI"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "quick_reply",
+                "id": "menu_main",
+                "text": "🏠 Menu Utama"
+              }
+            ]
+          },
+          "boardKey": "menu_{chat}_{senderNumber}",
+          "deletePrevious": true
+        },
+        "cat_game": {
+          "interactive": {
+            "header": "🎮 Game",
+            "body": "Hiburan ringan\n\n▫️ .dadu  Lempar dadu\n▫️ .koin  Lempar koin\n▫️ .suit  Suit lawan bot\n▫️ .tebak  Tebak angka 1 sampai 100\n▫️ .truth  Pertanyaan truth\n▫️ .dare  Tantangan dare\n▫️ .quote  Kata motivasi\n\nPilih perintah di daftar untuk menjalankan atau melihat cara pakai.",
+            "footer": "🤖 Ready Bot",
+            "buttons": [
+              {
+                "type": "single_select",
+                "text": "📜 Pilih Perintah",
+                "sections": [
+                  {
+                    "title": "🎮 Game",
+                    "rows": [
+                      {
+                        "id": ".dadu",
+                        "title": ".dadu",
+                        "description": "Lempar dadu"
+                      },
+                      {
+                        "id": ".koin",
+                        "title": ".koin",
+                        "description": "Lempar koin"
+                      },
+                      {
+                        "id": ".suit",
+                        "title": ".suit",
+                        "description": "Suit lawan bot"
+                      },
+                      {
+                        "id": ".tebak",
+                        "title": ".tebak",
+                        "description": "Tebak angka 1 sampai 100"
+                      },
+                      {
+                        "id": ".truth",
+                        "title": ".truth",
+                        "description": "Pertanyaan truth"
+                      },
+                      {
+                        "id": ".dare",
+                        "title": ".dare",
+                        "description": "Tantangan dare"
+                      },
+                      {
+                        "id": ".quote",
+                        "title": ".quote",
+                        "description": "Kata motivasi"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "quick_reply",
+                "id": "menu_main",
+                "text": "🏠 Menu Utama"
+              }
+            ]
+          },
+          "boardKey": "menu_{chat}_{senderNumber}",
+          "deletePrevious": true
+        },
+        "cat_notes": {
+          "interactive": {
+            "header": "📝 Catatan",
+            "body": "Catatan pribadi di database bot\n\n▫️ .catat <teks>  Simpan catatan\n▫️ .catatan  Lihat 10 catatan terakhir\n▫️ .hapus <no>  Hapus catatan\n\nPilih perintah di daftar untuk menjalankan atau melihat cara pakai.",
+            "footer": "🤖 Ready Bot",
+            "buttons": [
+              {
+                "type": "single_select",
+                "text": "📜 Pilih Perintah",
+                "sections": [
+                  {
+                    "title": "📝 Catatan",
+                    "rows": [
+                      {
+                        "id": "help_catat",
+                        "title": ".catat <teks>",
+                        "description": "Simpan catatan"
+                      },
+                      {
+                        "id": ".catatan",
+                        "title": ".catatan",
+                        "description": "Lihat 10 catatan terakhir"
+                      },
+                      {
+                        "id": "help_hapus",
+                        "title": ".hapus <no>",
+                        "description": "Hapus catatan"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "quick_reply",
+                "id": "menu_main",
+                "text": "🏠 Menu Utama"
+              }
+            ]
+          },
+          "boardKey": "menu_{chat}_{senderNumber}",
+          "deletePrevious": true
+        },
+        "cat_all": {
+          "reply": "📋 *Semua Perintah*\n\n*ℹ️ Info*\n.ping  Cek kecepatan bot\n.info  Info bot dan waktu\n.owner  Kirim kontak pemilik bot\n.jid  Lihat ID chat dan ID kamu\n.waktu  Tanggal dan jam sekarang\n\n*👥 Grup: Anggota*\n.groupinfo  Info grup ini\n.tagall <pesan>  Mention semua anggota\n.hidetag <pesan>  Mention semua tanpa terlihat\n.kick  Keluarkan anggota\n.promote  Jadikan admin\n.demote  Cabut status admin\n\n*⚙️ Grup: Pengaturan*\n.open  Semua anggota boleh kirim pesan\n.close  Hanya admin boleh kirim pesan\n.setname <nama>  Ganti nama grup\n.setdesc <teks>  Ganti deskripsi grup\n.link  Ambil link undangan grup\n.del  Hapus pesan anggota\n.antilink on/off  Blokir link grup lain\n\n*🖼️ Media*\n.s  Buat sticker dari gambar atau video\n.toimg  Ubah sticker jadi gambar\n.dl <link>  Kirim file dari link langsung\n\n*🧰 Tools*\n.calc <hitungan>  Kalkulator\n.toen <teks>  Terjemah Indonesia ke Inggris\n.toid <teks>  Terjemah Inggris ke Indonesia\n.cuaca <kota>  Cuaca sekarang\n.qr <teks>  Buat QR code\n.ai <pertanyaan>  Tanya AI\n\n*🎮 Game*\n.dadu  Lempar dadu\n.koin  Lempar koin\n.suit  Suit lawan bot\n.tebak  Tebak angka 1 sampai 100\n.truth  Pertanyaan truth\n.dare  Tantangan dare\n.quote  Kata motivasi\n\n*📝 Catatan*\n.catat <teks>  Simpan catatan\n.catatan  Lihat 10 catatan terakhir\n.hapus <no>  Hapus catatan",
+          "buttons": [
+            {
+              "type": "quick_reply",
+              "id": "menu_main",
+              "text": "🏠 Menu Utama"
+            }
+          ]
+        },
+        "help_tagall": {
+          "reply": "📢 *.tagall <pesan>*\nMention semua anggota grup.\nSyarat: kamu admin.",
+          "buttons": [
+            {
+              "type": "quick_reply",
+              "id": "cat_member",
+              "text": "⬅️ Kembali"
+            },
+            {
+              "type": "quick_reply",
+              "id": "menu_main",
+              "text": "🏠 Menu Utama"
+            }
+          ]
+        },
+        "help_hidetag": {
+          "reply": "👻 *.hidetag <pesan>*\nKirim pesan dan mention semua anggota tanpa daftar nama.\nSyarat: kamu admin.",
+          "buttons": [
+            {
+              "type": "quick_reply",
+              "id": "cat_member",
+              "text": "⬅️ Kembali"
+            },
+            {
+              "type": "quick_reply",
+              "id": "menu_main",
+              "text": "🏠 Menu Utama"
+            }
+          ]
+        },
+        "help_kick": {
+          "reply": "👢 *.kick*\nBalas pesan anggota, lalu ketik .kick\nSyarat: kamu admin dan bot admin.",
+          "buttons": [
+            {
+              "type": "quick_reply",
+              "id": "cat_member",
+              "text": "⬅️ Kembali"
+            },
+            {
+              "type": "quick_reply",
+              "id": "menu_main",
+              "text": "🏠 Menu Utama"
+            }
+          ]
+        },
+        "help_promote": {
+          "reply": "⬆️ *.promote*\nBalas pesan anggota, lalu ketik .promote\nSyarat: kamu admin dan bot admin.",
+          "buttons": [
+            {
+              "type": "quick_reply",
+              "id": "cat_member",
+              "text": "⬅️ Kembali"
+            },
+            {
+              "type": "quick_reply",
+              "id": "menu_main",
+              "text": "🏠 Menu Utama"
+            }
+          ]
+        },
+        "help_demote": {
+          "reply": "⬇️ *.demote*\nBalas pesan admin, lalu ketik .demote\nSyarat: kamu admin dan bot admin.",
+          "buttons": [
+            {
+              "type": "quick_reply",
+              "id": "cat_member",
+              "text": "⬅️ Kembali"
+            },
+            {
+              "type": "quick_reply",
+              "id": "menu_main",
+              "text": "🏠 Menu Utama"
+            }
+          ]
+        },
+        "help_open": {
+          "reply": "🔓 *.open*\nBuka grup supaya semua anggota bisa kirim pesan.\nSyarat: kamu admin dan bot admin.",
+          "buttons": [
+            {
+              "type": "quick_reply",
+              "id": "cat_gset",
+              "text": "⬅️ Kembali"
+            },
+            {
+              "type": "quick_reply",
+              "id": "menu_main",
+              "text": "🏠 Menu Utama"
+            }
+          ]
+        },
+        "help_close": {
+          "reply": "🔒 *.close*\nTutup grup supaya hanya admin yang bisa kirim pesan.\nSyarat: kamu admin dan bot admin.",
+          "buttons": [
+            {
+              "type": "quick_reply",
+              "id": "cat_gset",
+              "text": "⬅️ Kembali"
+            },
+            {
+              "type": "quick_reply",
+              "id": "menu_main",
+              "text": "🏠 Menu Utama"
+            }
+          ]
+        },
+        "help_setname": {
+          "reply": "✏️ *.setname <nama>*\nContoh: .setname Keluarga Besar\nSyarat: kamu admin dan bot admin.",
+          "buttons": [
+            {
+              "type": "quick_reply",
+              "id": "cat_gset",
+              "text": "⬅️ Kembali"
+            },
+            {
+              "type": "quick_reply",
+              "id": "menu_main",
+              "text": "🏠 Menu Utama"
+            }
+          ]
+        },
+        "help_setdesc": {
+          "reply": "📄 *.setdesc <teks>*\nContoh: .setdesc Aturan grup ada di pin\nSyarat: kamu admin dan bot admin.",
+          "buttons": [
+            {
+              "type": "quick_reply",
+              "id": "cat_gset",
+              "text": "⬅️ Kembali"
+            },
+            {
+              "type": "quick_reply",
+              "id": "menu_main",
+              "text": "🏠 Menu Utama"
+            }
+          ]
+        },
+        "help_link": {
+          "reply": "🔗 *.link*\nAmbil link undangan grup.\nSyarat: kamu admin dan bot admin.",
+          "buttons": [
+            {
+              "type": "quick_reply",
+              "id": "cat_gset",
+              "text": "⬅️ Kembali"
+            },
+            {
+              "type": "quick_reply",
+              "id": "menu_main",
+              "text": "🏠 Menu Utama"
+            }
+          ]
+        },
+        "help_del": {
+          "reply": "🗑️ *.del*\nBalas pesan yang mau dihapus, lalu ketik .del\nSyarat: kamu admin dan bot admin.",
+          "buttons": [
+            {
+              "type": "quick_reply",
+              "id": "cat_gset",
+              "text": "⬅️ Kembali"
+            },
+            {
+              "type": "quick_reply",
+              "id": "menu_main",
+              "text": "🏠 Menu Utama"
+            }
+          ]
+        },
+        "help_antilink": {
+          "reply": "🚫 *.antilink on* atau *.antilink off*\nSaat aktif, anggota yang kirim link grup WhatsApp akan dihapus pesannya dan dikeluarkan. Admin dikecualikan.\nSyarat: kamu admin dan bot admin.",
+          "buttons": [
+            {
+              "type": "quick_reply",
+              "id": "cat_gset",
+              "text": "⬅️ Kembali"
+            },
+            {
+              "type": "quick_reply",
+              "id": "menu_main",
+              "text": "🏠 Menu Utama"
+            }
+          ]
+        },
+        "help_s": {
+          "reply": "🖼️ *.s*\nKirim gambar atau video dengan caption .s\nAtau balas gambar atau video dengan .s",
+          "buttons": [
+            {
+              "type": "quick_reply",
+              "id": "cat_media",
+              "text": "⬅️ Kembali"
+            },
+            {
+              "type": "quick_reply",
+              "id": "menu_main",
+              "text": "🏠 Menu Utama"
+            }
+          ]
+        },
+        "help_toimg": {
+          "reply": "🖼️ *.toimg*\nBalas sticker dengan .toimg",
+          "buttons": [
+            {
+              "type": "quick_reply",
+              "id": "cat_media",
+              "text": "⬅️ Kembali"
+            },
+            {
+              "type": "quick_reply",
+              "id": "menu_main",
+              "text": "🏠 Menu Utama"
+            }
+          ]
+        },
+        "help_dl": {
+          "reply": "⬇️ *.dl <link>*\nContoh: .dl https://example.com/foto.jpg\nLink harus mengarah langsung ke file.",
+          "buttons": [
+            {
+              "type": "quick_reply",
+              "id": "cat_media",
+              "text": "⬅️ Kembali"
+            },
+            {
+              "type": "quick_reply",
+              "id": "menu_main",
+              "text": "🏠 Menu Utama"
+            }
+          ]
+        },
+        "help_calc": {
+          "reply": "🧮 *.calc <hitungan>*\nContoh: .calc 12*(3+4)",
+          "buttons": [
+            {
+              "type": "quick_reply",
+              "id": "cat_tools",
+              "text": "⬅️ Kembali"
+            },
+            {
+              "type": "quick_reply",
+              "id": "menu_main",
+              "text": "🏠 Menu Utama"
+            }
+          ]
+        },
+        "help_toen": {
+          "reply": "🌐 *.toen <teks>*\nContoh: .toen selamat pagi",
+          "buttons": [
+            {
+              "type": "quick_reply",
+              "id": "cat_tools",
+              "text": "⬅️ Kembali"
+            },
+            {
+              "type": "quick_reply",
+              "id": "menu_main",
+              "text": "🏠 Menu Utama"
+            }
+          ]
+        },
+        "help_toid": {
+          "reply": "🌐 *.toid <teks>*\nContoh: .toid good morning",
+          "buttons": [
+            {
+              "type": "quick_reply",
+              "id": "cat_tools",
+              "text": "⬅️ Kembali"
+            },
+            {
+              "type": "quick_reply",
+              "id": "menu_main",
+              "text": "🏠 Menu Utama"
+            }
+          ]
+        },
+        "help_cuaca": {
+          "reply": "⛅ *.cuaca <kota>*\nContoh: .cuaca Bekasi",
+          "buttons": [
+            {
+              "type": "quick_reply",
+              "id": "cat_tools",
+              "text": "⬅️ Kembali"
+            },
+            {
+              "type": "quick_reply",
+              "id": "menu_main",
+              "text": "🏠 Menu Utama"
+            }
+          ]
+        },
+        "help_qr": {
+          "reply": "🔳 *.qr <teks>*\nContoh: .qr https://example.com",
+          "buttons": [
+            {
+              "type": "quick_reply",
+              "id": "cat_tools",
+              "text": "⬅️ Kembali"
+            },
+            {
+              "type": "quick_reply",
+              "id": "menu_main",
+              "text": "🏠 Menu Utama"
+            }
+          ]
+        },
+        "help_ai": {
+          "reply": "🧠 *.ai <pertanyaan>*\nContoh: .ai apa itu inflasi\nButuh AI_API_KEY di Plugin settings, bagian Secrets.",
+          "buttons": [
+            {
+              "type": "quick_reply",
+              "id": "cat_tools",
+              "text": "⬅️ Kembali"
+            },
+            {
+              "type": "quick_reply",
+              "id": "menu_main",
+              "text": "🏠 Menu Utama"
+            }
+          ]
+        },
+        "help_catat": {
+          "reply": "📝 *.catat <teks>*\nContoh: .catat beli beras 5 kg",
+          "buttons": [
+            {
+              "type": "quick_reply",
+              "id": "cat_notes",
+              "text": "⬅️ Kembali"
+            },
+            {
+              "type": "quick_reply",
+              "id": "menu_main",
+              "text": "🏠 Menu Utama"
+            }
+          ]
+        },
+        "help_hapus": {
+          "reply": "🗑️ *.hapus <no>*\nContoh: .hapus 3\nNomor dilihat dari .catatan",
+          "buttons": [
+            {
+              "type": "quick_reply",
+              "id": "cat_notes",
+              "text": "⬅️ Kembali"
+            },
+            {
+              "type": "quick_reply",
+              "id": "menu_main",
+              "text": "🏠 Menu Utama"
+            }
+          ]
+        },
+        ".ping": [
+          {
+            "method": "ping",
+            "args": {},
+            "saveAs": "pg"
+          },
+          {
+            "reply": "🏓 Pong! {pg} ms",
+            "quote": true
+          }
+        ],
+        ".info": {
+          "reply": "🤖 *Ready Bot*\nStatus: aktif\nNomor bot: {myNumber}\nTanggal: {date}\nJam: {time}\n\nKetik .menu untuk melihat fitur.",
+          "buttons": [
+            {
+              "type": "quick_reply",
+              "id": "menu_main",
+              "text": "🏠 Menu Utama"
+            }
+          ]
+        },
+        ".owner": [
+          {
+            "method": "sendContact",
+            "args": {
+              "toJid": "{chat}",
+              "displayName": "Owner Bot",
+              "phoneNumber": "+{myNumber}"
+            },
+            "onError": "❌ Gagal mengirim kontak."
+          }
+        ],
+        ".jid": {
+          "reply": "🆔 Chat: {chat}\n👤 Kamu: {senderJid}",
+          "quote": true
+        },
+        ".waktu": {
+          "reply": "📅 {date}\n⏰ {time}"
+        },
+        ".groupinfo": [
+          {
+            "when": "{isGroup}",
+            "is": "true",
+            "then": [
+              {
+                "method": "groupFetchMetadata",
+                "args": {
+                  "groupJid": "{chat}"
+                },
+                "saveAs": "g",
+                "onError": "❌ Gagal mengambil info grup."
+              },
+              {
+                "reply": "👥 *{g.subject}*\nAnggota: {g.size}\n\n📄 Deskripsi:\n{g.description}",
+                "quote": true
+              }
+            ],
+            "else": [
+              {
+                "reply": "⚠️ Perintah ini hanya untuk grup."
+              }
+            ]
+          }
+        ],
+        ".dadu": {
+          "reply": "🎲 {sender} melempar dadu dan dapat {roll:1d6}"
+        },
+        ".koin": {
+          "reply": "🪙 Hasil lempar koin: {pick:Angka|Gambar}"
+        },
+        ".truth": {
+          "reply": "🎯 *Truth*\n{pick:Siapa orang terakhir yang kamu stalk di media sosial?|Apa kebohongan terbesar yang pernah kamu katakan?|Hal paling memalukan apa yang pernah terjadi padamu?|Siapa teman yang paling sering kamu gibahin?|Kapan terakhir kali kamu menangis dan kenapa?|Apa kebiasaan burukmu yang tidak diketahui orang lain?|Barang apa yang pernah kamu ambil tanpa izin?}"
+        },
+        ".dare": {
+          "reply": "🔥 *Dare*\n{pick:Kirim voice note menyanyikan satu lagu|Ganti foto profil dengan foto lucu selama sehari|Kirim pesan semangat ke tiga teman|Tulis pantun untuk anggota grup|Kirim selfie wajah konyol|Ketik nama mantan dengan huruf terbalik|Telepon teman dan bilang kamu rindu}"
+        },
+        ".quote": {
+          "reply": "💬 {pick:Mulai dari yang kecil, lakukan setiap hari.|Gagal itu data, bukan akhir cerita.|Disiplin mengalahkan motivasi saat semangat turun.|Kerjakan sekarang, sempurnakan nanti.|Satu langkah hari ini lebih baik dari seribu rencana.|Fokus pada proses, hasil akan menyusul.|Istirahat boleh, menyerah jangan.}"
+        },
+        ".suit": {
+          "reply": "✊ Suit lawan bot. Pilih senjatamu:",
+          "buttons": [
+            {
+              "type": "quick_reply",
+              "id": "suit_batu",
+              "text": "🪨 Batu"
+            },
+            {
+              "type": "quick_reply",
+              "id": "suit_gunting",
+              "text": "✂️ Gunting"
+            },
+            {
+              "type": "quick_reply",
+              "id": "suit_kertas",
+              "text": "📄 Kertas"
+            }
+          ]
+        },
+        "suit_batu": [
+          {
+            "random": {
+              "loot": [
+                {
+                  "c": "batu",
+                  "weight": 1
+                },
+                {
+                  "c": "gunting",
+                  "weight": 1
+                },
+                {
+                  "c": "kertas",
+                  "weight": 1
+                }
+              ]
+            },
+            "saveAs": "bot"
+          },
+          {
+            "when": "{bot.c}",
+            "is": "batu",
+            "then": [
+              {
+                "reply": "Kamu: 🪨 Batu\nBot: 🪨 Batu\n\n🤝 Seri!",
+                "buttons": [
+                  {
+                    "type": "quick_reply",
+                    "id": ".suit",
+                    "text": "🔁 Main lagi"
+                  },
+                  {
+                    "type": "quick_reply",
+                    "id": "menu_main",
+                    "text": "🏠 Menu Utama"
+                  }
+                ]
+              }
+            ],
+            "else": [
+              {
+                "when": "{bot.c}",
+                "is": "gunting",
+                "then": [
+                  {
+                    "reply": "Kamu: 🪨 Batu\nBot: ✂️ Gunting\n\n🎉 Kamu menang!",
+                    "buttons": [
+                      {
+                        "type": "quick_reply",
+                        "id": ".suit",
+                        "text": "🔁 Main lagi"
+                      },
+                      {
+                        "type": "quick_reply",
+                        "id": "menu_main",
+                        "text": "🏠 Menu Utama"
+                      }
+                    ]
+                  }
+                ],
+                "else": [
+                  {
+                    "reply": "Kamu: 🪨 Batu\nBot: 📄 Kertas\n\n😎 Bot menang!",
+                    "buttons": [
+                      {
+                        "type": "quick_reply",
+                        "id": ".suit",
+                        "text": "🔁 Main lagi"
+                      },
+                      {
+                        "type": "quick_reply",
+                        "id": "menu_main",
+                        "text": "🏠 Menu Utama"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "suit_gunting": [
+          {
+            "random": {
+              "loot": [
+                {
+                  "c": "batu",
+                  "weight": 1
+                },
+                {
+                  "c": "gunting",
+                  "weight": 1
+                },
+                {
+                  "c": "kertas",
+                  "weight": 1
+                }
+              ]
+            },
+            "saveAs": "bot"
+          },
+          {
+            "when": "{bot.c}",
+            "is": "batu",
+            "then": [
+              {
+                "reply": "Kamu: ✂️ Gunting\nBot: 🪨 Batu\n\n😎 Bot menang!",
+                "buttons": [
+                  {
+                    "type": "quick_reply",
+                    "id": ".suit",
+                    "text": "🔁 Main lagi"
+                  },
+                  {
+                    "type": "quick_reply",
+                    "id": "menu_main",
+                    "text": "🏠 Menu Utama"
+                  }
+                ]
+              }
+            ],
+            "else": [
+              {
+                "when": "{bot.c}",
+                "is": "gunting",
+                "then": [
+                  {
+                    "reply": "Kamu: ✂️ Gunting\nBot: ✂️ Gunting\n\n🤝 Seri!",
+                    "buttons": [
+                      {
+                        "type": "quick_reply",
+                        "id": ".suit",
+                        "text": "🔁 Main lagi"
+                      },
+                      {
+                        "type": "quick_reply",
+                        "id": "menu_main",
+                        "text": "🏠 Menu Utama"
+                      }
+                    ]
+                  }
+                ],
+                "else": [
+                  {
+                    "reply": "Kamu: ✂️ Gunting\nBot: 📄 Kertas\n\n🎉 Kamu menang!",
+                    "buttons": [
+                      {
+                        "type": "quick_reply",
+                        "id": ".suit",
+                        "text": "🔁 Main lagi"
+                      },
+                      {
+                        "type": "quick_reply",
+                        "id": "menu_main",
+                        "text": "🏠 Menu Utama"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "suit_kertas": [
+          {
+            "random": {
+              "loot": [
+                {
+                  "c": "batu",
+                  "weight": 1
+                },
+                {
+                  "c": "gunting",
+                  "weight": 1
+                },
+                {
+                  "c": "kertas",
+                  "weight": 1
+                }
+              ]
+            },
+            "saveAs": "bot"
+          },
+          {
+            "when": "{bot.c}",
+            "is": "batu",
+            "then": [
+              {
+                "reply": "Kamu: 📄 Kertas\nBot: 🪨 Batu\n\n🎉 Kamu menang!",
+                "buttons": [
+                  {
+                    "type": "quick_reply",
+                    "id": ".suit",
+                    "text": "🔁 Main lagi"
+                  },
+                  {
+                    "type": "quick_reply",
+                    "id": "menu_main",
+                    "text": "🏠 Menu Utama"
+                  }
+                ]
+              }
+            ],
+            "else": [
+              {
+                "when": "{bot.c}",
+                "is": "gunting",
+                "then": [
+                  {
+                    "reply": "Kamu: 📄 Kertas\nBot: ✂️ Gunting\n\n😎 Bot menang!",
+                    "buttons": [
+                      {
+                        "type": "quick_reply",
+                        "id": ".suit",
+                        "text": "🔁 Main lagi"
+                      },
+                      {
+                        "type": "quick_reply",
+                        "id": "menu_main",
+                        "text": "🏠 Menu Utama"
+                      }
+                    ]
+                  }
+                ],
+                "else": [
+                  {
+                    "reply": "Kamu: 📄 Kertas\nBot: 📄 Kertas\n\n🤝 Seri!",
+                    "buttons": [
+                      {
+                        "type": "quick_reply",
+                        "id": ".suit",
+                        "text": "🔁 Main lagi"
+                      },
+                      {
+                        "type": "quick_reply",
+                        "id": "menu_main",
+                        "text": "🏠 Menu Utama"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        ".tebak": [
+          {
+            "remember": "tebak_{chat}_{senderNumber}",
+            "value": "{rand:1:100}",
+            "ttlSec": 900
+          },
+          {
+            "reply": "🔢 Aku memikirkan angka 1 sampai 100.\nKirim tebakanmu sekarang.\nKetik .nyerah untuk menyerah.",
+            "nextStep": "tebak",
+            "stepTtlSec": 900
+          }
+        ],
+        ".catatan": [
+          {
+            "method": "dbQuery",
+            "args": {
+              "sql": "CREATE TABLE IF NOT EXISTS notes (_id INTEGER PRIMARY KEY AUTOINCREMENT, jid TEXT, note TEXT, created TEXT)"
+            },
+            "saveAs": "mk",
+            "onError": "❌ Database error: {error}"
+          },
+          {
+            "method": "dbQuery",
+            "args": {
+              "sql": "SELECT group_concat('#' || _id || ' ' || note, char(10)) AS list FROM (SELECT _id, note FROM notes WHERE jid = ? ORDER BY _id DESC LIMIT 10)",
+              "params": [
+                "{senderJid}"
+              ]
+            },
+            "saveAs": "db",
+            "onError": "❌ Database error: {error}"
+          },
+          {
+            "when": "{db.first.list}",
+            "notEmpty": true,
+            "then": [
+              {
+                "reply": "📒 *Catatan kamu*\n{db.first.list}\n\nHapus dengan .hapus <no>",
+                "quote": true
+              }
+            ],
+            "else": [
+              {
+                "reply": "📭 Belum ada catatan. Tambah dengan .catat <teks>"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "onIncoming": [
+      {
+        "step": "tebak",
+        "command": ".nyerah",
+        "clearStep": true,
+        "actions": [
+          {
+            "recall": "tebak_{chat}_{senderNumber}",
+            "default": "?",
+            "saveAs": "n"
+          },
+          {
+            "forget": "tebak_{chat}_{senderNumber}"
+          },
+          {
+            "reply": "🏳️ Menyerah. Jawabannya {n}. Ketik .tebak untuk main lagi."
+          }
+        ]
+      },
+      {
+        "step": "tebak",
+        "regex": "^\\s*\\d{1,3}\\s*$",
+        "actions": [
+          {
+            "recall": "tebak_{chat}_{senderNumber}",
+            "default": "0",
+            "saveAs": "n"
+          },
+          {
+            "when": "{text|trim}",
+            "gt": "{n}",
+            "then": [
+              {
+                "reply": "⬇️ Terlalu besar. Coba lagi."
+              }
+            ],
+            "else": [
+              {
+                "when": "{text|trim}",
+                "lt": "{n}",
+                "then": [
+                  {
+                    "reply": "⬆️ Terlalu kecil. Coba lagi."
+                  }
+                ],
+                "else": [
+                  {
+                    "forget": "tebak_{chat}_{senderNumber}"
+                  },
+                  {
+                    "clearStep": true
+                  },
+                  {
+                    "reply": "🎉 Benar! Angkanya {n}.",
+                    "buttons": [
+                      {
+                        "type": "quick_reply",
+                        "id": ".tebak",
+                        "text": "🔁 Main lagi"
+                      },
+                      {
+                        "type": "quick_reply",
+                        "id": "menu_main",
+                        "text": "🏠 Menu Utama"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "command": ".s",
+        "aliases": [
+          ".sticker",
+          ".stiker"
+        ],
+        "messageTypes": [
+          "image",
+          "video"
+        ],
+        "cooldown": 3,
+        "actions": [
+          {
+            "react": "⏳"
+          },
+          {
+            "sticker": true,
+            "packName": "Ready Bot",
+            "author": "WhatsApp Bot",
+            "onError": "❌ Gagal membuat sticker."
+          }
+        ]
+      },
+      {
+        "command": ".s",
+        "aliases": [
+          ".sticker",
+          ".stiker"
+        ],
+        "quotedHasMedia": true,
+        "cooldown": 3,
+        "actions": [
+          {
+            "react": "⏳"
+          },
+          {
+            "sticker": true,
+            "packName": "Ready Bot",
+            "author": "WhatsApp Bot",
+            "onError": "❌ Gagal membuat sticker."
+          }
+        ]
+      },
+      {
+        "command": ".s",
+        "aliases": [
+          ".sticker",
+          ".stiker"
+        ],
+        "actions": [
+          {
+            "reply": "🖼️ *.s*\nKirim gambar atau video dengan caption .s\nAtau balas gambar atau video dengan .s"
+          }
+        ]
+      },
+      {
+        "command": ".toimg",
+        "quotedMediaTypes": [
+          "sticker"
+        ],
+        "cooldown": 3,
+        "actions": [
+          {
+            "react": "⏳"
+          },
+          {
+            "toImage": true,
+            "onError": "❌ Gagal mengubah sticker."
+          }
+        ]
+      },
+      {
+        "command": ".toimg",
+        "actions": [
+          {
+            "reply": "🖼️ *.toimg*\nBalas sticker dengan .toimg"
+          }
+        ]
+      },
+      {
+        "command": ".dl",
+        "requireArgs": true,
+        "usage": "⬇️ *.dl <link>*\nContoh: .dl https://example.com/foto.jpg\nLink harus mengarah langsung ke file.",
+        "cooldown": 8,
+        "cooldownReply": "⏳ Tunggu {cooldownRemaining} dtk.",
+        "actions": [
+          {
+            "react": "⏳"
+          },
+          {
+            "media": {
+              "url": "{args}"
+            },
+            "onError": "❌ Gagal mengunduh. Pastikan link langsung ke file."
+          }
+        ]
+      },
+      {
+        "command": ".qr",
+        "requireArgs": true,
+        "usage": "🔳 *.qr <teks>*\nContoh: .qr https://example.com",
+        "cooldown": 3,
+        "actions": [
+          {
+            "image": "https://api.qrserver.com/v1/create-qr-code/?size=500x500&data={args|url}",
+            "caption": "🔳 QR untuk:\n{args}",
+            "onError": "❌ Gagal membuat QR."
+          }
+        ]
+      },
+      {
+        "command": ".calc",
+        "aliases": [
+          ".hitung"
+        ],
+        "requireArgs": true,
+        "usage": "🧮 *.calc <hitungan>*\nContoh: .calc 12*(3+4)",
+        "actions": [
+          {
+            "reply": "🧮 {args} = {math: {args}}",
+            "quote": true,
+            "onError": "❌ Hitungan tidak valid."
+          }
+        ]
+      },
+      {
+        "command": ".toen",
+        "requireArgs": true,
+        "usage": "🌐 *.toen <teks>*\nContoh: .toen selamat pagi",
+        "cooldown": 3,
+        "actions": [
+          {
+            "method": "httpRequest",
+            "args": {
+              "url": "https://api.mymemory.translated.net/get",
+              "query": {
+                "q": "{args}",
+                "langpair": "id|en"
+              },
+              "failOnHttpError": true,
+              "extract": {
+                "t": [
+                  "responseData.translatedText"
+                ]
+              }
+            },
+            "saveAs": "r",
+            "onError": "❌ Terjemahan gagal. Coba lagi nanti."
+          },
+          {
+            "reply": "🌐 {r.extracted.t}",
+            "quote": true
+          }
+        ]
+      },
+      {
+        "command": ".toid",
+        "requireArgs": true,
+        "usage": "🌐 *.toid <teks>*\nContoh: .toid good morning",
+        "cooldown": 3,
+        "actions": [
+          {
+            "method": "httpRequest",
+            "args": {
+              "url": "https://api.mymemory.translated.net/get",
+              "query": {
+                "q": "{args}",
+                "langpair": "en|id"
+              },
+              "failOnHttpError": true,
+              "extract": {
+                "t": [
+                  "responseData.translatedText"
+                ]
+              }
+            },
+            "saveAs": "r",
+            "onError": "❌ Terjemahan gagal. Coba lagi nanti."
+          },
+          {
+            "reply": "🌐 {r.extracted.t}",
+            "quote": true
+          }
+        ]
+      },
+      {
+        "command": ".cuaca",
+        "requireArgs": true,
+        "usage": "⛅ *.cuaca <kota>*\nContoh: .cuaca Bekasi",
+        "cooldown": 3,
+        "actions": [
+          {
+            "method": "httpRequest",
+            "args": {
+              "url": "https://wttr.in/{args|url}",
+              "query": {
+                "format": "4",
+                "lang": "id"
+              },
+              "responseType": "text",
+              "failOnHttpError": true
+            },
+            "saveAs": "w",
+            "onError": "❌ Kota tidak ditemukan."
+          },
+          {
+            "reply": "⛅ {w.body}",
+            "quote": true
+          }
+        ]
+      },
+      {
+        "command": ".ai",
+        "aliases": [
+          ".ask",
+          ".gpt"
+        ],
+        "requireArgs": true,
+        "usage": "🧠 *.ai <pertanyaan>*\nContoh: .ai apa itu inflasi\nButuh AI_API_KEY di Plugin settings, bagian Secrets.",
+        "cooldown": 5,
+        "cooldownReply": "⏳ Tunggu {cooldownRemaining} dtk.",
+        "actions": [
+          {
+            "react": "⏳"
+          },
+          {
+            "method": "httpRequest",
+            "args": {
+              "url": "https://api.openai.com/v1/chat/completions",
+              "method": "POST",
+              "auth": {
+                "bearer": "{secret.AI_API_KEY}"
+              },
+              "json": {
+                "model": "gpt-4o-mini",
+                "messages": [
+                  {
+                    "role": "system",
+                    "content": "Jawab singkat dan jelas dalam bahasa Indonesia."
+                  },
+                  {
+                    "role": "user",
+                    "content": "{args}"
+                  }
+                ]
+              },
+              "timeoutMs": 60000,
+              "failOnHttpError": true,
+              "extract": {
+                "answer": [
+                  "choices[0].message.content"
+                ]
+              }
+            },
+            "saveAs": "r",
+            "onError": "❌ AI gagal menjawab. Cek AI_API_KEY di Plugin settings, bagian Secrets."
+          },
+          {
+            "reply": "{r.extracted.answer}",
+            "quote": true
+          }
+        ]
+      },
+      {
+        "command": ".catat",
+        "aliases": [
+          ".note"
+        ],
+        "requireArgs": true,
+        "usage": "📝 *.catat <teks>*\nContoh: .catat beli beras 5 kg",
+        "actions": [
+          {
+            "method": "dbInsert",
+            "args": {
+              "table": "notes",
+              "data": {
+                "jid": "{senderJid}",
+                "note": "{args}",
+                "created": "{date} {time}"
+              }
+            },
+            "saveAs": "db",
+            "onError": "❌ Database error: {error}"
+          },
+          {
+            "reply": "📝 Tersimpan sebagai catatan #{db.lastInsertRowid}.",
+            "quote": true
+          }
+        ]
+      },
+      {
+        "command": ".hapus",
+        "requireArgs": true,
+        "usage": "🗑️ *.hapus <no>*\nContoh: .hapus 3\nNomor dilihat dari .catatan",
+        "actions": [
+          {
+            "method": "dbDelete",
+            "args": {
+              "table": "notes",
+              "where": {
+                "_id": "{args}",
+                "jid": "{senderJid}"
+              }
+            },
+            "saveAs": "db",
+            "onError": "❌ Database error: {error}"
+          },
+          {
+            "when": "{db.affectedRows}",
+            "gt": "0",
+            "then": [
+              {
+                "reply": "🗑️ Catatan #{args} dihapus."
+              }
+            ],
+            "else": [
+              {
+                "reply": "⚠️ Catatan #{args} tidak ditemukan."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "command": ".tagall",
+        "cooldown": 10,
+        "cooldownReply": "⏳ Tunggu {cooldownRemaining} dtk.",
+        "groupOnly": true,
+        "adminOnly": true,
+        "botAdminRequired": true,
+        "actions": [
+          {
+            "reply": "📢 *Perhatian semua anggota*\n{args}",
+            "mentions": "all"
+          }
+        ]
+      },
+      {
+        "command": ".hidetag",
+        "requireArgs": true,
+        "usage": "👻 *.hidetag <pesan>*\nKirim pesan dan mention semua anggota tanpa daftar nama.\nSyarat: kamu admin.",
+        "groupOnly": true,
+        "adminOnly": true,
+        "botAdminRequired": true,
+        "actions": [
+          {
+            "reply": "{args}",
+            "mentions": "all"
+          }
+        ]
+      },
+      {
+        "command": ".kick",
+        "requireQuoted": true,
+        "usage": "👢 *.kick*\nBalas pesan anggota, lalu ketik .kick\nSyarat: kamu admin dan bot admin.",
+        "cooldown": 3,
+        "groupOnly": true,
+        "adminOnly": true,
+        "botAdminRequired": true,
+        "actions": [
+          {
+            "kick": true
+          },
+          {
+            "reply": "👢 Anggota dikeluarkan."
+          }
+        ]
+      },
+      {
+        "command": ".promote",
+        "requireQuoted": true,
+        "usage": "⬆️ *.promote*\nBalas pesan anggota, lalu ketik .promote\nSyarat: kamu admin dan bot admin.",
+        "cooldown": 3,
+        "groupOnly": true,
+        "adminOnly": true,
+        "botAdminRequired": true,
+        "actions": [
+          {
+            "promote": true
+          },
+          {
+            "reply": "⬆️ Anggota dijadikan admin."
+          }
+        ]
+      },
+      {
+        "command": ".demote",
+        "requireQuoted": true,
+        "usage": "⬇️ *.demote*\nBalas pesan admin, lalu ketik .demote\nSyarat: kamu admin dan bot admin.",
+        "cooldown": 3,
+        "groupOnly": true,
+        "adminOnly": true,
+        "botAdminRequired": true,
+        "actions": [
+          {
+            "demote": true
+          },
+          {
+            "reply": "⬇️ Status admin dicabut."
+          }
+        ]
+      },
+      {
+        "command": ".open",
+        "groupOnly": true,
+        "adminOnly": true,
+        "botAdminRequired": true,
+        "actions": [
+          {
+            "openGroup": true
+          },
+          {
+            "reply": "🔓 Grup dibuka. Semua anggota bisa kirim pesan."
+          }
+        ]
+      },
+      {
+        "command": ".close",
+        "groupOnly": true,
+        "adminOnly": true,
+        "botAdminRequired": true,
+        "actions": [
+          {
+            "muteGroup": true
+          },
+          {
+            "reply": "🔒 Grup ditutup. Hanya admin yang bisa kirim pesan."
+          }
+        ]
+      },
+      {
+        "command": ".setname",
+        "requireArgs": true,
+        "usage": "✏️ *.setname <nama>*\nContoh: .setname Keluarga Besar\nSyarat: kamu admin dan bot admin.",
+        "groupOnly": true,
+        "adminOnly": true,
+        "botAdminRequired": true,
+        "actions": [
+          {
+            "setSubject": "{args}"
+          },
+          {
+            "reply": "✏️ Nama grup diganti."
+          }
+        ]
+      },
+      {
+        "command": ".setdesc",
+        "requireArgs": true,
+        "usage": "📄 *.setdesc <teks>*\nContoh: .setdesc Aturan grup ada di pin\nSyarat: kamu admin dan bot admin.",
+        "groupOnly": true,
+        "adminOnly": true,
+        "botAdminRequired": true,
+        "actions": [
+          {
+            "setDescription": "{args}"
+          },
+          {
+            "reply": "📄 Deskripsi grup diganti."
+          }
+        ]
+      },
+      {
+        "command": ".link",
+        "cooldown": 5,
+        "groupOnly": true,
+        "adminOnly": true,
+        "botAdminRequired": true,
+        "actions": [
+          {
+            "method": "groupGetInviteCode",
+            "args": {
+              "groupJid": "{chat}"
+            },
+            "saveAs": "code",
+            "onError": "❌ Gagal mengambil link."
+          },
+          {
+            "reply": "🔗 https://chat.whatsapp.com/{code}",
+            "quote": true
+          }
+        ]
+      },
+      {
+        "command": ".del",
+        "requireQuoted": true,
+        "usage": "🗑️ *.del*\nBalas pesan yang mau dihapus, lalu ketik .del\nSyarat: kamu admin dan bot admin.",
+        "groupOnly": true,
+        "adminOnly": true,
+        "botAdminRequired": true,
+        "actions": [
+          {
+            "method": "revokeMessage",
+            "args": {
+              "chatJid": "{chat}",
+              "targetMessageId": "{quotedId}"
+            },
+            "onError": "❌ Gagal menghapus pesan."
+          }
+        ]
+      },
+      {
+        "command": ".antilink",
+        "requireArgs": true,
+        "usage": "🚫 *.antilink on* atau *.antilink off*\nSaat aktif, anggota yang kirim link grup WhatsApp akan dihapus pesannya dan dikeluarkan. Admin dikecualikan.\nSyarat: kamu admin dan bot admin.",
+        "groupOnly": true,
+        "adminOnly": true,
+        "botAdminRequired": true,
+        "actions": [
+          {
+            "when": "{args|lower}",
+            "is": "on",
+            "then": [
+              {
+                "remember": "antilink_{chat}",
+                "value": "1"
+              },
+              {
+                "reply": "🚫 Antilink aktif."
+              }
+            ],
+            "else": [
+              {
+                "when": "{args|lower}",
+                "is": "off",
+                "then": [
+                  {
+                    "forget": "antilink_{chat}"
+                  },
+                  {
+                    "reply": "✅ Antilink nonaktif."
+                  }
+                ],
+                "else": [
+                  {
+                    "reply": "🚫 *.antilink on* atau *.antilink off*\nSaat aktif, anggota yang kirim link grup WhatsApp akan dihapus pesannya dan dikeluarkan. Admin dikecualikan.\nSyarat: kamu admin dan bot admin."
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "regex": "chat\\.whatsapp\\.com/[A-Za-z0-9]+",
+        "groupOnly": true,
+        "botAdminRequired": true,
+        "scope": "others",
+        "actions": [
+          {
+            "recall": "antilink_{chat}",
+            "default": "0",
+            "saveAs": "al"
+          },
+          {
+            "when": "{al}",
+            "is": "1",
+            "then": [
+              {
+                "when": "{isAdmin}",
+                "is": "false",
+                "then": [
+                  {
+                    "method": "revokeMessage",
+                    "args": {
+                      "chatJid": "{chat}",
+                      "targetMessageId": "{messageId}"
+                    }
+                  },
+                  {
+                    "reply": "🚫 Link grup terdeteksi. {sender} dikeluarkan."
+                  },
+                  {
+                    "method": "groupParticipantsUpdate",
+                    "args": {
+                      "groupJid": "{chat}",
+                      "participants": [
+                        "{senderJid}"
+                      ],
+                      "action": "remove"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}
