@@ -1,0 +1,1211 @@
+{
+  "id": "template_bot",
+  "name": "Template Bot",
+  "description": "Template siap pakai: list item, quick reply, select, CTA, carousel, gambar, konfirmasi, rating, halaman, form multi langkah, toko, polling, lokasi, kontak, logika, API, dan database.",
+  "version": "1.0.0",
+  "author": "You",
+  "enabled": true,
+  "type": "JSON",
+  "rules": {
+    "scope": "any",
+    "allowSelf": true,
+    "autoResponder": {
+      "commands": {
+        ".tpl": {
+          "list": {
+            "title": "🧩 Template Bot",
+            "description": "Halo {sender}. Pilih kategori template.\nKetik .batal untuk menghentikan alur apa pun.",
+            "buttonText": "📜 Pilih Kategori",
+            "sections": [
+              {
+                "title": "Kategori",
+                "rows": [
+                  {
+                    "id": "t_cat_btn",
+                    "title": "🔘 Tombol dan List",
+                    "description": "Semua jenis tombol dan list"
+                  },
+                  {
+                    "id": "t_cat_flow",
+                    "title": "🔁 Alur Multi Langkah",
+                    "description": "Alur percakapan dengan langkah lanjut"
+                  },
+                  {
+                    "id": "t_cat_msg",
+                    "title": "📨 Pesan dan Logika",
+                    "description": "Jenis pesan, API, dan logika"
+                  }
+                ]
+              },
+              {
+                "title": "Lainnya",
+                "rows": [
+                  {
+                    "id": "t_all",
+                    "title": "📋 Semua Template",
+                    "description": "Daftar lengkap satu pesan"
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        ".template": {
+          "list": {
+            "title": "🧩 Template Bot",
+            "description": "Halo {sender}. Pilih kategori template.\nKetik .batal untuk menghentikan alur apa pun.",
+            "buttonText": "📜 Pilih Kategori",
+            "sections": [
+              {
+                "title": "Kategori",
+                "rows": [
+                  {
+                    "id": "t_cat_btn",
+                    "title": "🔘 Tombol dan List",
+                    "description": "Semua jenis tombol dan list"
+                  },
+                  {
+                    "id": "t_cat_flow",
+                    "title": "🔁 Alur Multi Langkah",
+                    "description": "Alur percakapan dengan langkah lanjut"
+                  },
+                  {
+                    "id": "t_cat_msg",
+                    "title": "📨 Pesan dan Logika",
+                    "description": "Jenis pesan, API, dan logika"
+                  }
+                ]
+              },
+              {
+                "title": "Lainnya",
+                "rows": [
+                  {
+                    "id": "t_all",
+                    "title": "📋 Semua Template",
+                    "description": "Daftar lengkap satu pesan"
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        "t_menu": {
+          "list": {
+            "title": "🧩 Template Bot",
+            "description": "Halo {sender}. Pilih kategori template.\nKetik .batal untuk menghentikan alur apa pun.",
+            "buttonText": "📜 Pilih Kategori",
+            "sections": [
+              {
+                "title": "Kategori",
+                "rows": [
+                  {
+                    "id": "t_cat_btn",
+                    "title": "🔘 Tombol dan List",
+                    "description": "Semua jenis tombol dan list"
+                  },
+                  {
+                    "id": "t_cat_flow",
+                    "title": "🔁 Alur Multi Langkah",
+                    "description": "Alur percakapan dengan langkah lanjut"
+                  },
+                  {
+                    "id": "t_cat_msg",
+                    "title": "📨 Pesan dan Logika",
+                    "description": "Jenis pesan, API, dan logika"
+                  }
+                ]
+              },
+              {
+                "title": "Lainnya",
+                "rows": [
+                  {
+                    "id": "t_all",
+                    "title": "📋 Semua Template",
+                    "description": "Daftar lengkap satu pesan"
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        "t_cat_btn": {
+          "interactive": {
+            "header": "🔘 Tombol dan List",
+            "body": "Semua jenis tombol dan list\n\n▫️ .quick  Tombol quick reply + langkah lanjut\n▫️ .list  List item satu kali pilih\n▫️ .select  Tombol dengan list pilihan\n▫️ .cta  Tombol link, telepon, salin\n▫️ .carousel  Kartu geser dengan tombol\n▫️ .media  Gambar dengan tombol\n▫️ .confirm  Konfirmasi ya atau tidak\n▫️ .rate  List rating bintang\n▫️ .page  Halaman sebelumnya dan berikutnya",
+            "footer": "🧩 Template Bot",
+            "buttons": [
+              {
+                "type": "single_select",
+                "text": "📜 Pilih Template",
+                "sections": [
+                  {
+                    "title": "🔘 Tombol dan List",
+                    "rows": [
+                      {
+                        "id": ".quick",
+                        "title": ".quick",
+                        "description": "Tombol quick reply + langkah lanjut"
+                      },
+                      {
+                        "id": ".list",
+                        "title": ".list",
+                        "description": "List item satu kali pilih"
+                      },
+                      {
+                        "id": ".select",
+                        "title": ".select",
+                        "description": "Tombol dengan list pilihan"
+                      },
+                      {
+                        "id": ".cta",
+                        "title": ".cta",
+                        "description": "Tombol link, telepon, salin"
+                      },
+                      {
+                        "id": ".carousel",
+                        "title": ".carousel",
+                        "description": "Kartu geser dengan tombol"
+                      },
+                      {
+                        "id": ".media",
+                        "title": ".media",
+                        "description": "Gambar dengan tombol"
+                      },
+                      {
+                        "id": ".confirm",
+                        "title": ".confirm",
+                        "description": "Konfirmasi ya atau tidak"
+                      },
+                      {
+                        "id": ".rate",
+                        "title": ".rate",
+                        "description": "List rating bintang"
+                      },
+                      {
+                        "id": ".page",
+                        "title": ".page",
+                        "description": "Halaman sebelumnya dan berikutnya"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "quick_reply",
+                "id": "t_menu",
+                "text": "🏠 Menu Template"
+              }
+            ]
+          }
+        },
+        "t_cat_flow": {
+          "interactive": {
+            "header": "🔁 Alur Multi Langkah",
+            "body": "Alur percakapan dengan langkah lanjut\n\n▫️ .form  Form nama dan umur, simpan ke database\n▫️ .shop  Pilih item, jumlah, konfirmasi\n▫️ .forms  Lihat data form tersimpan",
+            "footer": "🧩 Template Bot",
+            "buttons": [
+              {
+                "type": "single_select",
+                "text": "📜 Pilih Template",
+                "sections": [
+                  {
+                    "title": "🔁 Alur Multi Langkah",
+                    "rows": [
+                      {
+                        "id": ".form",
+                        "title": ".form",
+                        "description": "Form nama dan umur, simpan ke database"
+                      },
+                      {
+                        "id": ".shop",
+                        "title": ".shop",
+                        "description": "Pilih item, jumlah, konfirmasi"
+                      },
+                      {
+                        "id": ".forms",
+                        "title": ".forms",
+                        "description": "Lihat data form tersimpan"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "quick_reply",
+                "id": "t_menu",
+                "text": "🏠 Menu Template"
+              }
+            ]
+          }
+        },
+        "t_cat_msg": {
+          "interactive": {
+            "header": "📨 Pesan dan Logika",
+            "body": "Jenis pesan, API, dan logika\n\n▫️ .poll  Kirim polling\n▫️ .lokasi  Kirim lokasi\n▫️ .kontak  Kirim kartu kontak\n▫️ .react  Beri reaksi emoji\n▫️ .logic  Counter, kondisi, dadu, cooldown\n▫️ .api  Panggil API web",
+            "footer": "🧩 Template Bot",
+            "buttons": [
+              {
+                "type": "single_select",
+                "text": "📜 Pilih Template",
+                "sections": [
+                  {
+                    "title": "📨 Pesan dan Logika",
+                    "rows": [
+                      {
+                        "id": ".poll",
+                        "title": ".poll",
+                        "description": "Kirim polling"
+                      },
+                      {
+                        "id": ".lokasi",
+                        "title": ".lokasi",
+                        "description": "Kirim lokasi"
+                      },
+                      {
+                        "id": ".kontak",
+                        "title": ".kontak",
+                        "description": "Kirim kartu kontak"
+                      },
+                      {
+                        "id": ".react",
+                        "title": ".react",
+                        "description": "Beri reaksi emoji"
+                      },
+                      {
+                        "id": ".logic",
+                        "title": ".logic",
+                        "description": "Counter, kondisi, dadu, cooldown"
+                      },
+                      {
+                        "id": ".api",
+                        "title": ".api",
+                        "description": "Panggil API web"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "quick_reply",
+                "id": "t_menu",
+                "text": "🏠 Menu Template"
+              }
+            ]
+          }
+        },
+        "t_all": {
+          "reply": "🧩 Template Bot\n\n🔘 Tombol dan List\n.quick  Tombol quick reply + langkah lanjut\n.list  List item satu kali pilih\n.select  Tombol dengan list pilihan\n.cta  Tombol link, telepon, salin\n.carousel  Kartu geser dengan tombol\n.media  Gambar dengan tombol\n.confirm  Konfirmasi ya atau tidak\n.rate  List rating bintang\n.page  Halaman sebelumnya dan berikutnya\n\n🔁 Alur Multi Langkah\n.form  Form nama dan umur, simpan ke database\n.shop  Pilih item, jumlah, konfirmasi\n.forms  Lihat data form tersimpan\n\n📨 Pesan dan Logika\n.poll  Kirim polling\n.lokasi  Kirim lokasi\n.kontak  Kirim kartu kontak\n.react  Beri reaksi emoji\n.logic  Counter, kondisi, dadu, cooldown\n.api  Panggil API web",
+          "buttons": [
+            {
+              "type": "quick_reply",
+              "id": "t_menu",
+              "text": "🏠 Menu Template"
+            }
+          ]
+        },
+        ".batal": [
+          {
+            "clearStep": true
+          },
+          {
+            "reply": "🛑 Alur dihentikan."
+          }
+        ],
+        ".quick": {
+          "reply": "⚡ Quick reply. Pilih satu:",
+          "footer": "Template quick reply",
+          "nextStep": "t_quick",
+          "stepTtlSec": 600,
+          "buttons": [
+            {
+              "type": "quick_reply",
+              "id": "t_qa",
+              "text": "Opsi A"
+            },
+            {
+              "type": "quick_reply",
+              "id": "t_qb",
+              "text": "Opsi B"
+            },
+            {
+              "type": "quick_reply",
+              "id": "t_qc",
+              "text": "Opsi C"
+            }
+          ]
+        },
+        ".list": {
+          "list": {
+            "title": "🍽️ Menu Makanan",
+            "description": "Pilih satu item",
+            "buttonText": "Lihat Menu",
+            "sections": [
+              {
+                "title": "Makanan",
+                "rows": [
+                  {
+                    "id": "t_li_nasi",
+                    "title": "Nasi Goreng",
+                    "description": "Rp 20.000"
+                  },
+                  {
+                    "id": "t_li_mie",
+                    "title": "Mie Ayam",
+                    "description": "Rp 18.000"
+                  },
+                  {
+                    "id": "t_li_soto",
+                    "title": "Soto Ayam",
+                    "description": "Rp 22.000"
+                  }
+                ]
+              },
+              {
+                "title": "Minuman",
+                "rows": [
+                  {
+                    "id": "t_li_teh",
+                    "title": "Es Teh",
+                    "description": "Rp 5.000"
+                  },
+                  {
+                    "id": "t_li_kopi",
+                    "title": "Kopi Susu",
+                    "description": "Rp 15.000"
+                  }
+                ]
+              }
+            ]
+          },
+          "nextStep": "t_list",
+          "stepTtlSec": 600
+        },
+        ".select": {
+          "interactive": {
+            "header": "🎛️ Tombol + List",
+            "body": "Contoh quick reply dan list dalam satu pesan.\nMenu lama otomatis diganti saat kamu buka lagi.",
+            "footer": "🧩 Template Bot",
+            "buttons": [
+              {
+                "type": "quick_reply",
+                "id": "t_sel_hi",
+                "text": "👋 Sapa"
+              },
+              {
+                "type": "single_select",
+                "text": "📜 Pilih Aksi",
+                "sections": [
+                  {
+                    "title": "Aksi",
+                    "rows": [
+                      {
+                        "id": "t_sel_a",
+                        "title": "Aksi Satu",
+                        "description": "Deskripsi aksi satu"
+                      },
+                      {
+                        "id": "t_sel_b",
+                        "title": "Aksi Dua",
+                        "description": "Deskripsi aksi dua"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          "boardKey": "t_sel_{chat}_{senderNumber}",
+          "deletePrevious": true
+        },
+        ".cta": {
+          "interactive": {
+            "header": "🔗 Tombol Aksi",
+            "body": "Buka link, telepon, atau salin kode.",
+            "footer": "🧩 Template Bot",
+            "buttons": [
+              {
+                "type": "url",
+                "text": "🌐 Buka Website",
+                "url": "https://example.com"
+              },
+              {
+                "name": "cta_call",
+                "params": {
+                  "display_text": "📞 Telepon",
+                  "phone_number": "+620000000000"
+                }
+              },
+              {
+                "name": "cta_copy",
+                "params": {
+                  "display_text": "📋 Salin Kode",
+                  "copy_code": "PROMO2026"
+                }
+              }
+            ]
+          }
+        },
+        ".carousel": {
+          "carousel": {
+            "body": "Geser untuk melihat paket",
+            "cards": [
+              {
+                "header": "Paket Basic",
+                "subtitle": "Rp 15.000",
+                "body": "Cocok untuk mencoba",
+                "footer": "🧩 Template Bot",
+                "buttons": [
+                  {
+                    "type": "quick_reply",
+                    "id": "t_car_pick",
+                    "text": "Pilih"
+                  },
+                  {
+                    "type": "url",
+                    "text": "Detail",
+                    "url": "https://example.com"
+                  }
+                ]
+              },
+              {
+                "header": "Paket Pro",
+                "subtitle": "Rp 45.000",
+                "body": "Fitur lengkap",
+                "footer": "🧩 Template Bot",
+                "buttons": [
+                  {
+                    "type": "quick_reply",
+                    "id": "t_car_pick",
+                    "text": "Pilih"
+                  },
+                  {
+                    "type": "url",
+                    "text": "Detail",
+                    "url": "https://example.com"
+                  }
+                ]
+              },
+              {
+                "header": "Paket Max",
+                "subtitle": "Rp 90.000",
+                "body": "Tanpa batas",
+                "footer": "🧩 Template Bot",
+                "buttons": [
+                  {
+                    "type": "quick_reply",
+                    "id": "t_car_pick",
+                    "text": "Pilih"
+                  },
+                  {
+                    "type": "url",
+                    "text": "Detail",
+                    "url": "https://example.com"
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        ".media": {
+          "interactive": {
+            "header": "🖼️ Gambar",
+            "body": "Pesan dengan gambar dan tombol.",
+            "footer": "🧩 Template Bot",
+            "buttons": [
+              {
+                "type": "quick_reply",
+                "id": "t_media_ok",
+                "text": "👍 Bagus"
+              },
+              {
+                "type": "url",
+                "text": "Sumber",
+                "url": "https://picsum.photos"
+              }
+            ]
+          },
+          "image": "https://picsum.photos/600/400"
+        },
+        ".confirm": {
+          "reply": "❓ Yakin ingin melanjutkan?",
+          "nextStep": "t_confirm",
+          "stepTtlSec": 300,
+          "buttons": [
+            {
+              "type": "quick_reply",
+              "id": "t_yes",
+              "text": "✅ Ya"
+            },
+            {
+              "type": "quick_reply",
+              "id": "t_no",
+              "text": "❌ Tidak"
+            }
+          ]
+        },
+        ".rate": {
+          "list": {
+            "title": "⭐ Beri Rating",
+            "description": "Seberapa puas kamu?",
+            "buttonText": "Pilih Rating",
+            "sections": [
+              {
+                "title": "Rating",
+                "rows": [
+                  {
+                    "id": "t_rate_1",
+                    "title": "⭐",
+                    "description": "Sangat buruk"
+                  },
+                  {
+                    "id": "t_rate_2",
+                    "title": "⭐⭐",
+                    "description": "Buruk"
+                  },
+                  {
+                    "id": "t_rate_3",
+                    "title": "⭐⭐⭐",
+                    "description": "Cukup"
+                  },
+                  {
+                    "id": "t_rate_4",
+                    "title": "⭐⭐⭐⭐",
+                    "description": "Bagus"
+                  },
+                  {
+                    "id": "t_rate_5",
+                    "title": "⭐⭐⭐⭐⭐",
+                    "description": "Sangat bagus"
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        "t_page_1": {
+          "reply": "📄 Halaman 1 dari 3\nIsi halaman pertama.",
+          "buttons": [
+            {
+              "type": "quick_reply",
+              "id": "t_page_2",
+              "text": "Berikutnya ➡️"
+            }
+          ]
+        },
+        "t_page_2": {
+          "reply": "📄 Halaman 2 dari 3\nIsi halaman kedua.",
+          "buttons": [
+            {
+              "type": "quick_reply",
+              "id": "t_page_1",
+              "text": "⬅️ Sebelumnya"
+            },
+            {
+              "type": "quick_reply",
+              "id": "t_page_3",
+              "text": "Berikutnya ➡️"
+            }
+          ]
+        },
+        "t_page_3": {
+          "reply": "📄 Halaman 3 dari 3\nIsi halaman terakhir.",
+          "buttons": [
+            {
+              "type": "quick_reply",
+              "id": "t_page_2",
+              "text": "⬅️ Sebelumnya"
+            }
+          ]
+        },
+        ".page": {
+          "reply": "📄 Halaman 1 dari 3\nIsi halaman pertama.",
+          "buttons": [
+            {
+              "type": "quick_reply",
+              "id": "t_page_2",
+              "text": "Berikutnya ➡️"
+            }
+          ]
+        },
+        ".form": {
+          "reply": "📝 Form 1/3\nKetik nama kamu.\nKetik .batal untuk berhenti.",
+          "nextStep": "t_form_name",
+          "stepTtlSec": 600
+        },
+        ".forms": [
+          {
+            "method": "dbQuery",
+            "args": {
+              "sql": "CREATE TABLE IF NOT EXISTS forms (_id INTEGER PRIMARY KEY AUTOINCREMENT, jid TEXT, nama TEXT, umur TEXT, created TEXT)"
+            },
+            "saveAs": "mk",
+            "onError": "❌ Database error: {error}"
+          },
+          {
+            "method": "dbQuery",
+            "args": {
+              "sql": "SELECT group_concat('#' || _id || ' ' || nama || ' (' || umur || ' th)', char(10)) AS list FROM (SELECT _id, nama, umur FROM forms WHERE jid = ? ORDER BY _id DESC LIMIT 5)",
+              "params": [
+                "{senderJid}"
+              ]
+            },
+            "saveAs": "db",
+            "onError": "❌ Database error: {error}"
+          },
+          {
+            "when": "{db.first.list}",
+            "notEmpty": true,
+            "then": [
+              {
+                "reply": "📒 5 data terakhir kamu:\n{db.first.list}"
+              }
+            ],
+            "else": [
+              {
+                "reply": "📭 Belum ada data. Isi dulu dengan .form"
+              }
+            ]
+          }
+        ],
+        ".shop": {
+          "list": {
+            "title": "🛒 Toko Contoh",
+            "description": "Langkah 1/3. Pilih item.",
+            "buttonText": "Pilih Item",
+            "sections": [
+              {
+                "title": "Produk",
+                "rows": [
+                  {
+                    "id": "t_item_kopi",
+                    "title": "Kopi Susu",
+                    "description": "Rp 18.000"
+                  },
+                  {
+                    "id": "t_item_teh",
+                    "title": "Teh Tarik",
+                    "description": "Rp 15.000"
+                  },
+                  {
+                    "id": "t_item_roti",
+                    "title": "Roti Bakar",
+                    "description": "Rp 20.000"
+                  }
+                ]
+              }
+            ]
+          },
+          "nextStep": "t_shop_item",
+          "stepTtlSec": 600
+        },
+        ".poll": [
+          {
+            "method": "sendPoll",
+            "args": {
+              "targetJid": "{chat}",
+              "question": "Makan siang apa?",
+              "options": [
+                "Nasi Goreng",
+                "Mie Ayam",
+                "Soto"
+              ],
+              "selectableCount": 1
+            },
+            "onError": "❌ Gagal mengirim polling."
+          }
+        ],
+        ".lokasi": [
+          {
+            "method": "sendLocation",
+            "args": {
+              "toJid": "{chat}",
+              "latitude": -6.1754,
+              "longitude": 106.8272,
+              "name": "Monas",
+              "address": "Jakarta Pusat"
+            },
+            "onError": "❌ Gagal mengirim lokasi."
+          }
+        ],
+        ".kontak": [
+          {
+            "method": "sendContact",
+            "args": {
+              "toJid": "{chat}",
+              "displayName": "Contoh Kontak",
+              "phoneNumber": "+620000000000"
+            },
+            "onError": "❌ Gagal mengirim kontak."
+          }
+        ],
+        ".react": [
+          {
+            "react": "🔥"
+          },
+          {
+            "reply": "Reaksi terkirim."
+          }
+        ],
+        ".logic": [
+          {
+            "cooldown": 5,
+            "key": "t_logic_{sender}",
+            "scope": "user",
+            "reply": "⏳ Tunggu {remaining} dtk."
+          },
+          {
+            "recall": "t_count_{senderNumber}",
+            "default": "0",
+            "saveAs": "c"
+          },
+          {
+            "remember": "t_count_{senderNumber}",
+            "value": "{math: {c} + 1}"
+          },
+          {
+            "when": "{c}",
+            "is": "0",
+            "then": [
+              {
+                "reply": "👋 Pertama kali pakai .logic\n🎲 d20: {roll:1d20}"
+              }
+            ],
+            "else": [
+              {
+                "reply": "🔢 Kamu sudah memakai .logic {math: {c} + 1} kali\n🎲 d20: {roll:1d20}\n🎯 Pilihan acak: {pick:Merah|Biru|Hijau}"
+              }
+            ]
+          }
+        ],
+        ".api": [
+          {
+            "react": "⏳"
+          },
+          {
+            "method": "httpRequest",
+            "args": {
+              "url": "https://api.github.com/zen",
+              "responseType": "text",
+              "failOnHttpError": true
+            },
+            "saveAs": "r",
+            "onError": "❌ Gagal memanggil API."
+          },
+          {
+            "reply": "💡 {r.body}"
+          }
+        ]
+      }
+    },
+    "onIncoming": [
+      {
+        "step": "t_quick",
+        "buttonIds": [
+          "t_qa",
+          "t_qb",
+          "t_qc"
+        ],
+        "clearStep": true,
+        "actions": [
+          {
+            "reply": "✅ Kamu memilih {buttonText}\nID tombol: {buttonId}\nLangkah selesai.",
+            "buttons": [
+              {
+                "type": "quick_reply",
+                "id": "t_menu",
+                "text": "🏠 Menu Template"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "step": "t_list",
+        "buttonIdPrefix": "t_li_",
+        "clearStep": true,
+        "actions": [
+          {
+            "reply": "🍴 Kamu memilih {buttonText}\nID baris: {buttonId}",
+            "buttons": [
+              {
+                "type": "quick_reply",
+                "id": "t_menu",
+                "text": "🏠 Menu Template"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "buttonIdPrefix": "t_sel_",
+        "actions": [
+          {
+            "reply": "🎯 Dipilih: {buttonText}\nID: {buttonId}"
+          }
+        ]
+      },
+      {
+        "buttonId": "t_car_pick",
+        "actions": [
+          {
+            "reply": "🃏 Kamu memilih kartu dengan indeks {cardIndex}.",
+            "buttons": [
+              {
+                "type": "quick_reply",
+                "id": "t_menu",
+                "text": "🏠 Menu Template"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "buttonId": "t_media_ok",
+        "actions": [
+          {
+            "reply": "😄 Terima kasih!"
+          }
+        ]
+      },
+      {
+        "step": "t_confirm",
+        "buttonId": "t_yes",
+        "clearStep": true,
+        "actions": [
+          {
+            "reply": "✅ Dilanjutkan."
+          }
+        ]
+      },
+      {
+        "step": "t_confirm",
+        "buttonId": "t_no",
+        "clearStep": true,
+        "actions": [
+          {
+            "reply": "❌ Dibatalkan."
+          }
+        ]
+      },
+      {
+        "buttonIdPrefix": "t_rate_",
+        "actions": [
+          {
+            "reply": "🙏 Terima kasih! Rating kamu: {buttonText}"
+          }
+        ]
+      },
+      {
+        "step": "t_form_name",
+        "messageType": "text",
+        "always": true,
+        "actions": [
+          {
+            "remember": "t_fn_{chat}_{senderNumber}",
+            "value": "{text}",
+            "ttlSec": 900
+          },
+          {
+            "reply": "📝 Form 2/3\nHalo {text}. Berapa umur kamu? Kirim angka.",
+            "nextStep": "t_form_age",
+            "stepTtlSec": 600
+          }
+        ]
+      },
+      {
+        "step": "t_form_age",
+        "messageType": "text",
+        "regex": "^\\s*\\d{1,3}\\s*$",
+        "actions": [
+          {
+            "remember": "t_fa_{chat}_{senderNumber}",
+            "value": "{text|trim}",
+            "ttlSec": 900
+          },
+          {
+            "recall": "t_fn_{chat}_{senderNumber}",
+            "default": "-",
+            "saveAs": "nm"
+          },
+          {
+            "reply": "📝 Form 3/3\nNama: {nm}\nUmur: {text|trim}\n\nSimpan data ini?",
+            "nextStep": "t_form_confirm",
+            "stepTtlSec": 600,
+            "buttons": [
+              {
+                "type": "quick_reply",
+                "id": "t_form_ok",
+                "text": "💾 Simpan"
+              },
+              {
+                "type": "quick_reply",
+                "id": "t_form_no",
+                "text": "❌ Batal"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "step": "t_form_age",
+        "messageType": "text",
+        "always": true,
+        "actions": [
+          {
+            "reply": "⚠️ Umur harus berupa angka. Coba lagi."
+          }
+        ]
+      },
+      {
+        "step": "t_form_confirm",
+        "buttonId": "t_form_ok",
+        "clearStep": true,
+        "actions": [
+          {
+            "recall": "t_fn_{chat}_{senderNumber}",
+            "default": "-",
+            "saveAs": "nm"
+          },
+          {
+            "recall": "t_fa_{chat}_{senderNumber}",
+            "default": "0",
+            "saveAs": "ag"
+          },
+          {
+            "method": "dbInsert",
+            "args": {
+              "table": "forms",
+              "data": {
+                "jid": "{senderJid}",
+                "nama": "{nm}",
+                "umur": "{ag}",
+                "created": "{date} {time}"
+              }
+            },
+            "saveAs": "db",
+            "onError": "❌ Database error: {error}"
+          },
+          {
+            "forget": "t_fn_{chat}_{senderNumber}"
+          },
+          {
+            "forget": "t_fa_{chat}_{senderNumber}"
+          },
+          {
+            "reply": "✅ Data tersimpan dengan nomor #{db.lastInsertRowid}.\nLihat semua dengan .forms",
+            "buttons": [
+              {
+                "type": "quick_reply",
+                "id": "t_menu",
+                "text": "🏠 Menu Template"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "step": "t_form_confirm",
+        "buttonId": "t_form_no",
+        "clearStep": true,
+        "actions": [
+          {
+            "reply": "❌ Form dibatalkan."
+          }
+        ]
+      },
+      {
+        "step": "t_shop_item",
+        "buttonIdPrefix": "t_item_",
+        "actions": [
+          {
+            "remember": "t_si_{chat}_{senderNumber}",
+            "value": "{buttonText}",
+            "ttlSec": 900
+          },
+          {
+            "when": "{buttonId}",
+            "is": "t_item_kopi",
+            "then": [
+              {
+                "remember": "t_sp_{chat}_{senderNumber}",
+                "value": "18000",
+                "ttlSec": 900
+              }
+            ],
+            "else": [
+              {
+                "when": "{buttonId}",
+                "is": "t_item_teh",
+                "then": [
+                  {
+                    "remember": "t_sp_{chat}_{senderNumber}",
+                    "value": "15000",
+                    "ttlSec": 900
+                  }
+                ],
+                "else": [
+                  {
+                    "remember": "t_sp_{chat}_{senderNumber}",
+                    "value": "20000",
+                    "ttlSec": 900
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "list": {
+              "title": "🛒 Jumlah",
+              "description": "Langkah 2/3. Berapa porsi {buttonText}?",
+              "buttonText": "Pilih Jumlah",
+              "sections": [
+                {
+                  "title": "Jumlah",
+                  "rows": [
+                    {
+                      "id": "t_qty_1",
+                      "title": "1",
+                      "description": "1 porsi"
+                    },
+                    {
+                      "id": "t_qty_2",
+                      "title": "2",
+                      "description": "2 porsi"
+                    },
+                    {
+                      "id": "t_qty_3",
+                      "title": "3",
+                      "description": "3 porsi"
+                    },
+                    {
+                      "id": "t_qty_5",
+                      "title": "5",
+                      "description": "5 porsi"
+                    }
+                  ]
+                }
+              ]
+            },
+            "nextStep": "t_shop_qty",
+            "stepTtlSec": 600
+          }
+        ]
+      },
+      {
+        "step": "t_shop_qty",
+        "buttonIdPrefix": "t_qty_",
+        "actions": [
+          {
+            "remember": "t_sq_{chat}_{senderNumber}",
+            "value": "{buttonText}",
+            "ttlSec": 900
+          },
+          {
+            "recall": "t_si_{chat}_{senderNumber}",
+            "default": "-",
+            "saveAs": "it"
+          },
+          {
+            "recall": "t_sp_{chat}_{senderNumber}",
+            "default": "0",
+            "saveAs": "pr"
+          },
+          {
+            "reply": "🧾 Langkah 3/3\n{it} x {buttonText}\nTotal: Rp {math: {pr} * {buttonText}}\n\nKonfirmasi pesanan?",
+            "nextStep": "t_shop_confirm",
+            "stepTtlSec": 600,
+            "buttons": [
+              {
+                "type": "quick_reply",
+                "id": "t_shop_ok",
+                "text": "✅ Pesan"
+              },
+              {
+                "type": "quick_reply",
+                "id": "t_shop_no",
+                "text": "❌ Batal"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "step": "t_shop_confirm",
+        "buttonId": "t_shop_ok",
+        "clearStep": true,
+        "actions": [
+          {
+            "recall": "t_si_{chat}_{senderNumber}",
+            "default": "-",
+            "saveAs": "it"
+          },
+          {
+            "recall": "t_sp_{chat}_{senderNumber}",
+            "default": "0",
+            "saveAs": "pr"
+          },
+          {
+            "recall": "t_sq_{chat}_{senderNumber}",
+            "default": "1",
+            "saveAs": "qt"
+          },
+          {
+            "reply": "✅ Pesanan dikonfirmasi\n{it} x {qt}\nTotal: Rp {math: {pr} * {qt}}",
+            "buttons": [
+              {
+                "type": "quick_reply",
+                "id": "t_menu",
+                "text": "🏠 Menu Template"
+              }
+            ]
+          },
+          {
+            "forget": "t_si_{chat}_{senderNumber}"
+          },
+          {
+            "forget": "t_sp_{chat}_{senderNumber}"
+          },
+          {
+            "forget": "t_sq_{chat}_{senderNumber}"
+          }
+        ]
+      },
+      {
+        "step": "t_shop_confirm",
+        "buttonId": "t_shop_no",
+        "clearStep": true,
+        "actions": [
+          {
+            "reply": "❌ Pesanan dibatalkan."
+          }
+        ]
+      }
+    ],
+    "onBeforeSend": [
+      {
+        "enabled": false,
+        "messageTypes": [
+          "text"
+        ],
+        "suffix": "\n\n_Dikirim lewat Template Bot_"
+      }
+    ],
+    "onAfterSend": [
+      {
+        "enabled": false,
+        "messageTypes": [
+          "text"
+        ],
+        "actions": [
+          {
+            "method": "storageAppend",
+            "args": {
+              "path": "sent.log",
+              "content": "{timestamp} {chat} {type}\n"
+            }
+          }
+        ]
+      }
+    ]
+  }
+}
